@@ -5,7 +5,8 @@ public class Joueur {
         this(nom, Parcelle, random);
         this.hauteur = hauteur;
     }
-    public joueur(String name, Parcelle Parcelle, int hauteur, boolean , Random random) {
+
+    public joueur(String name, Parcelle Parcelle, int hauteur, boolean, Random random) {
         this.randomizer = random;
         this.actionList = new ArrayList<>();
         this.score = 0;
@@ -14,4 +15,13 @@ public class Joueur {
         this.Parcelle = Parcelle;
         this.hauteur = hauteur;
         this.stat = new Statistic(name);
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public Random getRandomizer() {
+        return randomizer;
+    }
 }
