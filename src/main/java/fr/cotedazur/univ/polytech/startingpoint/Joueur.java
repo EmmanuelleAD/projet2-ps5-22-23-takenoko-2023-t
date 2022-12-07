@@ -1,7 +1,8 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 public class Joueur {
-    public Joueur(String nom, Parcelle Parcelle, int hauteur, Random random) {
+
+/*    public Joueur(String nom, Parcelle Parcelle, int hauteur, Random random) {
         this(nom, Parcelle, random);
         this.hauteur = hauteur;
     }
@@ -14,4 +15,6 @@ public class Joueur {
         this.Parcelle = Parcelle;
         this.hauteur = hauteur;
         this.stat = new Statistic(name);
+
+        */
 }
