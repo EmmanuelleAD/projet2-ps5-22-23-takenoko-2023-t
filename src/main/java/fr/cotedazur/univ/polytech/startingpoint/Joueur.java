@@ -14,6 +14,9 @@ public class Joueur {
         this.tabParcelle = tabParcelle;
     }
 
+    public Joueur() {
+    }
+
     public void addParcelle(Parcelle parcelle) {
         list.add(parcelle);
     }
