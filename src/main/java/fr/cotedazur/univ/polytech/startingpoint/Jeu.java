@@ -36,7 +36,7 @@ public class Jeu {
         int i;
         for (i = 0; i < listParcelle.size(); i++) {
             if (listParcelle.get(i).isAdjacent(parcelle1)) {
-                break
+                break;
             }
         }
         String check = (i % 2 == 0) ? "joueur1" : "joueur2";

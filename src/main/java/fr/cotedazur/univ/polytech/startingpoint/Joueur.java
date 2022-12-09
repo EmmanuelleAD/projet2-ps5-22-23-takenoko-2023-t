@@ -16,9 +16,12 @@ public class Joueur {
 
 
     }
-    public void addParcelle(Parcelle parcelle){
-        list.add(parcelle);
 
+    public void addParcelle(Parcelle parcelle) {
+        list.add(parcelle);
     }
-dasdasdasdasdasdsadas
+
+    public String getNom() {
+        return nom;
+    }
 }
