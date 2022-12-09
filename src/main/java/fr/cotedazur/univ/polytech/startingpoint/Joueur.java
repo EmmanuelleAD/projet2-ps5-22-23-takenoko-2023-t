@@ -10,12 +10,8 @@ public class Joueur {
     ArrayList list = new ArrayList();
 
     public Joueur(String nom, Parcelle[] tabParcelle) {
-
-
         this.nom = nom;
         this.tabParcelle = tabParcelle;
-
-
     }
 
     public void addParcelle(Parcelle parcelle) {
