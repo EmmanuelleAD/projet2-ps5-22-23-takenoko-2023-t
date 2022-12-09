@@ -1,17 +1,17 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 public class Position {
-        double x;
-        double y;
+        int x;
+        int y;
         private static final double EPSILON = 0.001;
 
 
-        public Position(double x,double y) {
+        public Position(int x,int y) {
             this.x = x;
-            this.y=y;
+            this.y =y;
         }
 
-        public double getX() {
+        public int getX() {
             return x;
         }
 
@@ -19,7 +19,7 @@ public class Position {
             this.x = x;
         }
 
-        public double getY() {
+        public int getY() {
             return y;
         }
 

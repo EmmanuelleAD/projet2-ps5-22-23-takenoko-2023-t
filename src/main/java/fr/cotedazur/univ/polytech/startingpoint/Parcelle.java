@@ -21,19 +21,9 @@ public class Parcelle {
 
 
     public boolean isAdjacent(Parcelle parcelle) {
-        double x = this.positionCentre.getX();
-        double y = this.positionCentre.getY();
-
-        Position tabPos[]=new Position[6];
-        tabPos[0]=new Position(x,y);
-        tabPos[1]=new Position((x+1),y);
-        tabPos[2]=new Position(x-1,y-1);
-        tabPos[3]=new Position(x-1,y+1);
-        tabPos[4]=new Position(x,y-1);
-        tabPos[5]=new Position(x,y+1);
-
+        Position[] tabPos = positionsAdjacentes(parcelle);
         for (int i=0;i<6;i++){
-            if (parcelle.getPosition().equals(tabPos[i])){
+            if (this.getPosition().equals(tabPos[i])){
                 return true;
             }
         }return false;
@@ -41,10 +31,30 @@ public class Parcelle {
 
     }
 
+    public Parcelle[] parcelleAdjacentes(Parcelle parcelle) {
+        Position[] tabPos = positionsAdjacentes(parcelle);
+        Parcelle tabParcelle[] = new Parcelle[6];
+        for (int i = 0; i < 6; i++) {
+            tabParcelle[i] = new Parcelle(tabPos[i]);
+        }
+        return tabParcelle;
+    }
 
 
+    public Position[] positionsAdjacentes(Parcelle parcelle) {
+        int x = this.positionCentre.getX();
+        int y = this.positionCentre.getY();
 
+        Position tabPos[] = new Position[6];
+        tabPos[0] = new Position(x, y);
+        tabPos[1] = new Position((x + 1), y);
+        tabPos[2] = new Position(x - 1, y - 1);
+        tabPos[3] = new Position(x - 1, y + 1);
+        tabPos[4] = new Position(x, y - 1);
+        tabPos[5] = new Position(x, y + 1);
+        return tabPos;
 
+    }
 
 }
 
