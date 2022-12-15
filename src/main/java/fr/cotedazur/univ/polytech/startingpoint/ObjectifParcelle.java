@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 
 public class ObjectifParcelle extends Objectif {
 
-    private static List<String> ListObjectifs = new ArrayList<>(Arrays.asList("PARADJ"));
+    static List<ObjectifParcelle> objectifParcelles = new ArrayList<>(Arrays.asList(new ObjectifParcelle("PARADJ",2,false,"")));
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
     }
