@@ -25,7 +25,8 @@ public class Jeu {
     public void initialisation() {
         Parcelle etang = new Parcelle(new Position(0, 0));
         parcellesPlacees.add(etang);
-        Collections.sort(joueurs, Joueur.tailleComparator);
+        System.out.println("Placement de la parcelle étang");
+        Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
         for (int i = 0; i <MAX_OBJ ; i++) {
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
