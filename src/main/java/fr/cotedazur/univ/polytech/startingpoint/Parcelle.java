@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Objects;
+
 import static java.lang.Math.sqrt;
 
 public class Parcelle {
@@ -18,7 +20,18 @@ public class Parcelle {
         return positionCentre;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parcelle parcelle = (Parcelle) o;
+        return positionCentre.equals(parcelle.positionCentre);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(positionCentre);
+    }
 
     public boolean isAdjacent(Parcelle parcelle) {
         Position[] tabPos = parcelle.getPosition().positionsAdjacentes();
