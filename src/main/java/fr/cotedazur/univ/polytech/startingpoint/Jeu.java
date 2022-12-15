@@ -50,14 +50,7 @@ public class Jeu {
 
 
     }
-    public static void main (String[] args){
-        Joueur joueur1=new Joueur(1.85);
-        Joueur joueur2=new Joueur(1.6);
-        Jeu jeu=new Jeu(joueur1, joueur2);
-        jeu.initialisation();
-        jeu.jouer();
 
-    }
 
 
 

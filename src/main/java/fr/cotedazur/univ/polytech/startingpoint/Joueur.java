@@ -42,7 +42,7 @@ public class Joueur {
         Position positionParcelle1 = new Position(x, y);
         Parcelle parcelle1 = new Parcelle(positionParcelle1);
 
-        return new Action("Parcelle1",positionParcelle1);
+        return new Action("Parcelle",positionParcelle1);
 
 
     }
