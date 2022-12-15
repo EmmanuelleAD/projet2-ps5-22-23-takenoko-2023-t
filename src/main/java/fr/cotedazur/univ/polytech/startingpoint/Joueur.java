@@ -34,15 +34,13 @@ public class Joueur {
         this.plateau = new Plateau();
     }
 
-    public Action jouer() {
+    public Action jouer(List<Position>positions) {
 
         Random rand = new Random();
-        int x = rand.nextInt();
-        int y = rand.nextInt();
-        Position positionParcelle1 = new Position(x, y);
-        Parcelle parcelle1 = new Parcelle(positionParcelle1);
+       int index=rand.nextInt(positions.size());
+        Parcelle parcelle1 = new Parcelle(positions.get(index));
 
-        return new Action("Parcelle",positionParcelle1);
+        return new Action("Parcelle",parcelle1.getPosition());
 
 
     }

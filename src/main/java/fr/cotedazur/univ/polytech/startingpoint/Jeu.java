@@ -21,6 +21,7 @@ public class Jeu {
         Parcelle etang = new Parcelle(new Position(0, 0));
         parcellesPlacees.add(etang);
         Collections.sort(joueurs, Joueur.tailleComparator);
+        placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
 
     }
 
@@ -28,10 +29,10 @@ public class Jeu {
 
         for (Joueur j : joueurs
         ) {
-            Action action = j.jouer();
+            Action action = j.jouer(placementsPossibles);
             if (action.getNomAction().equals("Parcelle")) {
                 this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
-                System.out.println("Un joueur vient de placer une parcelle en " + action.getPosition());
+                System.out.println("Un joueur vient de placer une parcelle adjacente en " + action.getPosition());
                 System.out.println("Il a gagné ");
                 break;
             }
