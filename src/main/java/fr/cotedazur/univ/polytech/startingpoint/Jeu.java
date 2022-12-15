@@ -29,8 +29,8 @@ public class Jeu {
 
     public void start_game() {
         Random rand = new Random();
-        Double x = rand.nextDouble();
-        Double y = rand.nextDouble();
+        int x = rand.nextInt();
+        int y = rand.nextInt();
         Position positionParcelle1 = new Position(x, y);
         Parcelle parcelle1 = new Parcelle(positionParcelle1);
         int i;
