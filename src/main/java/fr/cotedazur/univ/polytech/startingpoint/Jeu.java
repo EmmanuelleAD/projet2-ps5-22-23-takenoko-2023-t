@@ -28,16 +28,25 @@ public class Jeu {
 
         for (Joueur j : joueurs
         ) {
-            List action = j.jouer();
-            if (action.get(0).equals("Parcelle")) {
-                this.parcellesPlacees.add(new Parcelle((Position) action.get(1)));
-                System.out.println("Un joueur vient de placer une parcelle en " + action.get(1));
+            Action action = j.jouer();
+            if (action.getNomAction().equals("Parcelle")) {
+                this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
+                System.out.println("Un joueur vient de placer une parcelle en " + action.getPosition());
                 System.out.println("Il a gagné ");
                 break;
             }
 
         }
 
+    }
+
+
+    public static void main (String[] args){
+        Joueur joueur1=new Joueur(1.85);
+        Joueur joueur2=new Joueur(1.6);
+        Jeu jeu=new Jeu(joueur1, joueur2);
+        jeu.initialisation();
+        jeu.jouer();
 
     }
 
