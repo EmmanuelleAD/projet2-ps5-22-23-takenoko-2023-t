@@ -46,6 +46,11 @@ public class Position {
             return Math.sqrt(Math.pow((double) position1.x - position2.x, 2) + Math.pow((double) position1.y - position2.y, 2));
         }
 
+
+        public String toString(){
+            return "(" + this.x + "," + this.y + ")";
+        }
+
     }
 
 
