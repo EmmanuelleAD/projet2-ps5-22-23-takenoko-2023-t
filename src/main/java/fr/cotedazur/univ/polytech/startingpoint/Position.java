@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Objects;
+
 public class Position {
         int x;
         int y;
@@ -33,13 +35,21 @@ public class Position {
             return xEquiv <= EPSILON && yEquiv <= EPSILON;
         }
 
-        public boolean equals(Position position) {
-            return (position.x == this.x) && (position.y == this.y);
-        }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Position position = (Position) o;
+        return x == position.x && y == position.y;
+    }
 
-//    public boolean equalsParamX(Position position,double x) {
-//        return ( (position.x + x == this.x) && (position.y == this.y) ) || ((position.x - x == this.x) && (position.y == this.y));
-//    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+
+
 
 
         public static double distanceBetweenTwoPositions(Position position1, Position position2) {
@@ -50,6 +60,20 @@ public class Position {
         public String toString(){
             return "(" + this.x + "," + this.y + ")";
         }
+
+
+    public Position[] positionsAdjacentes() {
+
+        Position tabPos[] = new Position[6];
+        tabPos[0] = new Position(x - 1, y);
+        tabPos[1] = new Position(x + 1, y);
+        tabPos[2] = new Position(x - 1, y - 1);
+        tabPos[3] = new Position(x - 1, y + 1);
+        tabPos[4] = new Position(x, y - 1);
+        tabPos[5] = new Position(x, y + 1);
+        return tabPos;
+
+    }
 
     }
 
