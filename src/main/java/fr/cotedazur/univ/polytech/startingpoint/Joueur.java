@@ -2,36 +2,49 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Joueur {
-    public String nom;
-    public Parcelle[] tabParcelle;
-    ArrayList list = new ArrayList();
-
-    public Joueur(String nom, Parcelle[] tabParcelle) {
-        this.nom = nom;
-        this.tabParcelle = tabParcelle;
+    private double taille;
+    private Plateau plateau;
+    public double getTaille() {
+        return taille;
     }
 
-    public Joueur() {
+    public void setTaille(double taille) {
+        this.taille = taille;
     }
 
-    public void addParcelle(Parcelle parcelle) {
-        list.add(parcelle);
+    public Plateau getPlateau() {
+        return plateau;
     }
 
-    public String getNom() {
-        return nom;
+    public void setPlateau(Plateau plateau) {
+        this.plateau = plateau;
     }
 
 
-    public Parcelle jouerParcelle(){
+
+
+    public Joueur(double taille) {
+        this.taille = taille;
+        this.plateau = new Plateau();
+    }
+
+    public List jouer() {
+        List list = new ArrayList();
         Random rand = new Random();
         int x = rand.nextInt();
         int y = rand.nextInt();
         Position positionParcelle1 = new Position(x, y);
         Parcelle parcelle1 = new Parcelle(positionParcelle1);
-        return parcelle1;
+        list.add("Parcelle");
+        list.add(parcelle1.getPosition());
+        return list;
+
+
     }
+
+
 }
