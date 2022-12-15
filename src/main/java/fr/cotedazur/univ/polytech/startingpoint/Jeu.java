@@ -50,8 +50,9 @@ public class Jeu {
                 System.out.println("Un joueur vient de placer une parcelle adjacente en " + action.getPosition());
                 ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
                 if(o.estValide(parcellesPlacees)){
+                    j.addScore(o.getPoints());
                     System.out.println("L'objectif "+o.getNom()+" est validé");
-                    System.out.println(j.getNom()+" a gagné");
+                    System.out.println(j.getNom()+" a gagné avec un score de" + j.getScore());
                     break;
                 }
 

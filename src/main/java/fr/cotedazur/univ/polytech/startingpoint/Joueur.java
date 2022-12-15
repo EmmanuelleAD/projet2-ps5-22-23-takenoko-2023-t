@@ -13,6 +13,21 @@ public class Joueur {
     private List<Objectif>cartesObjectifs;
     private String nom;
 
+    private int score=0;
+
+    public void addScore(int score) {
+        this.score+= score;
+    }
+
+
+    public int getScore() {
+        return score;
+    }
+
+
+
+
+
     public String getNom() {
         return nom;
     }
