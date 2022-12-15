@@ -2,10 +2,12 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
 
 public class Joueur {
+    public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     private double taille;
     private Plateau plateau;
     public double getTaille() {
