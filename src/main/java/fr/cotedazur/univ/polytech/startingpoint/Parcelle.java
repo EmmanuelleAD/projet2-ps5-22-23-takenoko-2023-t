@@ -6,9 +6,22 @@ import static java.lang.Math.sqrt;
 
 public class Parcelle {
     public Position positionCentre;
+    public Bambou bambou;
+
+    public Bambou getBambou() {
+        return bambou;
+    }
+
+    public void setBambou(Bambou bambou) {
+        this.bambou = bambou;
+    }
+
+
 //    public final double size=(10/sqrt(3));
 //    public final double width=(sqrt(3)*size);
 //    public final double height=2*size;
+
+
 
 
     public Parcelle(Position positionCentre){

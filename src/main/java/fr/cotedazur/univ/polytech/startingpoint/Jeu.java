@@ -52,7 +52,7 @@ public class Jeu {
                 if(o.estValide(parcellesPlacees)){
                     j.addScore(o.getPoints());
                     System.out.println("L'objectif "+o.getNom()+" est validé");
-                    System.out.println(j.getNom()+" a gagné avec un score de" + j.getScore());
+                    System.out.println(j.getNom()+" a gagné avec un score de " + j.getScore());
                     break;
                 }
 
