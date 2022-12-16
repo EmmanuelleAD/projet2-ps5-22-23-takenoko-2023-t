@@ -19,14 +19,9 @@ public class Joueur {
         this.score+= score;
     }
 
-
     public int getScore() {
         return score;
     }
-
-
-
-
 
     public String getNom() {
         return nom;
@@ -60,15 +55,13 @@ public class Joueur {
         this.plateau = plateau;
     }
 
-
-
-
     public Joueur(double taille,String nom) {
         this.nom=nom;
         this.taille = taille;
         this.plateau = new Plateau();
         this.cartesObjectifs=new ArrayList<>();
     }
+
 
     public Action jouer(List<Position>positions) {
 
