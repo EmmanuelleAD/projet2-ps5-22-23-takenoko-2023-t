@@ -10,12 +10,11 @@ public class Joueur {
     ArrayList list = new ArrayList();
 
     public Joueur(String nom, Parcelle[] tabParcelle) {
-
-
         this.nom = nom;
         this.tabParcelle = tabParcelle;
+    }
 
-
+    public Joueur() {
     }
 
     public void addParcelle(Parcelle parcelle) {
@@ -29,8 +28,8 @@ public class Joueur {
 
     public Parcelle jouerParcelle(){
         Random rand = new Random();
-        Double x = rand.nextDouble();
-        Double y = rand.nextDouble();
+        int x = rand.nextInt();
+        int y = rand.nextInt();
         Position positionParcelle1 = new Position(x, y);
         Parcelle parcelle1 = new Parcelle(positionParcelle1);
         return parcelle1;

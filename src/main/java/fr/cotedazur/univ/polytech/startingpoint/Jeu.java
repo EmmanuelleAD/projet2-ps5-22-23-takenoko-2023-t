@@ -7,6 +7,8 @@ public class Jeu {
     private Joueur joueur1;
     private Joueur joueur2;
     public ArrayList<Parcelle> listParcelle;
+    public ArrayList<Parcelle> listParcelleAdjacente;
+    public Parcelle parcelleInitiale=new Parcelle(new Position(0,0));
 
     public Jeu(Joueur joueur1, Joueur joueur2, ArrayList<Parcelle> listeParcelle){
         this.joueur1=joueur1;
@@ -28,18 +30,27 @@ public class Jeu {
     }
 
     public void start_game() {
-        Random rand = new Random();
-        Double x = rand.nextDouble();
-        Double y = rand.nextDouble();
-        Position positionParcelle1 = new Position(x, y);
-        Parcelle parcelle1 = new Parcelle(positionParcelle1);
-        int i;
-        for (i = 0; i < listParcelle.size(); i++) {
-            if (listParcelle.get(i).isAdjacent(parcelle1)) {
+        Parcelle parcelle1=joueur1.jouerParcelle();
+        Parcelle parcelle2=joueur2.jouerParcelle();
+        while (!(parcelle1.isAdjacent(parcelleInitiale) && parcelle2.isAdjacent(parcelleInitiale))){
+            parcelle1=joueur1.jouerParcelle();
+            System.out.println("le joueur 1 a placé une parcelle en ( "+parcelle1.getPosition().getX()+" , "+parcelle1.getPosition().getY()+" )");
+            parcelle2=joueur2.jouerParcelle();
+            System.out.println("le joueur 2 a placé une parcelle en ( "+parcelle2.getPosition().getX()+" , "+parcelle2.getPosition().getY()+" )");
+            if (parcelle1.isAdjacent(parcelleInitiale)){
+                System.out.println("Joueur 1 a gagné");
+                break;
+            } else if(parcelle2.isAdjacent(parcelleInitiale)){
+                System.out.println("Joueur 2 a gagné");
                 break;
             }
         }
-        String check = (i % 2 == 0) ? "joueur1" : "joueur2";
-        System.out.println("le gagnant est :"+check);
+
+    }
+    public void parcellePossible() {
+        if (listParcelleAdjacente.isEmpty()) {
+            Position positionInitiale = new Position(0, 0);
+            listParcelleAdjacente.add(new Parcelle(positionInitiale));
+        }
     }
 }
