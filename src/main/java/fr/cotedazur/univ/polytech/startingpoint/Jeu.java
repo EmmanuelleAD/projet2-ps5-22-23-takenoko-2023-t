@@ -52,6 +52,7 @@ public class Jeu {
 
 
 
+
   //  public void jouer() {}
 
     public void jouerUnTour(List<Joueur> joueurs) {
@@ -62,15 +63,16 @@ public class Jeu {
             if (action.getNomAction().equals("Parcelle")) {
 
                 Parcelle nouvelleParcelle = new Parcelle((Position) action.getPosition());
-                this.parcellesPlacees.add(nouvelleParcelle);
+                this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
 
-                placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees,placementsPossibles);
+                placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
+
+
 
                 System.out.println("Un joueur vient de placer une parcelle adjacente en " + action.getPosition());
 
                 this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
-                System.out.println("le joueur "+j.getNom()+" vient de placer une parcelle adjacente en " + action.getPosition());
-
+                System.out.println("le joueur " + j.getNom() + " vient de placer une parcelle adjacente en " + action.getPosition());
                 ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
                 if(o.estValide(parcellesPlacees)){
                     j.addScore(o.getPoints());
@@ -90,33 +92,39 @@ public class Jeu {
         }
     }
 
-    public Joueur getGagnant(){
-        Collections.sort(joueurs,Joueur.scoreComparator.reversed());
-        return joueurs.get(0);
-    }
-    public void jouer(){
-        while (nombreObjectifs>0){
-            jouerUnTour(joueurs);
-        }
-        Joueur joueur=getGagnant();
-        System.out.println(joueur.getNom()+" a gagné avec un score de " + joueur.getScore());
-
-    }
-
-
-    public static void main (String[] args){
-        Joueur joueur1=new Joueur(1.85,"Wassim");
-        Joueur joueur2=new Joueur(1.6,"Brahim");
-        Jeu jeu=new Jeu(joueur1, joueur2);
-        jeu.initialisation();
-        jeu.jouer();
-
-
-    }
 
 
 
 
+        public Joueur getGagnant () {
+                    Collections.sort(joueurs, Joueur.scoreComparator.reversed());
+                    return joueurs.get(0);
+                }
 
-}
+
+
+                public void jouer () {
+                    while (nombreObjectifs > 0) {
+                        jouerUnTour(joueurs);
+                    }
+                    Joueur joueur = getGagnant();
+                    System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
+
+                }
+
+
+
+
+                public static void main (String[]args){
+                    Joueur joueur1 = new Joueur(1.85, "Wassim");
+                    Joueur joueur2 = new Joueur(1.6, "Brahim");
+                    Jeu jeu = new Jeu(joueur1, joueur2);
+                    jeu.initialisation();
+                    jeu.jouer();
+
+
+                }
+
+
+            }
 

@@ -73,6 +73,7 @@ public class Joueur {
         parcelle1.setBambou(new Bambou());
         addScore(1);
 
+
         return new ActionParcelle("Parcelle",parcelle1.getPosition(),"un joueur a placé une parcelle");
 
     }
