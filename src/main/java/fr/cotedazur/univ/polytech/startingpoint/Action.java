@@ -1,16 +1,16 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-public class Action {
-    private String nomAction;
-    private Position position;
-
-    public String getDescription() {
-        return description;
+public abstract class Action {
+    public String getNomAction() {
+        return nomAction;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+    protected String nomAction;
+    protected Position position;
+
+
+    public abstract String getDescription();
+
 
     private String description;
 
@@ -22,9 +22,7 @@ public class Action {
     }
 
 
-    public String getNomAction() {
-        return nomAction;
-    }
+
 
     public void setNomAction(String nomAction) {
         this.nomAction = nomAction;
