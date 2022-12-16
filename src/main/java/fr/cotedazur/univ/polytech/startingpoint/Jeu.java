@@ -51,7 +51,7 @@ public class Jeu {
                 ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
                 if(o.estValide(parcellesPlacees)){
                     j.addScore(o.getPoints());
-                    System.out.println("L'objectif "+o.getNom()+" est validé");
+                    System.out.println("L'objectif "+o.getNom()+" de "+o.getPoints()+" points est validé");
                     System.out.println(j.getNom()+" a gagné avec un score de " + j.getScore());
                     break;
                 }
