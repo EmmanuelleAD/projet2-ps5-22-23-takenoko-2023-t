@@ -1,5 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.List;
 import java.util.Objects;
 
 import static java.lang.Math.sqrt;
@@ -71,6 +72,16 @@ public class Parcelle {
     }
 
 
+
+    public static List<Position> positionsPossibleEnTenantCompteDeCellesPlacees(List<Parcelle> parcellePlacees,List<Position> positionPossible) {
+        for (int i = 0; i < positionPossible.size(); i++) {
+            for (int j =0; j < parcellePlacees.size(); j++) {
+                if (parcellePlacees.get(i).getPosition()==positionPossible.get(j)){
+                    positionPossible.remove(parcellePlacees.get(i));
+                }
+            }
+        }return positionPossible;
+    }
 
 
 

@@ -36,9 +36,9 @@ public class Jeu {
             joueur.getCartesObjectifs().add(cartesObjectis.get(cartesObjectis.size()-1));
             cartesObjectis.remove(cartesObjectis.size()-1);
         }
-
-
     }
+
+
 
     public void jouer() {
 
@@ -46,7 +46,11 @@ public class Jeu {
         ) {
             Action action = j.jouer(placementsPossibles);
             if (action.getNomAction().equals("Parcelle")) {
-                this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
+                Parcelle nouvelleParcelle = new Parcelle((Position) action.getPosition());
+                this.parcellesPlacees.add(nouvelleParcelle);
+
+                placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees,placementsPossibles);
+
                 System.out.println("Un joueur vient de placer une parcelle adjacente en " + action.getPosition());
                 ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
                 if(o.estValide(parcellesPlacees)){
