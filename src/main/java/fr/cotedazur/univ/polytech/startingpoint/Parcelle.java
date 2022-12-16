@@ -7,6 +7,7 @@ import static java.lang.Math.sqrt;
 public class Parcelle {
     public Position positionCentre;
     public Bambou bambou;
+    private boolean irrigue;
 
     public Bambou getBambou() {
         return bambou;
@@ -16,8 +17,10 @@ public class Parcelle {
         this.bambou = bambou;
     }
 
-
-//    public final double size=(10/sqrt(3));
+    public boolean estIrrigue() {
+        return irrigue;
+    }
+    //    public final double size=(10/sqrt(3));
 //    public final double width=(sqrt(3)*size);
 //    public final double height=2*size;
 
@@ -26,6 +29,7 @@ public class Parcelle {
 
     public Parcelle(Position positionCentre){
         this.positionCentre=positionCentre;
+        irrigue=true;
     }
 
 

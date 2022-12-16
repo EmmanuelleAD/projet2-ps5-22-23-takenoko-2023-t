@@ -2,7 +2,6 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 public class Bambou {
     private int taille;
-
     public Bambou(){
         this.taille=1;
     }

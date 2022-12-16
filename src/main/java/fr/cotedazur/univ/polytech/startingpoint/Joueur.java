@@ -75,8 +75,12 @@ public class Joueur {
         Random rand = new Random();
        int index=rand.nextInt(positions.size());
         Parcelle parcelle1 = new Parcelle(positions.get(index));
-        parcelle1.setBambou(new Bambou());
-        addScore(1);
+        if(parcelle1.estIrrigue()){
+            parcelle1.setBambou(new Bambou());
+            addScore(1);
+
+        }
+
         return new Action("Parcelle",parcelle1.getPosition());
 
 
