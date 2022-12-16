@@ -8,6 +8,7 @@ import java.util.Random;
 
 public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
+    public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
     private double taille;
     private Plateau plateau;
     private List<Objectif>cartesObjectifs;
@@ -85,7 +86,7 @@ public class Joueur {
 
 
 
-        return new Action("Parcelle",parcelle1.getPosition(),"un joueur a placé une parcelle");
+        return new ActionParcelle("Parcelle",parcelle1.getPosition(),"un joueur a placé une parcelle");
 
     }
 
