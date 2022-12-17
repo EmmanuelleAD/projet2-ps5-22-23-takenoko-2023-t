@@ -1,5 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -74,13 +75,16 @@ public class Parcelle {
 
 
     public static List<Position> positionsPossibleEnTenantCompteDeCellesPlacees(List<Parcelle> parcellePlacees,List<Position> positionPossible) {
+        Parcelle dernier=parcellePlacees.get(parcellePlacees.size()-1);
+        positionPossible.addAll(List.of(dernier.getPosition().positionsAdjacentes()));
+        List<Position> res=new ArrayList<>(positionPossible);
         for (int i = 0; i < positionPossible.size(); i++) {
             for (int j =0; j < parcellePlacees.size(); j++) {
-                if (parcellePlacees.get(i).getPosition()==positionPossible.get(j)){
-                    positionPossible.remove(parcellePlacees.get(i));
+                if (parcellePlacees.get(j).getPosition().equals(positionPossible.get(i))){
+                    res.remove(positionPossible.get(i));
                 }
             }
-        }return positionPossible;
+        }return res;
     }
 
 

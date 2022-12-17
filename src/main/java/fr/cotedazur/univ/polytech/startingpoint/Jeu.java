@@ -24,7 +24,6 @@ public class Jeu {
     }
 
     public void initialisation() {
-        Parcelle etang = new Parcelle(new Position(0, 0));
         switch (joueurs.size()){
             case 2:
                 nombreObjectifs=9;
@@ -36,12 +35,13 @@ public class Jeu {
                 nombreObjectifs=7;
                 break;
         }
+        Parcelle etang = new Parcelle(new Position(0, 0));
         parcellesPlacees.add(etang);
+        placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
-        placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
+        //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
         for (int i = 0; i <MAX_CARTES_OBJECTIFS ; i++) {
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
-
         }
         for (Joueur joueur:joueurs
              ) {
@@ -53,7 +53,6 @@ public class Jeu {
 
 
 
-  //  public void jouer() {}
 
     public void jouerUnTour(List<Joueur> joueurs) {
 
@@ -62,31 +61,25 @@ public class Jeu {
             Action action = j.jouer(placementsPossibles);
             if (action.getNomAction().equals("Parcelle")) {
 
-                Parcelle nouvelleParcelle = new Parcelle((Position) action.getPosition());
-                this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
-
+                Parcelle nouvelleParcelle = new Parcelle(action.getPosition());
+                this.parcellesPlacees.add(nouvelleParcelle);
                 placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
-
-
-
-                System.out.println("Un joueur vient de placer une parcelle adjacente en " + action.getPosition());
-
-                this.parcellesPlacees.add(new Parcelle((Position) action.getPosition()));
-                System.out.println("le joueur " + j.getNom() + " vient de placer une parcelle adjacente en " + action.getPosition());
+                System.out.println("Le joueur " + j.getNom() + " vient de placer une parcelle adjacente en " + action.getPosition());
                 ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
                 if(o.estValide(parcellesPlacees)){
                     j.addScore(o.getPoints());
                     System.out.println("L'objectif "+o.getNom()+" de "+o.getPoints()+" points est validé");
-                    System.out.println("le score de "+j.getNom()+" est "+j.getScore());
+                    System.out.println("Le score de "+j.getNom()+" est "+j.getScore());
                     nombreObjectifs--;
                 }
                 if (nombreObjectifs==0){
                     j.addScore(2);
                     Joueur joueurDernierTour=j;
-                    System.out.println("le joueur "+j.getNom()+" a declenché le dernier tour et remporte le bonus de 2 points");
+                    System.out.println("Le joueur "+j.getNom()+" a declenché le dernier tour et remporte le bonus de 2 points");
                     List<Joueur> joueursSansGagnant=new ArrayList(joueurs);
                     joueursSansGagnant.remove(j);
                     jouerUnTour(joueursSansGagnant);
+                    break;
                 }
             }
         }

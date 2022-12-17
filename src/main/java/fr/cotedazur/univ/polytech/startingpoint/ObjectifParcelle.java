@@ -24,7 +24,13 @@ public class ObjectifParcelle extends Objectif {
     }
 
     private boolean verifierValiderPARADJ(List<Parcelle> parcelles) {
-        return parcelles.get(parcelles.size() - 1).isAdjacent(new Parcelle(new Position(0, 0)));
+        for (Parcelle p:parcelles
+             ) {
+            if(p.isAdjacent(parcelles.get(parcelles.size() - 1)))
+                return true;
+
+        }
+        return false;
     }
 
 

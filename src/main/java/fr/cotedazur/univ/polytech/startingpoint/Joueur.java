@@ -69,7 +69,6 @@ public class Joueur {
         Random rand = new Random();
        int index=rand.nextInt(positions.size());
         Parcelle parcelle1 = new Parcelle(positions.get(index));
-
         parcelle1.setBambou(new Bambou());
         addScore(1);
 
