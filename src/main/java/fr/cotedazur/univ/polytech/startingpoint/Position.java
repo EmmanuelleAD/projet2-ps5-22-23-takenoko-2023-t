@@ -67,10 +67,16 @@ public class Position {
         Position tabPos[] = new Position[6];
         tabPos[0] = new Position(x - 1, y);
         tabPos[1] = new Position(x + 1, y);
-        tabPos[2] = new Position(x - 1, y - 1);
-        tabPos[3] = new Position(x - 1, y + 1);
-        tabPos[4] = new Position(x, y - 1);
-        tabPos[5] = new Position(x, y + 1);
+        tabPos[2] = new Position(x, y - 1);
+        tabPos[3] = new Position(x, y + 1);
+
+        if  ((this.y)%2==1){
+            tabPos[4] = new Position(x - 1, y - 1);
+            tabPos[5] = new Position(x - 1, y + 1);
+        }else{
+            tabPos[4] = new Position(x + 1, y - 1);
+            tabPos[5] = new Position(x + 1, y + 1);
+        }
         return tabPos;
 
     }
