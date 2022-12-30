@@ -40,8 +40,9 @@ public class Jeu {
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
-        for (int i = 0; i <MAX_CARTES_OBJECTIFS ; i++) {
+        for (int i = 0; i <MAX_CARTES_OBJECTIFS/2 ; i++) {
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
+            cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(1));
         }
         for (Joueur joueur:joueurs
              ) {
@@ -60,19 +61,24 @@ public class Jeu {
         for (Joueur j : joueurs) {
             Action action = j.jouer(placementsPossibles);
             if (action.getNomAction().equals("Parcelle")) {
-
-                Parcelle nouvelleParcelle = new Parcelle(action.getPosition());
+                ActionParcelle ap=(ActionParcelle)action ;
+                Parcelle nouvelleParcelle =ap.getParcelle();
                 this.parcellesPlacees.add(nouvelleParcelle);
                 placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
-                System.out.println("Le joueur " + j.getNom() + " vient de placer une parcelle adjacente en " + action.getPosition());
-                ObjectifParcelle o= (ObjectifParcelle) j.getCartesObjectifs().get(0);
-                if(o.estValide(parcellesPlacees)){
-                    j.addScore(o.getPoints());
-                    System.out.println("L'objectif "+o.getNom()+" de "+o.getPoints()+" points est validé");
-                    System.out.println("Le score de "+j.getNom()+" est "+j.getScore());
-                    nombreObjectifs--;
+                System.out.println(j.getNom()+ap.getDescription());
+                for (Objectif o:j.getCartesObjectifs()
+                     ) {
+                    if(o.type.equals("Parcelle")&&o.estValide(parcellesPlacees)){
+                        j.addScore(o.getPoints());
+                        System.out.println("L'objectif "+o.getNom()+" de "+o.getPoints()+" points est validé");
+                        System.out.println("Le score de "+j.getNom()+" est "+j.getScore());
+                        nombreObjectifs--;
+                    }
+
                 }
+
                 if (nombreObjectifs==0){
+                    nombreObjectifs--;// to be sure that this condition won't be executed twice
                     j.addScore(2);
                     Joueur joueurDernierTour=j;
                     System.out.println("Le joueur "+j.getNom()+" a declenché le dernier tour et remporte le bonus de 2 points");

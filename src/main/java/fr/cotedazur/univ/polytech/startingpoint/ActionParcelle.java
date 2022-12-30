@@ -1,14 +1,21 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 public class ActionParcelle extends Action {
+    public Parcelle getParcelle() {
+        return parcelle;
+    }
+
+    private Parcelle parcelle;
 
 
-    public ActionParcelle(String nomAction, Position position, String description) {
-        super(nomAction, position, description);
+    public ActionParcelle(Parcelle p) {
+        super("Parcelle",  "");
+        this.parcelle=p;
     }
 
     @Override
     public String getDescription() {
-        return "un joueur a placé une parcelle en "+position;
+        String info=(parcelle.estIrrigue())?"irriguée en ": "non irriguée en ";
+        return " vient de placer une parcelle "+info+parcelle.getPosition();
     }
 }

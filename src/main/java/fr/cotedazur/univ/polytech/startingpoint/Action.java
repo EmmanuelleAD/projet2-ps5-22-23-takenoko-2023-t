@@ -1,23 +1,22 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 public abstract class Action {
+
+
+    protected String nomAction;
+    protected String description;
+
+    public abstract String getDescription();
     public String getNomAction() {
         return nomAction;
     }
 
-    protected String nomAction;
-    protected Position position;
 
 
-    public abstract String getDescription();
 
 
-    private String description;
-
-
-    public Action(String nomAction, Position position, String description) {
+    public Action(String nomAction,  String description) {
         this.nomAction = nomAction;
-        this.position = position;
         this.description=description;
     }
 
@@ -28,9 +27,5 @@ public abstract class Action {
         this.nomAction = nomAction;
     }
 
-    public Position getPosition() {return position;}
 
-    public void setPosition(Position position) {
-        this.position = position;
-    }
 }

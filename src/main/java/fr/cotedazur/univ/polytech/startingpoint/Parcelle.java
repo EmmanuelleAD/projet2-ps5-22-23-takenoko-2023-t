@@ -3,20 +3,21 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.lang.Math.sqrt;
 
 public class Parcelle {
     public Position positionCentre;
-    public Bambou bambou;
+    public Optional<Bambou> bambou;
     private boolean irrigue;
 
-    public Bambou getBambou() {
+    public Optional<Bambou> getBambou() {
         return bambou;
     }
 
     public void setBambou(Bambou bambou) {
-        this.bambou = bambou;
+        this.bambou = Optional.ofNullable(bambou);
     }
 
     public boolean estIrrigue() {

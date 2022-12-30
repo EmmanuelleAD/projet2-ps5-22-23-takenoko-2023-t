@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Random;
+import java.util.stream.Collectors;
 
 public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
@@ -64,16 +65,17 @@ public class Joueur {
     }
 
 
+
     public Action jouer(List<Position>positions) {
 
         Random rand = new Random();
        int index=rand.nextInt(positions.size());
         Parcelle parcelle1 = new Parcelle(positions.get(index));
         parcelle1.setBambou(new Bambou());
-        addScore(1);
+       // addScore(1);
 
 
-        return new ActionParcelle("Parcelle",parcelle1.getPosition(),"un joueur a placé une parcelle");
+        return new ActionParcelle(parcelle1);
 
     }
 
