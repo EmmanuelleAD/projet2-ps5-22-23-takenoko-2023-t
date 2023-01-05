@@ -7,6 +7,12 @@ public abstract class Objectif{
     private int points ;
     private boolean statut;
     private String description ;
+
+    public String getType() {
+        return type;
+    }
+
+    protected String type;
     public String getNom() {
         return nom;
     }

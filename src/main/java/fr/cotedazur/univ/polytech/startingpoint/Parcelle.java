@@ -3,20 +3,21 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.lang.Math.sqrt;
 
 public class Parcelle {
     public Position positionCentre;
-    public Bambou bambou;
+    public Optional<Bambou> bambou;
     private boolean irrigue;
 
-    public Bambou getBambou() {
+    public Optional<Bambou> getBambou() {
         return bambou;
     }
 
     public void setBambou(Bambou bambou) {
-        this.bambou = bambou;
+        this.bambou = Optional.ofNullable(bambou);
     }
 
     public boolean estIrrigue() {
@@ -85,6 +86,32 @@ public class Parcelle {
                 }
             }
         }return res;
+    }
+    public static boolean isValide(Position position, List<Parcelle> parcellesPlacees){
+        int count=0;
+        Parcelle parcellePosition=new Parcelle(position);
+        for (Parcelle parcelle : parcellesPlacees){
+            if (parcellePosition.isAdjacent(parcelle)){
+                count++;
+            }
+        }
+        if ((count >= 2) || (parcellePosition.isAdjacent(new Parcelle(new Position(0,0))))){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public static List<Position> positionsPossible(List<Parcelle> parcellesPlacees, List<Position> positionPossible){
+        List<Position> listPosition=Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(parcellesPlacees,positionPossible);
+        List<Position> toRemove=new ArrayList<>();
+        for (Position position : listPosition){
+            if (!isValide(position, parcellesPlacees)){
+                toRemove.add(position);
+            }
+        }
+        listPosition.removeAll(toRemove);
+        return listPosition;
     }
 
 
