@@ -118,21 +118,5 @@ public class Jeu {
     }
 
 
-<<<<<<< HEAD
-
-
-                public static void main (String[]args){
-                    Joueur joueur1 = new Joueur(1.85, "Wassim");
-                    Joueur joueur2 = new Joueur(1.6, "Brahim");
-                    Jeu jeu = new Jeu(joueur1, joueur2);
-                    jeu.initialisation();
-                    jeu.jouer();
-
-                }
-
-
-            }
-=======
 }
->>>>>>> 9e820fd0d3c718eca7a600ac3fd92ed822950112
 
