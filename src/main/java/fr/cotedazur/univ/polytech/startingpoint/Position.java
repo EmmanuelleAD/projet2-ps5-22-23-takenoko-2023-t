@@ -80,6 +80,13 @@ public class Position {
         return tabPos;
 
     }
+    public boolean estAdjacente(Position p){
+        for (Position p1:positionsAdjacentes()
+             ) {
+            if(p1.equals(p))return true;
+        }
+            return false;
+    }
 
     }
 

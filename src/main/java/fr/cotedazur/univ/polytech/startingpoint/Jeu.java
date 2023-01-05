@@ -4,11 +4,29 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Jeu {
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+
     private List<Joueur> joueurs;
+
+    public List<Parcelle> getParcellesPlacees() {
+        return parcellesPlacees;
+    }
+
+    public List<Position> getPlacementsPossibles() {
+        return placementsPossibles;
+    }
+
     private List<Parcelle> parcellesPlacees;
     private List<Position> placementsPossibles;
     private List<Objectif> cartesObjectis;
     private static final int MAX_CARTES_OBJECTIFS = 46;
+
+    public int getNombreObjectifs() {
+        return nombreObjectifs;
+    }
+
     private int nombreObjectifs;
 
 
@@ -16,6 +34,27 @@ public class Jeu {
         joueurs = new ArrayList<>();
         joueurs.add(joueur1);
         joueurs.add(joueur2);
+        this.parcellesPlacees = new ArrayList<>();
+        this.placementsPossibles = new ArrayList<>();
+        this.cartesObjectis = new ArrayList<>();
+
+    }
+    public Jeu(Joueur joueur1, Joueur joueur2,Joueur joueur3) {
+        joueurs = new ArrayList<>();
+        joueurs.add(joueur1);
+        joueurs.add(joueur2);
+        joueurs.add(joueur3);
+        this.parcellesPlacees = new ArrayList<>();
+        this.placementsPossibles = new ArrayList<>();
+        this.cartesObjectis = new ArrayList<>();
+
+    }
+    public Jeu(Joueur joueur1, Joueur joueur2,Joueur joueur3,Joueur joueur4) {
+        joueurs = new ArrayList<>();
+        joueurs.add(joueur1);
+        joueurs.add(joueur2);
+        joueurs.add(joueur3);
+        joueurs.add(joueur4);
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
