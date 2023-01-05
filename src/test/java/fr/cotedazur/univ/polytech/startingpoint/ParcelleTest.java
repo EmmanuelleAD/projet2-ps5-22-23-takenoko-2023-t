@@ -47,38 +47,69 @@ class ParcelleTest {
 
     @Test
     void testParcelleAdjacentes() {
+        //Test y pair
         Position p1= new Position(0,0);
         Parcelle par1 = new Parcelle(p1);
         Parcelle[] tabTest1=par1.parcelleAdjacentes();
 
         Parcelle[] tabPar1={new Parcelle(new Position(-1,0)),
                 new Parcelle(new Position(1,0)),
-                new Parcelle(new Position(-1,-1)),
-                new Parcelle(new Position(-1,1)),
                 new Parcelle(new Position(0,-1)),
-                new Parcelle(new Position(0,1))};
+                new Parcelle(new Position(0,1)),
+                new Parcelle(new Position(1,-1)),
+                new Parcelle(new Position(1,1))};
 
         for (int i=0;i<6;i++){
             assertEquals(tabTest1[i],tabPar1[i]);
         }
 
+        Position p2= new Position(3,2);
+        Parcelle par2= new Parcelle(p2);
+        Parcelle[] tabTest2=par2.parcelleAdjacentes();
+
+        Parcelle[] tabPar2={new Parcelle(new Position(2,2)),
+                new Parcelle(new Position(4,2)),
+                new Parcelle(new Position(3,1)),
+                new Parcelle(new Position(3,3)),
+                new Parcelle(new Position(4,1)),
+                new Parcelle(new Position(4,3))};
+
+        for (int i=0;i<6;i++){
+            assertEquals(tabTest2[i],tabPar2[i]);
+        }
 
 
-        Position p2= new Position(0,1);
-        Parcelle par2= new Parcelle(p1);
-        Parcelle[] tabTest2=par1.parcelleAdjacentes();
+        //Test y impair
+        Position p3= new Position(0,1);
+        Parcelle par3= new Parcelle(p3);
+        Parcelle[] tabTest3=par3.parcelleAdjacentes();
 
-        Parcelle[] tabPar2={new Parcelle(new Position(0,2)),
-                new Parcelle(new Position(1,0)),
-                new Parcelle(new Position(-1,-1)),
-                new Parcelle(new Position(1,2)),
+        Parcelle[] tabPar3={new Parcelle(new Position(-1,1)),
                 new Parcelle(new Position(1,1)),
-                new Parcelle(new Position(0,0))};
+                new Parcelle(new Position(0,0)),
+                new Parcelle(new Position(0,2)),
+                new Parcelle(new Position(-1,0)),
+                new Parcelle(new Position(-1,2))};
 
         for (int i=0;i<6;i++){
-            assertEquals(tabTest1[i],tabPar1[i]);
+            assertEquals(tabTest3[i],tabPar3[i]);
         }
 
+
+        Position p4= new Position(3,5);
+        Parcelle par4= new Parcelle(p4);
+        Parcelle[] tabTest4=par4.parcelleAdjacentes();
+
+        Parcelle[] tabPar4={new Parcelle(new Position(2,5)),
+                new Parcelle(new Position(4,5)),
+                new Parcelle(new Position(3,4)),
+                new Parcelle(new Position(3,6)),
+                new Parcelle(new Position(2,4)),
+                new Parcelle(new Position(2,6))};
+
+        for (int i=0;i<6;i++){
+            assertEquals(tabTest4[i],tabPar4[i]);
+        }
 
 
 

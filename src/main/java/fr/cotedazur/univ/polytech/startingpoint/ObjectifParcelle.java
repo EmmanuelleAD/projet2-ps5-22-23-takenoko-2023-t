@@ -28,7 +28,6 @@ public class ObjectifParcelle extends Objectif {
              ) {
             if(p.isAdjacent(parcelles.get(parcelles.size() - 1)))
                 return true;
-
         }
         return false;
     }
