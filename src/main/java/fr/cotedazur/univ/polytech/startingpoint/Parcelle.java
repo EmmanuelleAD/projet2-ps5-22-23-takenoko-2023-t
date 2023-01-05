@@ -87,6 +87,32 @@ public class Parcelle {
             }
         }return res;
     }
+    public static boolean isValide(Position position, List<Parcelle> parcellesPlacees){
+        int count=0;
+        Parcelle parcellePosition=new Parcelle(position);
+        for (Parcelle parcelle : parcellesPlacees){
+            if (parcellePosition.isAdjacent(parcelle)){
+                count++;
+            }
+        }
+        if ((count >= 2) || (parcellePosition.isAdjacent(new Parcelle(new Position(0,0))))){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public static List<Position> positionsPossible(List<Parcelle> parcellesPlacees, List<Position> positionPossible){
+        List<Position> listPosition=Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(parcellesPlacees,positionPossible);
+        List<Position> toRemove=new ArrayList<>();
+        for (Position position : listPosition){
+            if (!isValide(position, parcellesPlacees)){
+                toRemove.add(position);
+            }
+        }
+        listPosition.removeAll(toRemove);
+        return listPosition;
+    }
 
 
 

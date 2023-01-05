@@ -91,7 +91,7 @@ public class Jeu {
         ActionParcelle ap = (ActionParcelle) action;
         Parcelle nouvelleParcelle = ap.getParcelle();
         this.parcellesPlacees.add(nouvelleParcelle);
-        placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
+        placementsPossibles = Parcelle.positionsPossible(this.parcellesPlacees, placementsPossibles);
         System.out.println(j.getNom() + ap.getDescription());
 
     }
