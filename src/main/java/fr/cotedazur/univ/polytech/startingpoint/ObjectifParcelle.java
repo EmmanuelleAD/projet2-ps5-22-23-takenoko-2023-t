@@ -8,8 +8,8 @@ import java.util.stream.Collectors;
 public class ObjectifParcelle extends Objectif {
 
     static List<ObjectifParcelle> objectifParcelles = new ArrayList<>(Arrays.asList(
-            new ObjectifParcelle("PARADJ",2,false,""),
-            new ObjectifParcelle("POUSSB",2,false,"")));
+            new ObjectifParcelle("PARADJ",2,false,"Adjacence parcelle"),
+            new ObjectifParcelle("POUSSB",2,false,"Pousse de bambou")));
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
         this.type="Parcelle";
