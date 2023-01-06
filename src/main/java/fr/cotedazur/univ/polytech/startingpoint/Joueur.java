@@ -11,7 +11,6 @@ public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
     private double taille;
-    private Plateau plateau;
     private List<Objectif>cartesObjectifs;
     private String nom;
 
@@ -49,18 +48,10 @@ public class Joueur {
         this.taille = taille;
     }
 
-    public Plateau getPlateau() {
-        return plateau;
-    }
-
-    public void setPlateau(Plateau plateau) {
-        this.plateau = plateau;
-    }
 
     public Joueur(double taille,String nom) {
         this.nom=nom;
         this.taille = taille;
-        this.plateau = new Plateau();
         this.cartesObjectifs=new ArrayList<>();
     }
 
