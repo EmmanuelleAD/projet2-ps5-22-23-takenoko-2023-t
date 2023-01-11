@@ -68,13 +68,13 @@ public class Jeu {
     public void initialisation() {
         switch (joueurs.size()) {
             case 2:
-                nombreObjectifs = 9;
+                nombreObjectifs = 19;
                 break;
             case 3:
-                nombreObjectifs = 8;
+                nombreObjectifs = 18;
                 break;
             case 4:
-                nombreObjectifs = 7;
+                nombreObjectifs = 17;
                 break;
         }
         this.jardinier = new Jardinier();

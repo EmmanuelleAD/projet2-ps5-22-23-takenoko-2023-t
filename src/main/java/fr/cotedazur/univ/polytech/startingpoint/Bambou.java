@@ -6,7 +6,10 @@ public class Bambou {
         this.taille=1;
     }
 
-
+    public Bambou(int taille) {
+        if( taille>=0&&taille<=4)
+           this.taille = taille;
+    }
 
 
     public int getTaille() {

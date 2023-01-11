@@ -6,7 +6,8 @@ import java.util.List;
 
 public class ObjectifJardinier extends Objectif {
     static List<ObjectifJardinier> objectifsJardinier=new ArrayList<>(Arrays.asList(
-            new ObjectifJardinier("B1",20,false,"",1,7)));
+            new ObjectifJardinier("B14",20,false,"",4,1),
+            new ObjectifJardinier("B43",6,false,"",3,4)));
 
     private int taille;
     private int nombre;
