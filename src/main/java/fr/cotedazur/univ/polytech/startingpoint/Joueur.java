@@ -74,7 +74,7 @@ public class Joueur {
         do
          index=rand.nextInt(jeu.getParcellesPlacees().size());
         while (index==0);
-        jeu.getJardinier().move(parcelles.get(index));
+        jeu.getJardinier().move(parcelles.get(index),jeu.getParcellesPlacees());
        return new ActionJardinier(parcelles.get(index));
 
 
