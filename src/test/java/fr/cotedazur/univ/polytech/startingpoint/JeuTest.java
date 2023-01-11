@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class JeuTest {
     private Joueur wassim=new Joueur(1.7,"Wassim");
@@ -40,7 +41,8 @@ public class JeuTest {
     class JeuDe4Joueurs{
         @Test
         void testInitialisation(){
-            Jeu jeu=new Jeu(wassim,brahim,emmanuelle,mohamed);
+            List<Joueur> joueurs=Arrays.asList(wassim,brahim,emmanuelle,mohamed);
+            Jeu jeu=new Jeu(joueurs);
             jeu.initialisation();
             assertEquals(jeu.getNombreObjectifs(),7);
             assertEquals(jeu.getParcellesPlacees().size(),1);
