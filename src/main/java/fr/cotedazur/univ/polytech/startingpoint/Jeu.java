@@ -4,28 +4,18 @@ import java.lang.reflect.Array;
 import java.util.*;
 
 public class Jeu {
-    public List<Joueur> getJoueurs() {
-        return joueurs;
-    }
 
     private List<Joueur> joueurs;
-
-    public List<Parcelle> getParcellesPlacees() {
-        return parcellesPlacees;
-    }
-
-    public List<Position> getPlacementsPossibles() {
-        return placementsPossibles;
-    }
-
     private List<Parcelle> parcellesPlacees;
     private List<Position> placementsPossibles;
     private List<Objectif> cartesObjectis;
-    private static final int MAX_CARTES_OBJECTIFS = 46;
 
-    public int getNombreObjectifs() {
-        return nombreObjectifs;
+    public Jardinier getJardinier() {
+        return jardinier;
     }
+
+    private Jardinier jardinier;
+    private static final int MAX_CARTES_OBJECTIFS = 46;
 
     private int nombreObjectifs;
 
@@ -60,6 +50,20 @@ public class Jeu {
         this.cartesObjectis = new ArrayList<>();
 
     }
+    public List<Parcelle> getParcellesPlacees() {
+        return parcellesPlacees;
+    }
+
+    public List<Position> getPlacementsPossibles() {
+        return placementsPossibles;
+    }
+    public List<Joueur> getJoueurs() {
+        return joueurs;
+    }
+    public int getNombreObjectifs() {
+        return nombreObjectifs;
+    }
+
 
     public void initialisation() {
         switch (joueurs.size()) {
@@ -73,15 +77,16 @@ public class Jeu {
                 nombreObjectifs = 7;
                 break;
         }
-        Jardinier jardinier = new Jardinier();
+        this.jardinier = new Jardinier();
         Parcelle etang = new Parcelle(new Position(0, 0));
         parcellesPlacees.add(etang);
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
-        for (int i = 0; i < MAX_CARTES_OBJECTIFS / 2; i++) {
+        for (int i = 0; i < MAX_CARTES_OBJECTIFS ; i++) {
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(1));
+            cartesObjectis.add(ObjectifJardinier.objectifsJardinier.get(0));
         }
         for (Joueur joueur : joueurs
         ) {
@@ -94,10 +99,12 @@ public class Jeu {
 
 
         for (Joueur j : joueurs) {
-            Action action = j.jouer(placementsPossibles);
+            Action action = j.jouer(this);
             if (action.getNomAction().equals("Parcelle")) {
                 traiterActionParcelle(j, action);
 
+            } else if (action.getNomAction().equals("Jardinier")) {
+                traiterActionJardinier(j,action);
             }
             for (Objectif o : j.getCartesObjectifs()
             ) {
@@ -134,6 +141,10 @@ public class Jeu {
         placementsPossibles = Parcelle.positionsPossible(this.parcellesPlacees, placementsPossibles);
         System.out.println(j.getNom() + ap.getDescription());
 
+    }
+    void traiterActionJardinier(Joueur j,Action action){
+        ActionJardinier aj=(ActionJardinier) action;
+        System.out.println(j.getNom() + aj.getDescription());
     }
 
 

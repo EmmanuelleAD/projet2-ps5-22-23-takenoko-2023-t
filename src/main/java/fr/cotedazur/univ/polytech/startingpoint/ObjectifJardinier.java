@@ -1,14 +1,23 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ObjectifJardinier extends Objectif {
+    static List<ObjectifJardinier> objectifsJardinier=new ArrayList<>(Arrays.asList(
+            new ObjectifJardinier("B1",20,false,"",1,7)));
 
     private int taille;
     private int nombre;
 
 
-    public ObjectifJardinier(String nom,int taille , int nombre, int points, boolean statut, String description) {
+    public ObjectifJardinier(String nom, int points, boolean statut, String description) {
+        super(nom, points, statut, description);
+        this.type="Jardinier";
+    }
+
+    public ObjectifJardinier(String nom, int points, boolean statut, String description, int taille , int nombre) {
         super(nom, points, statut, description);
         this.taille = taille;
         this.nombre=nombre;
@@ -33,6 +42,17 @@ public class ObjectifJardinier extends Objectif {
 
     @Override
     public boolean estValide(List<Parcelle> parcelles) {
-        return false;
+        int i=0;
+        for (Parcelle p:parcelles
+             ) {
+
+            if(p.getTaille()==this.taille) i++;
+
+            if(i==nombre)return true;
+
+        }
+     return false;
     }
+
+
 }

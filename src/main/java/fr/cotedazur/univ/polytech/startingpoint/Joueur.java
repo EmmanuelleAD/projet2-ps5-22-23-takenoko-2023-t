@@ -1,10 +1,7 @@
 
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class Joueur {
@@ -66,17 +63,41 @@ public class Joueur {
 
 
 
-    public Action jouer(List<Position>positions) {
+    public Action jouer(Jeu jeu) {
+        if (jeu.getParcellesPlacees().size()==1)return effectuerActionParcelle(jeu);
+        Random rand=new Random();
+        int index=rand.nextInt(Action.getNbreAction());
+        switch (index){
+            case 0:   return effectuerActionParcelle(jeu);
+            case 1 : return effectuerActionJardinier(jeu);
+        }
 
+
+        return null;
+    }
+
+    private Action effectuerActionJardinier(Jeu jeu) {
+        List<Parcelle>parcelles=jeu.getParcellesPlacees();
+        Random rand=new Random();
+        int index;
+        do
+         index=rand.nextInt(jeu.getParcellesPlacees().size());
+        while (index==0);
+        jeu.getJardinier().move(parcelles.get(index));
+       return new ActionJardinier(parcelles.get(index));
+
+
+    }
+
+    public ActionParcelle effectuerActionParcelle(Jeu jeu){
         Random rand = new Random();
-       int index=rand.nextInt(positions.size());
-        Parcelle parcelle1 = new Parcelle(positions.get(index));
+        int index=rand.nextInt(jeu.getPlacementsPossibles().size());
+        Parcelle parcelle1 = new Parcelle(jeu.getPlacementsPossibles().get(index));
         parcelle1.setBambou(new Bambou());
-       // addScore(1);
+        // addScore(1);
 
 
         return new ActionParcelle(parcelle1);
-
     }
 
 

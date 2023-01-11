@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Optional;
+
 public class Jardinier extends Personnage{
 
     public Jardinier() {
@@ -8,7 +10,7 @@ public class Jardinier extends Personnage{
     }
 
     @Override
-    public Bambou move(Parcelle parcelle) {
+    public Optional<Bambou> move(Parcelle parcelle) {
         this.position = parcelle.getPosition();
         if (parcelle.getBambou().isPresent()){
             parcelle.getBambou().orElse(new Bambou()).setTaille();
@@ -16,7 +18,7 @@ public class Jardinier extends Personnage{
             parcelle.setBambou(new Bambou());
         }
 
-        return null;
+        return parcelle.getBambou();
     }
 
 }

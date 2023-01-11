@@ -26,13 +26,17 @@ public class Parcelle {
     //    public final double size=(10/sqrt(3));
 //    public final double width=(sqrt(3)*size);
 //    public final double height=2*size;
+   public int getTaille(){
 
+        return bambou.orElse(new Bambou()).getTaille();
+    }
 
 
 
     public Parcelle(Position positionCentre){
         this.positionCentre=positionCentre;
         irrigue=true;
+        this.bambou=Optional.empty();
     }
 
 

@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Optional;
+
 public abstract class Personnage{
 
     protected Position position;
@@ -8,7 +10,7 @@ public abstract class Personnage{
         return PersonnageName.Jardinier;
     }
 
-    public abstract Bambou move(Parcelle parcelle);
+    public abstract Optional<Bambou> move(Parcelle parcelle);
 
     public PersonnageName getNom() {
         return nom;

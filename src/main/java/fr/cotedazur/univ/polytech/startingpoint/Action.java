@@ -1,10 +1,13 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.List;
+
 public abstract class Action {
 
 
     protected String nomAction;
     protected String description;
+    private final static int  nbreAction=2;
 
     public abstract String getDescription();
     public String getNomAction() {
@@ -28,4 +31,7 @@ public abstract class Action {
     }
 
 
+    public static int getNbreAction() {
+        return nbreAction;
+    }
 }
