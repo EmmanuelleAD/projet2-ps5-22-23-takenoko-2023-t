@@ -73,6 +73,7 @@ public class Jeu {
                 nombreObjectifs = 7;
                 break;
         }
+        Jardinier jardinier = new Jardinier();
         Parcelle etang = new Parcelle(new Position(0, 0));
         parcellesPlacees.add(etang);
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
