@@ -10,6 +10,11 @@ public class Jardinier extends Personnage{
     @Override
     public Bambou move(Parcelle parcelle) {
         this.position = parcelle.getPosition();
+        if (parcelle.getBambou().isPresent()){
+            parcelle.getBambou().orElse(new Bambou()).setTaille();
+        }else{
+            parcelle.setBambou(new Bambou());
+        }
 
         return null;
     }

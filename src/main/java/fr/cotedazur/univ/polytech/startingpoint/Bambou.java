@@ -13,7 +13,7 @@ public class Bambou {
         return taille;
     }
 
-    public void setTaille(int taille) {
-        this.taille = taille;
+    public void setTaille() {
+        this.taille++;
     }
 }
