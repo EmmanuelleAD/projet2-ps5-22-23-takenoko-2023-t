@@ -5,8 +5,6 @@ import java.util.Objects;
 public class Position {
         int x;
         int y;
-        private static final double EPSILON = 0.001;
-
 
         public Position(int x,int y) {
             this.x = x;
@@ -29,11 +27,6 @@ public class Position {
             this.y = y;
         }
 
-        public boolean isEquivalent(Position position) {
-            double xEquiv = Math.abs(position.x - this.x);
-            double yEquiv = Math.abs(position.y - this.y);
-            return xEquiv <= EPSILON && yEquiv <= EPSILON;
-        }
 
     @Override
     public boolean equals(Object o) {
@@ -48,13 +41,6 @@ public class Position {
         return Objects.hash(x, y);
     }
 
-
-
-
-
-        public static double distanceBetweenTwoPositions(Position position1, Position position2) {
-            return Math.sqrt(Math.pow((double) position1.x - position2.x, 2) + Math.pow((double) position1.y - position2.y, 2));
-        }
 
 
         public String toString(){

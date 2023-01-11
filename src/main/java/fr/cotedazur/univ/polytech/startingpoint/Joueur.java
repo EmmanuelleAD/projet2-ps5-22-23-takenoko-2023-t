@@ -8,7 +8,6 @@ public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
     private double taille;
-    private Plateau plateau;
     private List<Objectif>cartesObjectifs;
     private String nom;
 
@@ -46,18 +45,10 @@ public class Joueur {
         this.taille = taille;
     }
 
-    public Plateau getPlateau() {
-        return plateau;
-    }
-
-    public void setPlateau(Plateau plateau) {
-        this.plateau = plateau;
-    }
 
     public Joueur(double taille,String nom) {
         this.nom=nom;
         this.taille = taille;
-        this.plateau = new Plateau();
         this.cartesObjectifs=new ArrayList<>();
     }
 
@@ -94,7 +85,6 @@ public class Joueur {
         int index=rand.nextInt(jeu.getPlacementsPossibles().size());
         Parcelle parcelle1 = new Parcelle(jeu.getPlacementsPossibles().get(index));
         parcelle1.setBambou(new Bambou());
-        // addScore(1);
 
 
         return new ActionParcelle(parcelle1);

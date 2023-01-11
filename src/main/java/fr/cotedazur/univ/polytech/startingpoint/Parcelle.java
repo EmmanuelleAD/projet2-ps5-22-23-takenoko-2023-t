@@ -23,13 +23,12 @@ public class Parcelle {
     public boolean estIrrigue() {
         return irrigue;
     }
-    //    public final double size=(10/sqrt(3));
-//    public final double width=(sqrt(3)*size);
-//    public final double height=2*size;
+
    public int getTaille(){
 
         return bambou.orElse(new Bambou()).getTaille();
     }
+
 
 
 

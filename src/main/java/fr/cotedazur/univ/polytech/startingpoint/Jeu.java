@@ -84,6 +84,7 @@ public class Jeu {
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
         for (int i = 0; i < MAX_CARTES_OBJECTIFS ; i++) {
+
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
             cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(1));
             cartesObjectis.add(ObjectifJardinier.objectifsJardinier.get(0));
@@ -101,6 +102,9 @@ public class Jeu {
         for (Joueur j : joueurs) {
             Action action = j.jouer(this);
             if (action.getNomAction().equals("Parcelle")) {
+                if (nombreObjectifs==-2){
+                    break;
+                }
                 traiterActionParcelle(j, action);
 
             } else if (action.getNomAction().equals("Jardinier")) {
@@ -110,7 +114,7 @@ public class Jeu {
             ) {
                 if (o.estValide(parcellesPlacees)) {
                     j.addScore(o.getPoints());
-                    System.out.println("L'objectif " + o.getNom() + " de " + o.getPoints() + " points est validé");
+                    System.out.println("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
                     System.out.println("Le score de " + j.getNom() + " est " + j.getScore());
                     nombreObjectifs--;
                 }
@@ -129,9 +133,17 @@ public class Jeu {
         }
     }
 
-    public Joueur getGagnant() {
+    public List<Joueur> getGagnant() {
+
         Collections.sort(joueurs, Joueur.scoreComparator.reversed());
-        return joueurs.get(0);
+        List<Joueur> joueurGagnant=new ArrayList<>();
+        int maxValeur=joueurs.get(0).getScore();
+        for (Joueur joueur: joueurs){
+            if (maxValeur==joueur.getScore()){
+                joueurGagnant.add(joueur);
+            }
+        }
+        return joueurGagnant;
     }
 
     void traiterActionParcelle(Joueur j, Action action) {
@@ -152,21 +164,22 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
-        Joueur joueur = getGagnant();
-        System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
-
-    }
-
-
-    public static void main(String[] args) {
-        Joueur joueur1 = new Joueur(1.85, "Wassim");
-        Joueur joueur2 = new Joueur(1.6, "Brahim");
-        Jeu jeu = new Jeu(joueur1, joueur2);
-        jeu.initialisation();
-        jeu.jouer();
+        List<Joueur> joueurGagnant=getGagnant();
+        if (joueurGagnant.size()==1){
+            Joueur joueur = joueurGagnant.get(0);
+            System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
+        } else {
+            System.out.println("Égalité! les joueurs suivants ont gagnés :");
+            for (Joueur joueur: joueurGagnant){
+                System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
+            }
+        }
 
 
     }
+
+
+
 
 
 }
