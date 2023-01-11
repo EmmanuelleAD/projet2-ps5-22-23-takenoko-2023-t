@@ -4,10 +4,17 @@ public abstract class Personnage{
 
     protected Position position;
 
+    public PersonnageName getName() {
+        return PersonnageName.Jardinier;
+    }
 
     public abstract Bambou move(Parcelle parcelle);
 
-    public abstract PersonnageName getName();
+    public PersonnageName getNom() {
+        return nom;
+    }
+
+    protected PersonnageName nom;
 
 
 
