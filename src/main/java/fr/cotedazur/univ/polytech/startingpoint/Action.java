@@ -7,7 +7,7 @@ public abstract class Action {
 
     protected String nomAction;
     protected String description;
-    private final static int  nbreAction=2;
+    private final static int  nbreAction=3;
 
     public abstract String getDescription();
     public String getNomAction() {

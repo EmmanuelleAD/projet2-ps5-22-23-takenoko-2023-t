@@ -56,15 +56,34 @@ public class Joueur {
 
     public Action jouer(Jeu jeu) {
         if (jeu.getParcellesPlacees().size()==1)return effectuerActionParcelle(jeu);
+        if(this.getCartesObjectifs().size()==0) return piocherCartesObjectifs(jeu);
         Random rand=new Random();
         int index=rand.nextInt(Action.getNbreAction());
         switch (index){
             case 0:   return effectuerActionParcelle(jeu);
             case 1 : return effectuerActionJardinier(jeu);
+            case 2 : if(this.getCartesObjectifs().size()==5) return effectuerActionParcelle(jeu) ;
+            else return piocherCartesObjectifs(jeu);
         }
 
 
         return null;
+    }
+
+    private Action piocherCartesObjectifs(Jeu jeu) {
+        Random rand=new Random();
+        int index=rand.nextInt(2);
+        int size;
+        Objectif o;
+        if(index==0){
+            size=jeu.getObjectifsParcelles().size();
+             o=jeu.getObjectifsParcelles().get(rand.nextInt(size));
+        }
+       else {
+            size=jeu.getObjectifsJardinier().size();
+            o=jeu.getObjectifsJardinier().get(rand.nextInt(size));
+        }
+        return new ActionPiocher(o);
     }
 
     private Action effectuerActionJardinier(Jeu jeu) {

@@ -10,6 +10,17 @@ public class Jeu {
     private List<Position> placementsPossibles;
     private List<Objectif> cartesObjectis;
 
+    public List<ObjectifParcelle> getObjectifsParcelles() {
+        return objectifsParcelles;
+    }
+
+    public List<ObjectifJardinier> getObjectifsJardinier() {
+        return objectifsJardinier;
+    }
+
+    private List<ObjectifParcelle> objectifsParcelles;
+    private List<ObjectifJardinier> objectifsJardinier;
+
     public Jardinier getJardinier() {
         return jardinier;
     }
@@ -27,29 +38,21 @@ public class Jeu {
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
+        this.objectifsParcelles=new ArrayList<>();
+        this.objectifsJardinier=new ArrayList<>();
 
     }
-    public Jeu(Joueur joueur1, Joueur joueur2,Joueur joueur3) {
-        joueurs = new ArrayList<>();
-        joueurs.add(joueur1);
-        joueurs.add(joueur2);
-        joueurs.add(joueur3);
+    public Jeu(List<Joueur>joueurs) {
+        this.joueurs = new ArrayList<>();
+       this.joueurs.addAll(joueurs);
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
+        this.objectifsParcelles=new ArrayList<>();
+        this.objectifsJardinier=new ArrayList<>();
 
     }
-    public Jeu(Joueur joueur1, Joueur joueur2,Joueur joueur3,Joueur joueur4) {
-        joueurs = new ArrayList<>();
-        joueurs.add(joueur1);
-        joueurs.add(joueur2);
-        joueurs.add(joueur3);
-        joueurs.add(joueur4);
-        this.parcellesPlacees = new ArrayList<>();
-        this.placementsPossibles = new ArrayList<>();
-        this.cartesObjectis = new ArrayList<>();
 
-    }
     public List<Parcelle> getParcellesPlacees() {
         return parcellesPlacees;
     }
@@ -68,13 +71,13 @@ public class Jeu {
     public void initialisation() {
         switch (joueurs.size()) {
             case 2:
-                nombreObjectifs = 19;
+                nombreObjectifs = 9;
                 break;
             case 3:
-                nombreObjectifs = 18;
+                nombreObjectifs = 8;
                 break;
             case 4:
-                nombreObjectifs = 17;
+                nombreObjectifs = 7;
                 break;
         }
         this.jardinier = new Jardinier();
@@ -83,16 +86,17 @@ public class Jeu {
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
-        for (int i = 0; i < MAX_CARTES_OBJECTIFS ; i++) {
+        for (int i = 0; i < 4 ; i++) {
 
-            cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(0));
-            cartesObjectis.add(ObjectifParcelle.objectifParcelles.get(1));
-            cartesObjectis.add(ObjectifJardinier.objectifsJardinier.get(0));
+            objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
+            objectifsJardinier.addAll(ObjectifJardinier.objectifsJardinier);
         }
         for (Joueur joueur : joueurs
         ) {
-            joueur.getCartesObjectifs().add(cartesObjectis.get(cartesObjectis.size() - 1));
-            cartesObjectis.remove(cartesObjectis.size() - 1);
+            joueur.getCartesObjectifs().add(objectifsParcelles.get(objectifsParcelles.size() - 1)); //donner une carte de chaque catégorie
+            objectifsParcelles.remove(objectifsParcelles.size() - 1);
+            joueur.getCartesObjectifs().add(objectifsJardinier.get(objectifsJardinier.size() - 1));
+            objectifsJardinier.remove(objectifsJardinier.size() - 1);
         }
     }
 
@@ -110,16 +114,23 @@ public class Jeu {
             } else if (action.getNomAction().equals("Jardinier")) {
                 traiterActionJardinier(j,action);
             }
+            else if (action.getNomAction().equals("Piocher")) {
+                traiterActionPiocher(j,action);
+            }
+            List<Objectif> aSupp=new ArrayList<>();
             for (Objectif o : j.getCartesObjectifs()
             ) {
+
                 if (o.estValide(parcellesPlacees)) {
                     j.addScore(o.getPoints());
                     System.out.println("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
                     System.out.println("Le score de " + j.getNom() + " est " + j.getScore());
                     nombreObjectifs--;
+                    aSupp.add(o);
                 }
 
             }
+            j.getCartesObjectifs().removeAll(aSupp);
             if (nombreObjectifs == 0) {
                 nombreObjectifs--;// to be sure that this condition won't be executed twice
                 j.addScore(2);
@@ -131,6 +142,12 @@ public class Jeu {
             }
 
         }
+    }
+
+    private void traiterActionPiocher(Joueur j, Action action) {
+        ActionPiocher api=(ActionPiocher) action;
+        j.getCartesObjectifs().add(api.getObjectif());
+        System.out.println(j.getNom() + api.getDescription());
     }
 
     public List<Joueur> getGagnant() {
