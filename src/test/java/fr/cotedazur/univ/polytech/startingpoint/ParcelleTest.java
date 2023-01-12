@@ -1,11 +1,15 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
-import static java.lang.Math.sqrt;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParcelleTest {
+    private Parcelle etang=new Parcelle(new Position(0,0));
 
     @Test
     void testEquals() {
@@ -112,6 +116,44 @@ class ParcelleTest {
         }
 
 
+
+
+    }
+    @Nested
+    class testPlacements{
+        @Test
+        void testPlacementEtang(){
+            List<Parcelle >parcellesPlacees=new ArrayList<>();
+            parcellesPlacees.add(etang);
+            List<Position> positions=Parcelle.positionsPossible(parcellesPlacees,new ArrayList<Position>());
+            Position[] adjacEtangs=etang.getPosition().positionsAdjacentes();
+            for (int i=0;i<6;i++){
+                assertEquals(positions.get(i),adjacEtangs[i]);
+            }
+
+        }
+
+        @Test
+        void testPlacementAdjacentA2(){
+            int count;
+            List<Parcelle >parcellesPlacees=new ArrayList<>();
+            parcellesPlacees.add(etang);
+            parcellesPlacees.addAll(List.of(etang.parcelleAdjacentes()));
+            List<Position> positions=Parcelle.positionsPossible(parcellesPlacees,new ArrayList<Position>());
+            for (Position p1:positions
+                 ) {
+                count=0;
+                for (Parcelle p:parcellesPlacees
+                     ) {
+                    if(p1.estAdjacente(p.getPosition()))count++;
+
+                }
+                assertTrue(count>=2);
+
+            }
+
+
+        }
 
 
     }
