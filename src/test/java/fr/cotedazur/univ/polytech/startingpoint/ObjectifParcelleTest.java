@@ -19,6 +19,7 @@ class ObjectifParcelleTest {
     Parcelle p12;
     Parcelle p13;
     ObjectifParcelle objectifAli3;
+    ObjectifParcelle objectifPARC;
     List<Parcelle> listPar1;
     List<Parcelle> listPar2;
     List<Parcelle> listPar3;
@@ -35,6 +36,7 @@ class ObjectifParcelleTest {
         p13=new Parcelle(new Position(1,3));
 
         objectifAli3=new ObjectifParcelle("ALI3",2,false,"3 Parcelles alignées");
+        objectifPARC=new ObjectifParcelle("PARC",3,false,"3 Parcelles en C");
         listPar1=Arrays.asList(p00,p01,p12);
         listPar2=Arrays.asList(p00,p01,p02);
         listPar3=Arrays.asList(p00,p01,p11);
@@ -42,7 +44,7 @@ class ObjectifParcelleTest {
 
     }
     @Test
-    void testverifierValiderPAR1(){
+    void testverifierValiderALI3(){
 
         assertTrue(objectifAli3.estValide(listPar1));
         listPar1=Arrays.asList(p10,p01,p02);
@@ -52,6 +54,14 @@ class ObjectifParcelleTest {
         listPar1=Arrays.asList(p01,p12,p13);
         assertTrue(objectifAli3.estValide(listPar1));
         assertFalse(objectifAli3.estValide(Arrays.asList(p01)));
+    }
+    @Test
+    void testverifierValiderPAR2(){
+        assertFalse(objectifPARC.estValide(listPar1));
+        assertTrue(objectifPARC.estValide(listPar2));
+        listPar2=Arrays.asList(p11,p02,p13);
+        assertTrue(objectifPARC.estValide(listPar2));
+
     }
 
 

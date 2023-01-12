@@ -10,7 +10,9 @@ public class ObjectifParcelle extends Objectif {
     static List<ObjectifParcelle> objectifParcelles = new ArrayList<>(Arrays.asList(
             new ObjectifParcelle("PARADJ",2,false,"Adjacence parcelle"),
             new ObjectifParcelle("POUSSB",2,false,"Pousse de bambou"),
-            new ObjectifParcelle("ALI3",2,false,"3 Parcelles alignées")));
+            new ObjectifParcelle("ALI3",2,false,"3 Parcelles alignées"),
+            new ObjectifParcelle("PARC",3,false,"Parcelles en C")));
+
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
         this.type="Parcelle";
@@ -26,9 +28,24 @@ public class ObjectifParcelle extends Objectif {
                 return verifierValiderPOUSSB(parcelles);
             case "ALI3":
                 return verifierValiderAli3(parcelles);
+            case "PARC":
+                return verifierValiderPARC(parcelles);
 
 
         }
+        return false;
+    }
+
+    private boolean verifierValiderPARC(List<Parcelle> parcelles) {
+        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        for (Position p : positions
+        ) {
+            if ((p.y%2==0)&&positions.contains(new Position(p.x , p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)) ))
+                return true;
+            if ((p.y%2!=0)&&positions.contains(new Position(p.x-1 , p.y + 1)) && (positions.contains(new Position(p.x, p.y + 2)) ))
+                return true;
+        }
+
         return false;
     }
 
