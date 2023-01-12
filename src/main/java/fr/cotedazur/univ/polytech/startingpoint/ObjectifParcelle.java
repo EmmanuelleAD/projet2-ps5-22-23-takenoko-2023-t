@@ -12,7 +12,9 @@ public class ObjectifParcelle extends Objectif {
             new ObjectifParcelle("POUSSB",2,false,"Pousse de bambou"),
             new ObjectifParcelle("ALI3",2,false,"3 Parcelles alignées"),
             new ObjectifParcelle("PARC",3,false,"Parcelles en C"),
-            new ObjectifParcelle("GRP3",4,false,"3 Parcelles groupées")
+            new ObjectifParcelle("GRP3",4,false,"3 Parcelles groupées"),
+            new ObjectifParcelle("GRP4",4,false,"4 Parcelles groupées")
+
             ));
 
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
@@ -34,8 +36,24 @@ public class ObjectifParcelle extends Objectif {
                 return verifierValiderPARC(parcelles);
             case "GRP3":
                 return verifierValiderGRP3(parcelles);
+            case "GRP4":
+                return verifierValiderGRP4(parcelles);
 
 
+        }
+        return false;
+    }
+
+    private boolean verifierValiderGRP4(List<Parcelle> parcelles) {
+        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        for (Position p : positions
+        ) {
+            if ((p.y%2==0)&&(positions.contains(new Position(p.x , p.y + 2))&&positions.contains(new Position(p.x , p.y + 1)))
+                    &&  positions.contains(new Position(p.x +1, p.y + 1)))
+                return true;
+            if ((p.y%2!=0)&&(positions.contains(new Position(p.x , p.y + 2))&&positions.contains(new Position(p.x-1 , p.y + 1)))
+                    &&  positions.contains(new Position(p.x , p.y + 1)))
+                return true;
         }
         return false;
     }

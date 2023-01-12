@@ -13,6 +13,6 @@ public class ActionPiocher extends Action{
 
     @Override
     public String getDescription() {
-        return "a pioché la carte Objectif : "+objectif.getDescription();
+        return " a pioché la carte Objectif : "+objectif.getDescription();
     }
 }
