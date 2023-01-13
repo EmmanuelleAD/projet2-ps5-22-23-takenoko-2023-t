@@ -25,19 +25,21 @@ public class ObjectifParcelle extends Objectif {
 
     @Override
     public boolean estValide(List<Parcelle> parcelles) {
+        List<Parcelle>parcellesSansEtang=new ArrayList<>(parcelles);
+        parcellesSansEtang.remove(Parcelle.etang);
         switch (getNom()) {
             case "PARADJ":
-                return verifierValiderPARADJ(parcelles);
+                return verifierValiderPARADJ(parcellesSansEtang);
             case "POUSSB":
-                return verifierValiderPOUSSB(parcelles);
+                return verifierValiderPOUSSB(parcellesSansEtang);
             case "ALI3":
-                return verifierValiderAli3(parcelles);
+                return verifierValiderAli3(parcellesSansEtang);
             case "PARC":
-                return verifierValiderPARC(parcelles);
+                return verifierValiderPARC(parcellesSansEtang);
             case "GRP3":
-                return verifierValiderGRP3(parcelles);
+                return verifierValiderGRP3(parcellesSansEtang);
             case "GRP4":
-                return verifierValiderGRP4(parcelles);
+                return verifierValiderGRP4(parcellesSansEtang);
 
 
         }
