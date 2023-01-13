@@ -20,7 +20,7 @@ public class Jardinier extends Personnage{
         }
         for (Parcelle p :parcelle.parcelleAdjacentes()
              ) {
-            if(parcelles.contains(p)&& p.estIrrigue()) p.setBambou(new Bambou());
+            if(parcelles.contains(p)&& p.estIrrigue()&&!p.equals(Parcelle.etang)) p.setBambou(new Bambou());
         }
 
         return parcelle.getBambou();
