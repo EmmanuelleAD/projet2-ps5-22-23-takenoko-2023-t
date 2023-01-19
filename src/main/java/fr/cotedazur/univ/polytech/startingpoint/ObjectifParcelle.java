@@ -64,10 +64,18 @@ public class ObjectifParcelle extends Objectif {
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
-            if ((p.getY()%2==0)&&positions.contains(new Position(p.x , p.y + 1)) && ( positions.contains(new Position(p.x + 1, p.y + 1))))
+            if ((p.getY()%2==0)){
+                if(positions.contains(new Position(p.x , p.y + 1)) && ( positions.contains(new Position(p.x + 1, p.y + 1))))
                 return true;
-            if ((p.getY()%2!=0)&&positions.contains(new Position(p.x , p.y + 1)) && (positions.contains(new Position(p.x-1, p.y + 1)) ))
-                return true;
+               else  if(positions.contains(new Position(p.x , p.y - 1)) && ( positions.contains(new Position(p.x + 1, p.y - 1))))
+                    return true;
+            }
+            if ((p.getY()%2!=0)) {
+                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 1))))
+                    return true;
+                if (positions.contains(new Position(p.x-1, p.y - 1)) && (positions.contains(new Position(p.x , p.y - 1))))
+                    return true;
+            }
         }
 
         return false;
@@ -77,9 +85,9 @@ public class ObjectifParcelle extends Objectif {
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
-            if ((p.y%2==0)&&positions.contains(new Position(p.x , p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)) ))
+            if ((p.y%2==0)&&positions.contains(new Position(p.x , p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1))||positions.contains(new Position(p.x+1,p.y+1)) ))
                 return true;
-            if ((p.y%2!=0)&&positions.contains(new Position(p.x-1 , p.y + 1)) && (positions.contains(new Position(p.x, p.y + 2)) ))
+            if ((p.y%2!=0)&&(positions.contains(new Position(p.x-1 , p.y + 1))||positions.contains(new Position(p.x , p.y + 1))) && (positions.contains(new Position(p.x, p.y + 2)) ))
                 return true;
         }
 
@@ -91,16 +99,17 @@ public class ObjectifParcelle extends Objectif {
         for (Position p : positions
         ) {
             if ((p.getY()%2==0)){
-                if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1))  ))
+                if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x+1, p.y + 1))  ))
                 return true;
-                else if((positions.contains(new Position(p.x - 1, p.y + 1)) && (positions.contains(new Position(p.x-1, p.y + 2))  ))){
+                else if((positions.contains(new Position(p.x , p.y + 1)) && (positions.contains(new Position(p.x-1, p.y + 2))  ))){
                     return  true;
 
                 }
             }
-            if ((p.getY()%2!=0)){if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x+1, p.y + 1))  ))
+            if ((p.getY()%2!=0)){
+                if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1))  ))
                 return true;
-                else if(positions.contains(new Position(p.x - 1, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)) )) return true;
+                else if(positions.contains(new Position(p.x - 1, p.y + 1)) && (positions.contains(new Position(p.x-1, p.y + 2)) )) return true;
             }
 
         }
