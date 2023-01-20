@@ -1,5 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Collection;
 import java.util.List;
 
 public class Cerveau {
@@ -10,16 +11,19 @@ public class Cerveau {
     }
 
 
-
-
     public Action decider(Jeu jeu){
             if (joueur.getCartesObjectifs().size()==0){
                 List<ObjectifParcelle> op = jeu.getObjectifsParcelles();
                 Objectif newObjectif = op.get(op.size()-1);
                 ActionPiocher newAction= new ActionPiocher(newObjectif);
+                return newAction;
+
         }
         return null;
     }
+
+
+
     public Action deciderJardinier(Jeu jeu){
         if (joueur.getCartesObjectifs().size()==0){
             List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
@@ -41,8 +45,6 @@ public class Cerveau {
         return new ActionParcelle(new Parcelle(jeu.getPlacementsPossibles().get(0)));
 
     }
-
-
 
 
 
