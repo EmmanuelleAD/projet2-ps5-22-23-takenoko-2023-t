@@ -11,6 +11,18 @@ public class Joueur {
     private List<Objectif>cartesObjectifs;
     private String nom;
 
+
+
+    private Cerveau cerveau;
+
+    public Cerveau getCerveau() {
+        return cerveau;
+    }
+
+    public void setCerveau(Cerveau cerveau) {
+        this.cerveau = cerveau;
+    }
+
     private int score=0;
 
     public void addScore(int score) {
@@ -50,7 +62,9 @@ public class Joueur {
         this.nom=nom;
         this.taille = taille;
         this.cartesObjectifs=new ArrayList<>();
+        this.cerveau=new Cerveau(this);
     }
+
 
 
 

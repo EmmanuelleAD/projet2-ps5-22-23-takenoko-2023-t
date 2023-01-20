@@ -39,7 +39,7 @@ class CerveauTest {
         jeu.jouer();
         Cerveau cerveau = new Cerveau(joueur1);
         cerveau.decider(jeu);
-        assertEquals(null, cerveau.decider(jeu));
+        assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveau.decider(jeu));
 
     }
 
@@ -109,4 +109,8 @@ class CerveauTest {
         Action act=cerveauJoueur1.deciderJardinier(jeu);
         assertEquals(act,new ActionParcelle(jeu.getParcellesPlacees().get(2)));
     }
-}
+
+        }
+
+
+

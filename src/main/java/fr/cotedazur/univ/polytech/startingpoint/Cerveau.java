@@ -19,7 +19,9 @@ public class Cerveau {
                 return newAction;
 
         }
-        return null;
+
+            List<Position> listPlacement = jeu.getPlacementsPossibles();
+        return new ActionParcelle(new Parcelle( listPlacement.get(0)));
     }
 
 
