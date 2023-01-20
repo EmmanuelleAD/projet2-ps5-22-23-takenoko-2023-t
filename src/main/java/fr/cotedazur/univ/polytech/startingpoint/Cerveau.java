@@ -35,11 +35,12 @@ public class Cerveau {
         for (Parcelle parcelle : jeu.getParcellesPlacees()){
             if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 && joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(0))){
                 return new ActionJardinier(parcelle);
-            } if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 && joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(1))){
+            }
+            if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 && joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(1))){
                 nbParcellesBamboo2++;
-                if (nbParcellesBamboo2==2 && parcelle.getBambou().orElse(new Bambou()).getTaille()==2){
-                    return new ActionJardinier(parcelle);
-                }
+            }
+            if (nbParcellesBamboo2==2 && parcelle.getBambou().orElse(new Bambou()).getTaille()==2){
+                return new ActionJardinier(parcelle);
             }
         }
         return new ActionParcelle(new Parcelle(jeu.getPlacementsPossibles().get(0)));

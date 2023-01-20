@@ -1,6 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Objectif{
     protected String nom;
@@ -60,4 +61,29 @@ public abstract class Objectif{
 
 
     public abstract boolean estValide(List<Parcelle> parcelles);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Objectif objectif = (Objectif) o;
+
+        if (points != objectif.points) return false;
+        if (statut != objectif.statut) return false;
+        if (!Objects.equals(nom, objectif.nom)) return false;
+        if (!Objects.equals(description, objectif.description))
+            return false;
+        return Objects.equals(type, objectif.type);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nom != null ? nom.hashCode() : 0;
+        result = 31 * result + points;
+        result = 31 * result + (statut ? 1 : 0);
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        return result;
+    }
 }

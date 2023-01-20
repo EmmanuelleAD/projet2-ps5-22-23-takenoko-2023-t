@@ -15,4 +15,18 @@ public class ActionPiocher extends Action{
     public String getDescription() {
         return " a pioché la carte Objectif : "+objectif.getDescription();
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof ActionPiocher)){
+            return false;
+        }
+        ActionPiocher piocher=(ActionPiocher) o;
+        return piocher.objectif.equals(this.objectif);
+    }
+
+    @Override
+    public int hashCode() {
+        return objectif.hashCode();
+    }
 }
