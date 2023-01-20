@@ -1,6 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.List;
+import java.util.Random;
 
 public class CerveauJardinier extends Cerveau {
 
@@ -28,7 +29,10 @@ public class CerveauJardinier extends Cerveau {
                 return new ActionJardinier(parcelle);
             }
         }
-        return new ActionParcelle(new Parcelle(jeu.getPlacementsPossibles().get(0)));
+        Random ran=new Random();
+       int i= ran.nextInt(jeu.getParcellesPlacees().size());
+
+        return new ActionJardinier(jeu.getParcellesPlacees().get(i));
 
     }
 

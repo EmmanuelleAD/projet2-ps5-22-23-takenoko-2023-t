@@ -176,6 +176,8 @@ public class Jeu {
     }
     void traiterActionJardinier(Joueur j,Action action){
         ActionJardinier aj=(ActionJardinier) action;
+        getJardinier().move(aj.getParcelle(),getParcellesPlacees());
+
         System.out.println(j.getNom() + aj.getDescription());
     }
 

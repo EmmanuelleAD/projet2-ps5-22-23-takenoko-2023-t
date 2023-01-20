@@ -4,6 +4,10 @@ import java.util.Objects;
 import java.util.Optional;
 
 public class ActionJardinier extends Action{
+    public Parcelle getParcelle() {
+        return parcelle;
+    }
+
     private Parcelle parcelle;
     public ActionJardinier(Parcelle p) {
         super("Jardinier", "");
