@@ -54,14 +54,14 @@ class CerveauTest {
         Objectif newObjectif = op.get(op.size()-1);
         ActionPiocher newAction= new ActionPiocher(newObjectif);
         if (joueur1.getCartesObjectifs().size()==0){
-            cerveau.deciderJardinier(jeu);
+            cerveau.decider(jeu);
 
         }
     }
     @Test
     void testerCasSansCarte(){
         joueur1.setCartesObjectifs(new ArrayList<>());
-       Action act= cerveauJardinierJoueur1.deciderJardinier(jeu);
+       Action act= cerveauJardinierJoueur1.decider(jeu);
         List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
         Objectif newObjectif = op.get(op.size()-1);
        assertEquals(new ActionPiocher(newObjectif),act);
@@ -75,7 +75,7 @@ class CerveauTest {
         Parcelle parcelle = new Parcelle(new Position(1,0));
         jeu.getParcellesPlacees().add(parcelle);
         jeu.getParcellesPlacees().get(0).setBambou(new Bambou(3));
-        Action act= cerveauJardinierJoueur1.deciderJardinier(jeu);
+        Action act= cerveauJardinierJoueur1.decider(jeu);
         assertEquals(act,new ActionJardinier(jeu.getParcellesPlacees().get(0)));
     }
 
@@ -90,7 +90,7 @@ class CerveauTest {
         jeu.getParcellesPlacees().get(0).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(1).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(2).setBambou(new Bambou(2));
-        Action act= cerveauJardinierJoueur1.deciderJardinier(jeu);
+        Action act= cerveauJardinierJoueur1.decider(jeu);
         assertEquals(act,new ActionJardinier(jeu.getParcellesPlacees().get(2)));
     }
 
@@ -105,7 +105,7 @@ class CerveauTest {
         jeu.getParcellesPlacees().get(0).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(1).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(2).setBambou(new Bambou(3));
-        Action act= cerveauJardinierJoueur1.deciderJardinier(jeu);
+        Action act= cerveauJardinierJoueur1.decider(jeu);
         assertEquals(act,new ActionParcelle(jeu.getParcellesPlacees().get(2)));
     }
 

@@ -62,26 +62,13 @@ public class Joueur {
         this.nom=nom;
         this.taille = taille;
         this.cartesObjectifs=new ArrayList<>();
-        this.cerveau=new Cerveau(this);
     }
 
 
 
 
     public Action jouer(Jeu jeu) {
-        if (jeu.getParcellesPlacees().size()==1)return effectuerActionParcelle(jeu);
-        if(this.getCartesObjectifs().size()==0) return piocherCartesObjectifs(jeu);
-        Random rand=new Random();
-        int index=rand.nextInt(Action.getNbreAction());
-        switch (index){
-            case 0:   return effectuerActionParcelle(jeu);
-            case 1 : return effectuerActionJardinier(jeu);
-            case 2 : if(this.getCartesObjectifs().size()==5) return effectuerActionParcelle(jeu) ;
-            else return piocherCartesObjectifs(jeu);
-        }
-
-
-        return null;
+        return cerveau.decider(jeu);
     }
 
     private Action piocherCartesObjectifs(Jeu jeu) {
@@ -109,7 +96,6 @@ public class Joueur {
         while (index==0);
         jeu.getJardinier().move(parcelles.get(index),jeu.getParcellesPlacees());
        return new ActionJardinier(parcelles.get(index));
-
 
     }
 

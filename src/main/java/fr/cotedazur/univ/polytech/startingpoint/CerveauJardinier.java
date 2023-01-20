@@ -8,7 +8,8 @@ public class CerveauJardinier extends Cerveau {
         super(joueur);
     }
 
-    public Action deciderJardinier(Jeu jeu){
+    @Override
+    public Action decider(Jeu jeu){
         if (joueur.getCartesObjectifs().size()==0){
             List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
             Objectif newObjectif = op.get(op.size()-1);

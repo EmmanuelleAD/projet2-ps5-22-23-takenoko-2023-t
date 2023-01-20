@@ -8,6 +8,7 @@ public class CerveauParcelle extends Cerveau {
         super(joueur);
     }
 
+    @Override
     public Action decider(Jeu jeu){
         if (joueur.getCartesObjectifs().size()==0){
             List<ObjectifParcelle> op = jeu.getObjectifsParcelles();
