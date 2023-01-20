@@ -12,7 +12,7 @@ class CerveauTest {
     Joueur joueur1 = new Joueur(1.85, "Wassim");
     Joueur joueur2 = new Joueur(1.6, "Brahim");
     Jeu jeu = new Jeu(joueur1, joueur2);
-    Cerveau cerveauJoueur1=new Cerveau(joueur1);
+    CerveauJardinier cerveauJoueur1=new CerveauJardinier(joueur1);
     @BeforeEach void setUp(){
         jeu.initialisation();;
     }
@@ -37,7 +37,7 @@ class CerveauTest {
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
         jeu.jouer();
-        Cerveau cerveau = new Cerveau(joueur1);
+        CerveauJardinier cerveau = new CerveauJardinier(joueur1);
         cerveau.decider(jeu);
         assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveau.decider(jeu));
 
@@ -50,7 +50,7 @@ class CerveauTest {
         Jeu jeu= new Jeu(joueur1,joueur2);
         jeu.initialisation();
         joueur1.setCartesObjectifs(new ArrayList<Objectif>());
-        Cerveau cerveau = new Cerveau(joueur1);
+        CerveauJardinier cerveau = new CerveauJardinier(joueur1);
         List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
         Objectif newObjectif = op.get(op.size()-1);
         ActionPiocher newAction= new ActionPiocher(newObjectif);
