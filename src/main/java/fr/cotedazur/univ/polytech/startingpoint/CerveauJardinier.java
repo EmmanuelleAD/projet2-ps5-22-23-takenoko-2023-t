@@ -25,7 +25,7 @@ public class CerveauJardinier extends Cerveau {
             if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 && joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(1))){
                 nbParcellesBamboo2++;
             }
-            if (nbParcellesBamboo2==2 && parcelle.getBambou().orElse(new Bambou()).getTaille()==2){
+            if (nbParcellesBamboo2==3 && parcelle.getBambou().orElse(new Bambou()).getTaille()==2){
                 return new ActionJardinier(parcelle);
             }
         }
