@@ -13,10 +13,13 @@ public class Jardinier extends Personnage{
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle>parcelles) {
         this.position = parcelle.getPosition();
-        if (parcelle.getBambou().isPresent()){
-            parcelle.getBambou().orElse(new Bambou()).setTaille();
-        }else{
-            parcelle.setBambou(new Bambou());
+        if(!parcelle.equals(Parcelle.etang)) {
+
+            if (parcelle.getBambou().isPresent()) {
+                if (parcelle.getTaille() < 4) parcelle.setTaille();
+            } else {
+                parcelle.setBambou(new Bambou());
+            }
         }
         for (Parcelle p :parcelle.parcelleAdjacentes()
              ) {

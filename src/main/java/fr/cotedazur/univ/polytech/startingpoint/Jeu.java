@@ -21,6 +21,7 @@ public class Jeu {
     private List<ObjectifParcelle> objectifsParcelles;
     private List<ObjectifJardinier> objectifsJardinier;
 
+
     public Jardinier getJardinier() {
         return jardinier;
     }
@@ -34,7 +35,9 @@ public class Jeu {
     public Jeu(Joueur joueur1, Joueur joueur2) {
         joueurs = new ArrayList<>();
         joueurs.add(joueur1);
+        joueur1.setCerveau(new CerveauJardinier(joueur1));
         joueurs.add(joueur2);
+        joueur2.setCerveau(new CerveauParcelle(joueur2));
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
@@ -173,6 +176,8 @@ public class Jeu {
     }
     void traiterActionJardinier(Joueur j,Action action){
         ActionJardinier aj=(ActionJardinier) action;
+        getJardinier().move(aj.getParcelle(),getParcellesPlacees());
+
         System.out.println(j.getNom() + aj.getDescription());
     }
 

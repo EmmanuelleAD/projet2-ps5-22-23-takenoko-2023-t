@@ -29,6 +29,10 @@ public class Parcelle {
 
         return bambou.orElse(new Bambou()).getTaille();
     }
+    public void setTaille(){
+
+        bambou.orElse(new Bambou()).setTaille();
+    }
 
 
 
