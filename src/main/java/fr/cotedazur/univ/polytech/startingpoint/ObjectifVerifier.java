@@ -5,10 +5,10 @@ import java.util.List;
 
 public class ObjectifVerifier {
     boolean isManquant=false;
-    List parcellesManquant = new ArrayList();
+    List<List<Position>> parcellesManquant = new ArrayList();
 
 
-    public ObjectifVerifier(boolean isManquant, List parcellesManquant) {
+    public ObjectifVerifier(boolean isManquant, List<List<Position>> parcellesManquant) {
         this.isManquant = isManquant;
         this.parcellesManquant = parcellesManquant;
     }

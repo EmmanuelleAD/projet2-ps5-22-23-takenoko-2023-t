@@ -8,24 +8,24 @@ import java.util.stream.Collectors;
 public class ObjectifParcelle extends Objectif {
 
     static List<ObjectifParcelle> objectifParcelles = new ArrayList<>(Arrays.asList(
-            new ObjectifParcelle("PARADJ",2,false,"Adjacence parcelle"),
-            new ObjectifParcelle("POUSSB",2,false,"Pousse de bambou"),
-            new ObjectifParcelle("ALI3",2,false,"3 Parcelles alignées"),
-            new ObjectifParcelle("PARC",3,false,"Parcelles en C"),
-            new ObjectifParcelle("GRP3",4,false,"3 Parcelles groupées"),
-            new ObjectifParcelle("GRP4",4,false,"4 Parcelles groupées")
+            new ObjectifParcelle("PARADJ", 2, false, "Adjacence parcelle"),
+            new ObjectifParcelle("POUSSB", 2, false, "Pousse de bambou"),
+            new ObjectifParcelle("ALI3", 2, false, "3 Parcelles alignées"),
+            new ObjectifParcelle("PARC", 3, false, "Parcelles en C"),
+            new ObjectifParcelle("GRP3", 4, false, "3 Parcelles groupées"),
+            new ObjectifParcelle("GRP4", 4, false, "4 Parcelles groupées")
 
-            ));
+    ));
 
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
-        this.type="Parcelle";
+        this.type = "Parcelle";
     }
 
 
     @Override
     public boolean estValide(List<Parcelle> parcelles) {
-        List<Parcelle>parcellesSansEtang=new ArrayList<>(parcelles);
+        List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
         parcellesSansEtang.remove(Parcelle.etang);
         switch (getNom()) {
             case "PARADJ":
@@ -40,228 +40,273 @@ public class ObjectifParcelle extends Objectif {
                 return verifierValiderGRP3(parcellesSansEtang).isManquant;
             case "GRP4":
                 return verifierValiderGRP4(parcellesSansEtang).isManquant;
-
-
         }
         return false;
     }
 
     private ObjectifVerifier verifierValiderGRP4(List<Parcelle> parcelles) {
-        ObjectifVerifier objectif = new ObjectifVerifier(false, new ArrayList<>());
+        ObjectifVerifier objectif = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
-            List<Position> manquant = new ArrayList<>();
             if (p.y % 2 == 0) {
                 if ((positions.contains(new Position(p.x, p.y + 2)) && positions.contains(new Position(p.x, p.y + 1))) && positions.contains(new Position(p.x + 1, p.y + 1))) {
                     objectif.setIsManquant(true);
                     return objectif;
                 }
-
-                if (!positions.contains(new Position(p.x, p.y + 2))) {
-                    manquant.add(new Position(p.x, p.y + 2));
-                }
-
-                if (!positions.contains(new Position(p.x, p.y + 1))) {
-                    manquant.add(new Position(p.x, p.y + 1));
-                }
-
-                if (!positions.contains(new Position(p.x + 1, p.y + 1))) {
-                    manquant.add(new Position(p.x + 1, p.y + 1));
-                }
-                objectif.getParcellesManquant().add(manquant);
+               else verifierGRP4Pair(objectif, positions, p);
             }
-
             if (p.y % 2 != 0) {
                 if ((positions.contains(new Position(p.x, p.y + 2)) && positions.contains(new Position(p.x - 1, p.y + 1))) && positions.contains(new Position(p.x, p.y + 1))) {
                     objectif.setIsManquant(true);
                     return objectif;
                 }
             }
-            if (!positions.contains(new Position(p.x, p.y + 2))) {
-                manquant.add(new Position(p.x, p.y + 2));
-            }
-            if (!positions.contains(new Position(p.x - 1, p.y + 1))) {
-                manquant.add(new Position(p.x - 1, p.y + 1));
-            }
-            if (!positions.contains(new Position(p.x, p.y + 1))) {
-                manquant.add(new Position(p.x, p.y + 1));
-            }
-
-            objectif.getParcellesManquant().add(manquant);
+           else verifierGRP4impair(objectif, positions, p);
         }
         return objectif;
     }
 
 
     private ObjectifVerifier verifierValiderGRP3(List<Parcelle> parcelles) {
-        ObjectifVerifier ov=new ObjectifVerifier(false,new ArrayList<>());
+        ObjectifVerifier ov = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
-            List<Position> manquants = new ArrayList<>();
-            if ((p.getY()%2==0)){
-                if(positions.contains(new Position(p.x , p.y + 1)) && ( positions.contains(new Position(p.x + 1, p.y + 1))))
-                {
+            if ((p.getY() % 2 == 0)) {
+                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x + 1, p.y + 1)))) {
                     ov.setIsManquant(true);
                     return ov;
-                }
-                else{
-                    if(!positions.contains(new Position(p.x , p.y + 1))) manquants.add(new Position(p.x , p.y + 1));
-                    if(! positions.contains(new Position(p.x + 1, p.y + 1))) manquants.add(new Position(p.x + 1, p.y + 1));
-                    ov.getParcellesManquant().add(manquants);
-                }
-                manquants=new ArrayList<>();
-
-                 if(positions.contains(new Position(p.x , p.y - 1)) && ( positions.contains(new Position(p.x + 1, p.y - 1)))){
+                } else verifierGRP3Pair1(ov, positions, p);
+                if (positions.contains(new Position(p.x, p.y - 1)) && (positions.contains(new Position(p.x + 1, p.y - 1)))) {
                     ov.setIsManquant(true);
                     return ov;
-                }
-                 else{
-                     if(!positions.contains(new Position(p.x , p.y - 1))) manquants.add(new Position(p.x , p.y - 1));
-                     if(! positions.contains(new Position(p.x + 1, p.y - 1))) manquants.add(new Position(p.x + 1, p.y - 1));
-                     ov.getParcellesManquant().add(manquants);
-
-                 }
+                } else verifierGRP3Pair2(ov, positions, p);
             }
-            manquants=new ArrayList<>();
-            if ((p.getY()%2!=0)) {
-                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 1)))){
+            if ((p.getY() % 2 != 0)) {
+                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 1)))) {
                     ov.setIsManquant(true);
                     return ov;
-                }
-                else{
-                    if(!positions.contains(new Position(p.x , p.y + 1))) manquants.add(new Position(p.x , p.y +1));
-                    if(! positions.contains(new Position(p.x - 1, p.y + 1))) manquants.add(new Position(p.x - 1, p.y+ 1));
-                    ov.getParcellesManquant().add(manquants);
+                } else verifierGRP3Impair1(ov, positions, p);
 
-                }
-                manquants=new ArrayList<>();
-
-                if (positions.contains(new Position(p.x-1, p.y - 1)) && (positions.contains(new Position(p.x , p.y - 1)))){
+                if (positions.contains(new Position(p.x - 1, p.y - 1)) && (positions.contains(new Position(p.x, p.y - 1)))) {
                     ov.setIsManquant(true);
                     return ov;
-                }
-                else{
-                    if(!positions.contains(new Position(p.x-1 , p.y - 1))) manquants.add(new Position(p.x-1 , p.y -1));
-                    if(! positions.contains(new Position(p.x  , p.y - 1))) manquants.add(new Position(p.x , p.y- 1));
-                    ov.getParcellesManquant().add(manquants);
-
-                }
-
+                } else verifierGRP3Impair2(ov, positions, p);
             }
         }
-
         return ov;
     }
 
+
+
     private ObjectifVerifier verifierValiderPARC(List<Parcelle> parcelles) {
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
-        ObjectifVerifier objectif = new ObjectifVerifier(false, new ArrayList<>());
+        ObjectifVerifier objectif = new ObjectifVerifier();
         for (Position p : positions
         ) {
-
             List<Position> manquant = new ArrayList<>();
             if (p.y % 2 == 0) {
-
-                if ((p.y % 2 == 0) && positions.contains(new Position(p.x, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)) || positions.contains(new Position(p.x + 1, p.y + 1)))) {
+                if (positions.contains(new Position(p.x, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)) || positions.contains(new Position(p.x + 1, p.y + 1)))) {
                     objectif.setIsManquant(true);
                     return objectif;
-                }
-
-                if (!positions.contains(new Position(p.x, p.y + 2))) {
-                    manquant.add(new Position(p.x, p.y + 2));
-                }
-                if (!positions.contains(new Position(p.x, p.y + 1)) && !positions.contains(new Position(p.x + 1, p.y + 1))) {
-                    manquant.add(new Position(p.x, p.y + 1));
-                    manquant.add(new Position(p.x + 1, p.y + 1));
-                }
-                objectif.getParcellesManquant().add(manquant);
+                }else verifierParCPair(positions, objectif, p);
             }
-
-
             if ((p.y % 2 != 0) && (positions.contains(new Position(p.x - 1, p.y + 1)) || positions.contains(new Position(p.x, p.y + 1))) && (positions.contains(new Position(p.x, p.y + 2)))) {
                 objectif.setIsManquant(true);
                 return objectif;
-            }
-
-            if (!positions.contains(new Position(p.x, p.y + 2))) {
-                manquant.add(new Position(p.x, p.y +2));
-            }
-            if (!positions.contains(new Position(p.x-1, p.y+1 )) && !positions.contains(new Position(p.x , p.y+1 ))) {
-                manquant.add(new Position(p.x-1, p.y+1));
-                manquant.add(new Position(p.x, p.y+1 ));
-            }
-            objectif.getParcellesManquant().add(manquant);
+            }else veifierParCImpair(positions, objectif, p);
         }
-
         return objectif;
     }
 
 
-
     private ObjectifVerifier verifierValiderAli3(List<Parcelle> parcelles) {
-        ObjectifVerifier objectif = new ObjectifVerifier(false, new ArrayList<>());
+        ObjectifVerifier objectif = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
             List<Position> manquant = new ArrayList<>();
-            if ((p.getY()%2==0)){
-                if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x+1, p.y + 1))  )){
+            if ((p.getY() % 2 == 0)) {
+                if (positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x + 1, p.y + 1)))) {
+                    objectif.setIsManquant(true);
+                    return objectif;
+                }else verifierAli3Pair1(objectif, positions, p);
+                if ((positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 2))))) {
                     objectif.setIsManquant(true);
                     return objectif;
                 }
-
-                if (!positions.contains(new Position(p.x+1, p.y + 2))) {
-                    manquant.add(new Position(p.x+1, p.y + 2));
-                }
-
-                if ( !positions.contains(new Position(p.x + 1, p.y + 1))) {
-                    manquant.add(new Position(p.x + 1, p.y + 1));
-                }
-
-                objectif.getParcellesManquant().add(manquant);
+               else  verifierAli3Pair2(objectif, positions, p);
             }
-            if ((p.getY()%2!=0)){
-                if(positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1))  )){
+            if ((p.getY() % 2 != 0)) {
+                if (positions.contains(new Position(p.x + 1, p.y + 2)) && (positions.contains(new Position(p.x, p.y + 1)))) {
                     objectif.setIsManquant(true);
                     return objectif;
                 }
-                if (!positions.contains(new Position(p.x+1, p.y + 2))) {
-                    manquant.add(new Position(p.x+1, p.y + 2));
-                }
-                if ( !positions.contains(new Position(p.x , p.y + 1))) {
-                    manquant.add(new Position(p.x , p.y + 1));
-                }
-
-                else if(positions.contains(new Position(p.x - 1, p.y + 1)) && (positions.contains(new Position(p.x-1, p.y + 2)) )){
+               else verifierAli3Impair1(objectif, positions, p);
+                if (positions.contains(new Position(p.x - 1, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 2)))) {
                     objectif.setIsManquant(true);
                     return objectif;
                 }
-
-                objectif.getParcellesManquant().add(manquant);
+                else verifierAli3Impair2(objectif, positions, p);
             }
-
         }
         return objectif;
-
-
     }
 
+
     private boolean verifierValiderPOUSSB(List<Parcelle> parcelles) {
-        if (parcelles.get(parcelles.size()-1).getBambou().isPresent()) return true;
+        if (parcelles.get(parcelles.size() - 1).getBambou().isPresent()) return true;
         return false;
     }
 
 
     private boolean verifierValiderPARADJ(List<Parcelle> parcelles) {
-        for (Parcelle p:parcelles
-             ) {
-            if(p.isAdjacent(parcelles.get(parcelles.size() - 1)))
+        for (Parcelle p : parcelles
+        ) {
+            if (p.isAdjacent(parcelles.get(parcelles.size() - 1)))
                 return true;
         }
         return false;
     }
+    private void verifierGRP4impair(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 2))) {
+            manquant.add(new Position(p.x, p.y + 2));
+        }
+        if (!positions.contains(new Position(p.x - 1, p.y + 1))) {
+            manquant.add(new Position(p.x - 1, p.y + 1));
+        }
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+        }
+
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private void verifierGRP4Pair(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 2))) {
+            manquant.add(new Position(p.x, p.y + 2));
+        }
+
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+        }
+
+        if (!positions.contains(new Position(p.x + 1, p.y + 1))) {
+            manquant.add(new Position(p.x + 1, p.y + 1));
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private static void verifierGRP3Impair2(ObjectifVerifier ov, List<Position> positions, Position p) {
+        List<Position> manquants = new ArrayList<>();
+        if (!positions.contains(new Position(p.x - 1, p.y - 1))) manquants.add(new Position(p.x - 1, p.y - 1));
+        if (!positions.contains(new Position(p.x, p.y - 1))) manquants.add(new Position(p.x, p.y - 1));
+        ov.getParcellesManquant().add(manquants);
+    }
+
+    private static void verifierGRP3Impair1(ObjectifVerifier ov, List<Position> positions, Position p) {
+        List<Position> manquants = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 1))) manquants.add(new Position(p.x, p.y + 1));
+        if (!positions.contains(new Position(p.x - 1, p.y + 1))) manquants.add(new Position(p.x - 1, p.y + 1));
+        ov.getParcellesManquant().add(manquants);
+    }
+
+    private void verifierGRP3Pair2(ObjectifVerifier ov, List<Position> positions, Position p) {
+        List<Position> manquants = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y - 1))) manquants.add(new Position(p.x, p.y - 1));
+        if (!positions.contains(new Position(p.x + 1, p.y - 1))) manquants.add(new Position(p.x + 1, p.y - 1));
+        ov.getParcellesManquant().add(manquants);
+    }
+
+    private void verifierGRP3Pair1(ObjectifVerifier ov, List<Position> positions, Position p) {
+        List<Position> manquants = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 1))) manquants.add(new Position(p.x, p.y + 1));
+        if (!positions.contains(new Position(p.x + 1, p.y + 1))) manquants.add(new Position(p.x + 1, p.y + 1));
+        ov.getParcellesManquant().add(manquants);
+    }
+
+    private void veifierParCImpair(List<Position> positions, ObjectifVerifier objectif, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 2))) {
+            manquant.add(new Position(p.x, p.y + 2));
+        }
+        if (!positions.contains(new Position(p.x - 1, p.y + 1))) {
+            manquant.add(new Position(p.x - 1, p.y + 1));
+
+        }
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private void verifierParCPair(List<Position> positions, ObjectifVerifier objectif, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 2))) {
+            manquant.add(new Position(p.x, p.y + 2));
+        }
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+        }
+        if (positions.contains(new Position(p.x + 1, p.y + 1))) {
+            manquant.add(new Position(p.x + 1, p.y + 1));
+
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+    private void verifierAli3Impair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x - 1, p.y + 1))) {
+            manquant.add(new Position(p.x - 1, p.y + 1));
+        }
+        if (!positions.contains(new Position(p.x - 1, p.y + 2))) {
+            manquant.add(new Position(p.x - 1, p.y + 2));
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private void verifierAli3Pair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+        }
+        if (!positions.contains(new Position(p.x - 1, p.y + 2))) {
+            manquant.add(new Position(p.x - 1, p.y + 2));
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private static void verifierAli3Impair1(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x + 1, p.y + 2))) {
+            manquant.add(new Position(p.x + 1, p.y + 2));
+        }
+        if (!positions.contains(new Position(p.x, p.y + 1))) {
+            manquant.add(new Position(p.x, p.y + 1));
+        }
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+    private static void verifierAli3Pair1(ObjectifVerifier objectif, List<Position> positions, Position p) {
+        List<Position> manquant = new ArrayList<>();
+        if (!positions.contains(new Position(p.x + 1, p.y + 2))) {
+            manquant.add(new Position(p.x + 1, p.y + 2));
+        }
+
+        if (!positions.contains(new Position(p.x + 1, p.y + 1))) {
+            manquant.add(new Position(p.x + 1, p.y + 1));
+        }
+
+        objectif.getParcellesManquant().add(manquant);
+    }
+
+
+
+
 
 
 
