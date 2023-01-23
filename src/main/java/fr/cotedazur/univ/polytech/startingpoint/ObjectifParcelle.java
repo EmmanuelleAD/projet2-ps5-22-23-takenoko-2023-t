@@ -39,7 +39,7 @@ public class ObjectifParcelle extends Objectif {
             case "GRP3":
                 return verifierValiderGRP3(parcellesSansEtang);
             case "GRP4":
-                return verifierValiderGRP4(parcellesSansEtang);
+                return verifierValiderGRP4(parcellesSansEtang).isManquant;
 
 
         }
