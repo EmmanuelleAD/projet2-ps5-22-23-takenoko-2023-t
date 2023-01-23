@@ -11,9 +11,6 @@ public class Cerveau {
     }
 
 
-    
-
-
 
     public Action deciderJardinier(Jeu jeu){
         if (joueur.getCartesObjectifs().size()==0){
