@@ -7,12 +7,12 @@ import java.util.stream.Collectors;
 
 public class ObjectifParcelle extends Objectif {
     static List<ObjectifParcelle> objectifParcelles = new ArrayList<>(Arrays.asList(
-            new ObjectifParcelle("PARADJ", 2, false, "Adjacence parcelle"),
-            new ObjectifParcelle("POUSSB", 2, false, "Pousse de bambou"),
             new ObjectifParcelle("ALI3", 2, false, "3 Parcelles alignées"),
             new ObjectifParcelle("PARC", 3, false, "Parcelles en C"),
             new ObjectifParcelle("GRP3", 4, false, "3 Parcelles groupées"),
-            new ObjectifParcelle("GRP4", 4, false, "4 Parcelles groupées")
+            new ObjectifParcelle("GRP4", 4, false, "4 Parcelles groupées"),
+            new ObjectifParcelle("PARADJ", 2, false, "Adjacence parcelle"),
+            new ObjectifParcelle("POUSSB", 2, false, "Pousse de bambou")
     ));
 
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
@@ -36,7 +36,7 @@ public class ObjectifParcelle extends Objectif {
         };
     }
 
-    private ObjectifVerifier verifierValiderGRP4(List<Parcelle> parcelles) {
+    static ObjectifVerifier verifierValiderGRP4(List<Parcelle> parcelles) {
         ObjectifVerifier objectif = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
@@ -60,7 +60,7 @@ public class ObjectifParcelle extends Objectif {
     }
 
 
-    private ObjectifVerifier verifierValiderGRP3(List<Parcelle> parcelles) {
+    static ObjectifVerifier verifierValiderGRP3(List<Parcelle> parcelles) {
         ObjectifVerifier ov = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
@@ -90,7 +90,7 @@ public class ObjectifParcelle extends Objectif {
         return ov;
     }
 
-    private ObjectifVerifier verifierValiderPARC(List<Parcelle> parcelles) {
+    static ObjectifVerifier verifierValiderPARC(List<Parcelle> parcelles) {
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         ObjectifVerifier objectif = new ObjectifVerifier();
         for (Position p : positions
@@ -110,7 +110,7 @@ public class ObjectifParcelle extends Objectif {
     }
 
 
-    private ObjectifVerifier verifierValiderAli3(List<Parcelle> parcelles) {
+    static ObjectifVerifier verifierValiderAli3(List<Parcelle> parcelles) {
         ObjectifVerifier objectif = new ObjectifVerifier();
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
@@ -155,12 +155,12 @@ public class ObjectifParcelle extends Objectif {
         }
         return false;
     }
-    private void verifierGRP4impair(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierGRP4impair(ObjectifVerifier objectif, List<Position> positions, Position p) {
         verifierParCImpair(positions,objectif,p);
 
     }
 
-    private void verifierGRP4Pair(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierGRP4Pair(ObjectifVerifier objectif, List<Position> positions, Position p) {
       verifierParCPair(positions,objectif,p);
 
     }
@@ -180,7 +180,7 @@ public class ObjectifParcelle extends Objectif {
 
     }
 
-    private void verifierGRP3Pair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierGRP3Pair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x, p.y - 1));
         aVerifier.add(new Position(p.x + 1, p.y - 1));
@@ -188,7 +188,7 @@ public class ObjectifParcelle extends Objectif {
 
     }
 
-    private void verifierGRP3Pair1(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierGRP3Pair1(ObjectifVerifier objectif, List<Position> positions, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x, p.y + 1));
         aVerifier.add(new Position(p.x + 1, p.y + 1));
@@ -196,7 +196,7 @@ public class ObjectifParcelle extends Objectif {
 
     }
 
-    private void verifierParCImpair(List<Position> positions, ObjectifVerifier objectif, Position p) {
+    private static void verifierParCImpair(List<Position> positions, ObjectifVerifier objectif, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x, p.y + 2));
         aVerifier.add(new Position(p.x-1 , p.y + 1));
@@ -205,7 +205,7 @@ public class ObjectifParcelle extends Objectif {
 
     }
 
-    private void verifierParCPair(List<Position> positions, ObjectifVerifier objectif, Position p) {
+    private static void verifierParCPair(List<Position> positions, ObjectifVerifier objectif, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x, p.y + 2));
         aVerifier.add(new Position(p.x , p.y + 1));
@@ -213,7 +213,7 @@ public class ObjectifParcelle extends Objectif {
         traitementsManquants(objectif,positions,aVerifier);
 
     }
-    private void verifierAli3Impair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierAli3Impair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x-1, p.y + 1));
         aVerifier.add(new Position(p.x - 1, p.y + 2));
@@ -221,7 +221,7 @@ public class ObjectifParcelle extends Objectif {
 
     }
 
-    private void verifierAli3Pair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
+    private static void verifierAli3Pair2(ObjectifVerifier objectif, List<Position> positions, Position p) {
         List<Position>aVerifier=new ArrayList<>();
         aVerifier.add(new Position(p.x, p.y + 1));
         aVerifier.add(new Position(p.x - 1, p.y + 2));
