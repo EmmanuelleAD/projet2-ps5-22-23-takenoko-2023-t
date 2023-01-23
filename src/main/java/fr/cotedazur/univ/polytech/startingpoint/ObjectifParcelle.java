@@ -37,7 +37,7 @@ public class ObjectifParcelle extends Objectif {
             case "PARC":
                 return verifierValiderPARC(parcellesSansEtang).isManquant;
             case "GRP3":
-                return verifierValiderGRP3(parcellesSansEtang);
+                return verifierValiderGRP3(parcellesSansEtang).isManquant;
             case "GRP4":
                 return verifierValiderGRP4(parcellesSansEtang);
 
@@ -60,25 +60,65 @@ public class ObjectifParcelle extends Objectif {
         return false;
     }
 
-    private boolean verifierValiderGRP3(List<Parcelle> parcelles) {
+    private ObjectifVerifier verifierValiderGRP3(List<Parcelle> parcelles) {
+        ObjectifVerifier ov=new ObjectifVerifier(false,new ArrayList<>());
         List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
+            List<Position> manquants = new ArrayList<>();
             if ((p.getY()%2==0)){
                 if(positions.contains(new Position(p.x , p.y + 1)) && ( positions.contains(new Position(p.x + 1, p.y + 1))))
-                return true;
-               else  if(positions.contains(new Position(p.x , p.y - 1)) && ( positions.contains(new Position(p.x + 1, p.y - 1))))
-                    return true;
+                {
+                    ov.setIsManquant(true);
+                    return ov;
+                }
+                else{
+                    if(!positions.contains(new Position(p.x , p.y + 1))) manquants.add(new Position(p.x , p.y + 1));
+                    if(! positions.contains(new Position(p.x + 1, p.y + 1))) manquants.add(new Position(p.x + 1, p.y + 1));
+                    ov.getParcellesManquant().add(manquants);
+                }
+                manquants=new ArrayList<>();
+
+                 if(positions.contains(new Position(p.x , p.y - 1)) && ( positions.contains(new Position(p.x + 1, p.y - 1)))){
+                    ov.setIsManquant(true);
+                    return ov;
+                }
+                 else{
+                     if(!positions.contains(new Position(p.x , p.y - 1))) manquants.add(new Position(p.x , p.y - 1));
+                     if(! positions.contains(new Position(p.x + 1, p.y - 1))) manquants.add(new Position(p.x + 1, p.y - 1));
+                     ov.getParcellesManquant().add(manquants);
+
+                 }
             }
+            manquants=new ArrayList<>();
             if ((p.getY()%2!=0)) {
-                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 1))))
-                    return true;
-                if (positions.contains(new Position(p.x-1, p.y - 1)) && (positions.contains(new Position(p.x , p.y - 1))))
-                    return true;
+                if (positions.contains(new Position(p.x, p.y + 1)) && (positions.contains(new Position(p.x - 1, p.y + 1)))){
+                    ov.setIsManquant(true);
+                    return ov;
+                }
+                else{
+                    if(!positions.contains(new Position(p.x , p.y + 1))) manquants.add(new Position(p.x , p.y +1));
+                    if(! positions.contains(new Position(p.x - 1, p.y + 1))) manquants.add(new Position(p.x - 1, p.y+ 1));
+                    ov.getParcellesManquant().add(manquants);
+
+                }
+                manquants=new ArrayList<>();
+
+                if (positions.contains(new Position(p.x-1, p.y - 1)) && (positions.contains(new Position(p.x , p.y - 1)))){
+                    ov.setIsManquant(true);
+                    return ov;
+                }
+                else{
+                    if(!positions.contains(new Position(p.x-1 , p.y - 1))) manquants.add(new Position(p.x-1 , p.y -1));
+                    if(! positions.contains(new Position(p.x  , p.y - 1))) manquants.add(new Position(p.x , p.y- 1));
+                    ov.getParcellesManquant().add(manquants);
+
+                }
+
             }
         }
 
-        return false;
+        return ov;
     }
 
     private ObjectifVerifier verifierValiderPARC(List<Parcelle> parcelles) {
