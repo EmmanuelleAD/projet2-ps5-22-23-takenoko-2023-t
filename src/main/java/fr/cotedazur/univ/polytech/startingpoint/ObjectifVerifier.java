@@ -18,6 +18,10 @@ public class ObjectifVerifier {
         this.isManquant=false;
         this.parcellesManquant = new ArrayList<>();
     }
+    public void ajoutManquants(List<Position>positions){
+        this.parcellesManquant.add(positions);
+
+    }
 
 
 
