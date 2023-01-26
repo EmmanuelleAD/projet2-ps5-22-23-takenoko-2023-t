@@ -144,6 +144,7 @@ public class ObjectifParcelle extends Objectif {
     }
 
     private boolean verifierValiderPOUSSB(List<Parcelle> parcelles) {
+        if (parcelles.isEmpty())return  false;
         return parcelles.get(parcelles.size() - 1).getBambou().isPresent();
     }
 
