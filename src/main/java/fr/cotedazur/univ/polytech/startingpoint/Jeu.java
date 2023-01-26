@@ -134,6 +134,7 @@ public class Jeu {
 
             }
             j.getCartesObjectifs().removeAll(aSupp);
+
             if (nombreObjectifs == 0) {
                 nombreObjectifs--;// to be sure that this condition won't be executed twice
                 j.addScore(2);
@@ -150,6 +151,7 @@ public class Jeu {
     private void traiterActionPiocher(Joueur j, Action action) {
         ActionPiocher api=(ActionPiocher) action;
         j.getCartesObjectifs().add(api.getObjectif());
+        this.cartesObjectis.remove(api.getObjectif());
         System.out.println(j.getNom() + api.getDescription());
     }
 

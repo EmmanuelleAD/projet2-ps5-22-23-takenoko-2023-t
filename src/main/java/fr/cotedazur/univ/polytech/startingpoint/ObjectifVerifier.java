@@ -37,7 +37,7 @@ public class ObjectifVerifier {
         return isManquant;
     }
 
-    public List getParcellesManquant() {
+    public  List<List<Position>> getParcellesManquant() {
         return parcellesManquant;
     }
 
