@@ -41,7 +41,6 @@ public class ObjectifParcelle extends Objectif {
             case "GRP4":
                 return verifierValiderGRP4(parcellesSansEtang).isManquant;
 
-
         }
         return false;
     }
