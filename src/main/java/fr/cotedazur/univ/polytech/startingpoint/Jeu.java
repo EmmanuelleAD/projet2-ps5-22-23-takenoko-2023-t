@@ -201,8 +201,12 @@ public class Jeu {
     }
 
 
+    public Joueur getJoueur1() {
+        return joueurs.get(0);
+    }
 
-
-
+    public Joueur getJoueur2() {
+        return joueurs.get(1);
+    }
 }
 

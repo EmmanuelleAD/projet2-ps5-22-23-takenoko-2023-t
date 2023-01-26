@@ -25,7 +25,7 @@ public class ObjectifParcelle extends Objectif {
     public boolean estValide(List<Parcelle> parcelles) {
         List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
         parcellesSansEtang.remove(Parcelle.etang);
-<<<<<<< HEAD
+
         switch (getNom()) {
             case "PARADJ":
                 return verifierValiderPARADJ(parcellesSansEtang);
@@ -36,13 +36,14 @@ public class ObjectifParcelle extends Objectif {
             case "PARC":
                 return verifierValiderPARC(parcellesSansEtang).isManquant;
             case "GRP3":
-                return verifierValiderGRP3(parcellesSansEtang);
+                return verifierValiderGRP3(parcellesSansEtang).isManquant;
             case "GRP4":
                 return verifierValiderGRP4(parcellesSansEtang).isManquant;
 
         }
-        return false;
-=======
+
+
+
         return switch (getNom()) {
             case "PARADJ" -> verifierValiderPARADJ(parcellesSansEtang);
             case "POUSSB" -> verifierValiderPOUSSB(parcellesSansEtang);
@@ -52,7 +53,7 @@ public class ObjectifParcelle extends Objectif {
             case "GRP4" -> verifierValiderGRP4(parcellesSansEtang).isManquant;
             default -> false;
         };
->>>>>>> 40788cd00388059316272ae40358c8834b52aed5
+
     }
 
     static ObjectifVerifier verifierValiderGRP4(List<Parcelle> parcelles) {

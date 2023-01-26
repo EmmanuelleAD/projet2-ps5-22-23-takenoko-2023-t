@@ -112,4 +112,31 @@ class PositionTest {
         String expected2 = "(1,1)";
         assertEquals(res2,expected2);
     }
+
+    @Test
+    void positionEnLigneDroite() {
+        Position p1=new Position(0,0);
+        boolean res1=p1.positionEnLigneDroite(new Position(0,0),new Position(1,0),new Position(2,0));
+        boolean expected1 = true;
+        assertEquals(res1,expected1);
+
+        Position p2=new Position(1,1);
+        boolean res2=p2.positionEnLigneDroite(new Position(0,1),new Position(1,6),new Position(0,3));
+        boolean expected2 = false;
+        assertEquals(res2,expected2);
+    }
+
+    @Test
+    void estAdjacente() {
+        Position p1=new Position(0,0);
+        boolean res1=p1.estAdjacente(new Position(0,1));
+        boolean expected1 = true;
+        assertEquals(res1,expected1);
+
+        Position p2=new Position(1,1);
+        boolean res2=p2.estAdjacente(new Position(0,5));
+        boolean expected2 = false;
+        assertEquals(res2,expected2);
+    }
+
 }
