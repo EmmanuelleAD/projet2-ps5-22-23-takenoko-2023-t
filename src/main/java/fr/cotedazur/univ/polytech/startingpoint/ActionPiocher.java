@@ -7,7 +7,7 @@ public class ActionPiocher extends Action{
 
     private Objectif objectif;
     public ActionPiocher(Objectif objectif) {
-        super("Piocher", "");
+        super(Type.TypePiocher.getNomType(), "");
         this.objectif=objectif;
     }
 

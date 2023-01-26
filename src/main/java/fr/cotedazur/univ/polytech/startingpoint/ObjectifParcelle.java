@@ -16,7 +16,7 @@ public class ObjectifParcelle extends Objectif {
 
     @Override
     public String getType() {
-        return "Parcelle";
+        return Type.TypeParcelle.getNomType();
     }
 
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {

@@ -14,12 +14,12 @@ public class ObjectifJardinier extends Objectif {
 
     @Override
     public String getType() {
-        return "Jardinier";
+        return Type.TypeJardinier.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
-        this.type="Jardinier";
+        this.type=Type.TypeJardinier.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description, int taille , int nombre) {

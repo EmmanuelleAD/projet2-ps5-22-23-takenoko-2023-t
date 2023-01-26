@@ -13,7 +13,7 @@ public class CerveauParcelle extends Cerveau {
     @Override
     public Action decider(Jeu jeu){
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-       listObjectif= listObjectif.stream().filter(o->o.getType().equals("Parcelle")).collect(Collectors.toList());
+       listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TypeParcelle.getNomType())).collect(Collectors.toList());
         if (listObjectif.isEmpty()){
             List<ObjectifParcelle> op = jeu.getObjectifsParcelles();
             Objectif newObjectif = op.get(op.size()-1);
