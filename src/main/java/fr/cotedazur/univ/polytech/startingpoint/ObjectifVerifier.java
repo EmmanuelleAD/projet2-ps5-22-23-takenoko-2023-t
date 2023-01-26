@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ObjectifVerifier {
-    boolean isManquant=false;
-    List<List<Position>> parcellesManquant = new ArrayList();
+    boolean isManquant;
+    List<List<Position>> parcellesManquant ;
     Comparator<List> tailleComparator=Comparator.comparing(List::size);
 
 
@@ -35,7 +35,7 @@ public class ObjectifVerifier {
         List<List<Position>> aGarder=new ArrayList<>();
         for (List<Position>manquant:parcellesManquant
              ) {
-            if(!manquant.contains(Parcelle.etang)) aGarder.add(manquant);
+            if(!manquant.contains(Parcelle.etang.getPosition())) aGarder.add(manquant);
 
         }
         parcellesManquant.retainAll(aGarder);
