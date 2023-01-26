@@ -11,11 +11,14 @@ public class JardinierTest {
     Jardinier jardinier=new Jardinier();
     List<Parcelle> parcelles = new ArrayList<>();
     Parcelle pdeTaille4 = new Parcelle(new Position(2, 2));
+    Parcelle parcellesSansBambou=new Parcelle(new Position(1,1));
 
     @BeforeEach
     void setUp() {
-        parcelles.add(pdeTaille4);
         pdeTaille4.setBambou(new Bambou(4));
+        parcelles.add(pdeTaille4);
+        parcelles.add(parcellesSansBambou);
+
 
     }
 
@@ -32,6 +35,21 @@ public class JardinierTest {
         parcelles.add(Parcelle.etang);
         jardinier.move(Parcelle.etang,parcelles);
         assertFalse(Parcelle.etang.bambou.isPresent());
+
+    }
+    @Test
+    void  casNormal(){
+        jardinier.move(parcellesSansBambou,parcelles);
+        assertTrue(parcellesSansBambou.bambou.isPresent());
+        assertEquals(1,parcellesSansBambou.getBambou().get().getTaille());
+        jardinier.move(parcellesSansBambou,parcelles);
+        assertEquals(2,parcellesSansBambou.getBambou().get().getTaille());
+
+
+
+    }
+    @Test
+    void pousseSurLesParcellesAdjacentes(){
 
     }
 }
