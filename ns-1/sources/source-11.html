@@ -1,0 +1,235 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > Parcelle</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.cotedazur.univ.polytech.startingpoint</a>
+</div>
+
+<h1>Coverage Summary for Class: Parcelle (fr.cotedazur.univ.polytech.startingpoint)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Parcelle</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    93,3%
+  </span>
+  <span class="absValue">
+    (14/15)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    98%
+  </span>
+  <span class="absValue">
+    (50/51)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package fr.cotedazur.univ.polytech.startingpoint;
+&nbsp;
+&nbsp;import java.util.ArrayList;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Objects;
+&nbsp;import java.util.Optional;
+&nbsp;
+&nbsp;import static java.lang.Math.sqrt;
+&nbsp;
+&nbsp;public class Parcelle {
+&nbsp;    public Position positionCentre;
+&nbsp;    public Optional&lt;Bambou&gt; bambou;
+&nbsp;    private boolean irrigue;
+<b class="fc">&nbsp;    public  final static Parcelle etang=new Parcelle(new Position(0,0));</b>
+&nbsp;
+&nbsp;    public Optional&lt;Bambou&gt; getBambou() {
+<b class="fc">&nbsp;        return bambou;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBambou(Bambou bambou) {
+<b class="fc">&nbsp;        this.bambou = Optional.ofNullable(bambou);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean estIrrigue() {
+<b class="fc">&nbsp;        return irrigue;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;   public int getTaille(){
+&nbsp;
+<b class="fc">&nbsp;        return bambou.orElse(new Bambou()).getTaille();</b>
+&nbsp;    }
+&nbsp;    public void setTaille(){
+&nbsp;
+<b class="fc">&nbsp;        bambou.orElse(new Bambou()).setTaille();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public Parcelle(Position positionCentre){</b>
+<b class="fc">&nbsp;        this.positionCentre=positionCentre;</b>
+<b class="fc">&nbsp;        irrigue=true;</b>
+<b class="fc">&nbsp;        this.bambou=Optional.empty();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public Position getPosition(){
+<b class="fc">&nbsp;        return positionCentre;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object o) {
+<b class="fc">&nbsp;        if (this == o) return true;</b>
+<b class="fc">&nbsp;        if (o == null || getClass() != o.getClass()) return false;</b>
+<b class="fc">&nbsp;        Parcelle parcelle = (Parcelle) o;</b>
+<b class="fc">&nbsp;        return positionCentre.equals(parcelle.positionCentre);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public int hashCode() {
+<b class="nc">&nbsp;        return Objects.hash(positionCentre);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean isAdjacent(Parcelle parcelle) {
+<b class="fc">&nbsp;        Position[] tabPos = parcelle.getPosition().positionsAdjacentes();</b>
+<b class="fc">&nbsp;        for (int i=0;i&lt;6;i++){</b>
+<b class="fc">&nbsp;            if (this.getPosition().equals(tabPos[i])){</b>
+<b class="fc">&nbsp;                return true;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }return false;</b>
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    public Parcelle[] parcelleAdjacentes() {
+<b class="fc">&nbsp;        Position[] tabPos = this.getPosition().positionsAdjacentes();</b>
+<b class="fc">&nbsp;        Parcelle tabParcelle[] = new Parcelle[6];</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; 6; i++) {</b>
+<b class="fc">&nbsp;            tabParcelle[i] = new Parcelle(tabPos[i]);</b>
+&nbsp;        }
+<b class="fc">&nbsp;        return tabParcelle;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public static List&lt;Position&gt; positionsPossibleEnTenantCompteDeCellesPlacees(List&lt;Parcelle&gt; parcellePlacees,List&lt;Position&gt; positionPossible) {
+<b class="fc">&nbsp;        Parcelle dernier=parcellePlacees.get(parcellePlacees.size()-1);</b>
+<b class="fc">&nbsp;        positionPossible.addAll(List.of(dernier.getPosition().positionsAdjacentes()));</b>
+<b class="fc">&nbsp;        List&lt;Position&gt; res=new ArrayList&lt;&gt;(positionPossible);</b>
+<b class="fc">&nbsp;        for (int i = 0; i &lt; positionPossible.size(); i++) {</b>
+<b class="fc">&nbsp;            for (int j =0; j &lt; parcellePlacees.size(); j++) {</b>
+<b class="fc">&nbsp;                if (parcellePlacees.get(j).getPosition().equals(positionPossible.get(i))){</b>
+<b class="fc">&nbsp;                    res.remove(positionPossible.get(i));</b>
+&nbsp;                }
+&nbsp;            }
+<b class="fc">&nbsp;        }return res;</b>
+&nbsp;    }
+&nbsp;    public static boolean isValide(Position position, List&lt;Parcelle&gt; parcellesPlacees){
+<b class="fc">&nbsp;        int count=0;</b>
+<b class="fc">&nbsp;        Parcelle parcellePosition=new Parcelle(position);</b>
+<b class="fc">&nbsp;        for (Parcelle parcelle : parcellesPlacees){</b>
+<b class="fc">&nbsp;            if (parcellePosition.isAdjacent(parcelle)){</b>
+<b class="fc">&nbsp;                count++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        if ((count &gt;= 2) || (parcellePosition.isAdjacent(new Parcelle(new Position(0,0))))){</b>
+<b class="fc">&nbsp;            return true;</b>
+&nbsp;        } else{
+<b class="fc">&nbsp;            return false;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public static List&lt;Position&gt; positionsPossible(List&lt;Parcelle&gt; parcellesPlacees, List&lt;Position&gt; positionPossible){
+<b class="fc">&nbsp;        List&lt;Position&gt; listPosition=Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(parcellesPlacees,positionPossible);</b>
+<b class="fc">&nbsp;        List&lt;Position&gt; toRemove=new ArrayList&lt;&gt;();</b>
+<b class="fc">&nbsp;        for (Position position : listPosition){</b>
+<b class="fc">&nbsp;            if (!isValide(position, parcellesPlacees)){</b>
+<b class="fc">&nbsp;                toRemove.add(position);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        listPosition.removeAll(toRemove);</b>
+<b class="fc">&nbsp;        return listPosition;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-01-26 12:04</div>
+</div>
+</body>
+</html>

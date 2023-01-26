@@ -12,9 +12,6 @@ public abstract class Cerveau {
     public abstract Action decider(Jeu jeu);
 
 
-    
-
-
 
 
 

@@ -76,4 +76,37 @@ public class ObjectifJardinierTest {
 
 
     }
+
+    @Test
+    void getTaille() {
+        assertEquals(4,b14.getTaille());
+        assertEquals(3,b43.getTaille());
+    }
+
+
+
+    @Test
+    void testEquals() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"",4,1);
+        ObjectifJardinier b43bis=new ObjectifJardinier("B43",6,false,"",3,4);
+        assertEquals(b14,b14bis);
+        assertEquals(b43,b43bis);
+    }
+
+    @Test
+    void estValide() {
+        p14.setBambou(new Bambou(4));
+        parcelles.add(p14);
+        assertEquals(true,b14.estValide(parcelles));
+        p21.setBambou(new Bambou(3));
+        p22.setBambou(new Bambou(3));
+        p32.setBambou(new Bambou(3));
+        p33.setBambou(new Bambou(3));
+        parcelles.add(p21);
+        parcelles.add(p22);
+        parcelles.add(p32);
+        parcelles.add(p33);
+
+        assertEquals(true,b43.estValide(parcelles));
+    }
 }

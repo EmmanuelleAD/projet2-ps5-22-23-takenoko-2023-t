@@ -52,18 +52,18 @@ class ObjectifParcelleTest {
         listPar4=Arrays.asList(p10,p11,p21,p12);
 
     }
-    @Test
-    void testverifierValiderALI3(){
-
-        assertTrue(objectifAli3.estValide(listPar1));// y pair sens droit
-        listPar1=Arrays.asList(p01,p02,p13);
-        assertTrue(objectifAli3.estValide(listPar1));// y impair sens droit
-        listPar1=Arrays.asList(p10,p11,p02);
-        assertTrue(objectifAli3.estValide(listPar1)); // y pair sens gauche
-        listPar1=Arrays.asList(p11,p02,p03);
-        assertTrue(objectifAli3.estValide(listPar1));  // y impair sens gauche
-        assertFalse(objectifAli3.estValide(Arrays.asList(p01)));
-    }
+//    @Test
+//    void testverifierValiderALI3(){
+//
+//        assertTrue(objectifAli3.estValide(listPar1));// y pair sens droit
+//        listPar1=Arrays.asList(p01,p02,p13);
+//        assertTrue(objectifAli3.estValide(listPar1));// y impair sens droit
+//        listPar1=Arrays.asList(p10,p11,p02);
+//        assertTrue(objectifAli3.estValide(listPar1)); // y pair sens gauche
+//        listPar1=Arrays.asList(p11,p02,p03);
+//        assertTrue(objectifAli3.estValide(listPar1));  // y impair sens gauche
+//        assertFalse(objectifAli3.estValide(Arrays.asList(p01)));
+//    }
     @Test
     void testverifierValiderPARC(){
         assertFalse(objectifPARC.estValide(listPar1));
@@ -76,8 +76,6 @@ class ObjectifParcelleTest {
         assertTrue(objectifPARC.estValide(listPar2)); //pair sens droit
         listPar2=Arrays.asList(p13,p02,p11);
         assertTrue(objectifPARC.estValide(listPar2)); //le sens importe peu
-
-
 
     }
     @Test

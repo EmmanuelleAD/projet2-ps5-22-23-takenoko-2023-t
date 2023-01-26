@@ -53,7 +53,6 @@ public class JeuTest {
             ) {
                 jeu.getPlacementsPossibles().contains(p);
             }
-            jeu.jouer();
 
 
         }

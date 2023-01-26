@@ -62,4 +62,87 @@ class JoueurTest {
 
 
     }
+
+
+    @Test
+    void getCerveau() {
+
+    }
+
+
+    @Test
+    void setCerveau() {
+
+    }
+
+    @Test
+    void addScore() {
+        wassim.addScore(10);
+        assertEquals(10, wassim.getScore());
+
+        brahim.addScore(5);
+        assertEquals(5, brahim.getScore());
+    }
+
+    @Test
+    void getScore() {
+        wassim.addScore(10);
+        assertEquals(10, wassim.getScore());
+
+        brahim.addScore(5);
+        assertEquals(5, brahim.getScore());
+    }
+
+    @Test
+    void getNom() {
+        assertEquals("Wassim",wassim.getNom());
+        assertEquals("Brahim",brahim.getNom());
+        assertEquals("Mohamed",mohamed.getNom());
+        assertEquals("Emmanuelle",emmanuelle.getNom());
+    }
+
+    @Test
+    void setNom() {
+        wassim.setNom("David");
+        assertEquals("David",wassim.getNom());
+
+        brahim.setNom("Jean");
+        assertEquals("Jean",brahim.getNom());
+    }
+
+    @Test
+    void getCartesObjectifs() {
+
+    }
+
+    @Test
+    void setCartesObjectifs() {
+
+    }
+
+    @Test
+    void getTaille() {
+        assertEquals(wassim.getTaille(),1.7);
+        assertEquals(brahim.getTaille(),1.8);
+    }
+
+    @Test
+    void setTaille() {
+
+        wassim.setTaille(1.8);
+        assertEquals(wassim.getTaille(),1.8);
+
+        brahim.setTaille(1.7);
+        assertEquals(brahim.getTaille(),1.7);
+
+    }
+
+    @Test
+    void jouer() {
+
+    }
+
+    @Test
+    void effectuerActionParcelle() {
+    }
 }
