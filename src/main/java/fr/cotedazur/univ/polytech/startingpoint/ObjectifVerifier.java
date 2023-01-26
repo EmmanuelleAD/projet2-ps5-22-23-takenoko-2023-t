@@ -26,9 +26,19 @@ public class ObjectifVerifier {
 
     }
     public List<Position>getMoinsManquants(){
+        supprimerManquantAvecEtang();
     Optional<List<Position>> min;
         min = parcellesManquant.stream().min(tailleComparator);
         return min.orElse(new ArrayList<>());
+    }
+    private void supprimerManquantAvecEtang(){
+        List<List<Position>> aGarder=new ArrayList<>();
+        for (List<Position>manquant:parcellesManquant
+             ) {
+            if(!manquant.contains(Parcelle.etang)) aGarder.add(manquant);
+
+        }
+        parcellesManquant.retainAll(aGarder);
     }
 
 
@@ -38,6 +48,7 @@ public class ObjectifVerifier {
     }
 
     public  List<List<Position>> getParcellesManquant() {
+        supprimerManquantAvecEtang();
         return parcellesManquant;
     }
 
