@@ -151,7 +151,15 @@ public class Jeu {
     private void traiterActionPiocher(Joueur j, Action action) {
         ActionPiocher api=(ActionPiocher) action;
         j.getCartesObjectifs().add(api.getObjectif());
-        this.cartesObjectis.remove(api.getObjectif());
+        int index;
+        if(api.getObjectif().getType().equals("Parcelle")){
+            index  =  this.objectifsParcelles.lastIndexOf(api.getObjectif());
+            objectifsParcelles.remove(index);
+        }
+        else if(api.getObjectif().getType().equals("Jardinier")){
+            index  =  this.objectifsJardinier.lastIndexOf(api.getObjectif());
+            objectifsJardinier.remove(index);
+        }
         System.out.println(j.getNom() + api.getDescription());
     }
 

@@ -61,6 +61,7 @@ public abstract class Objectif{
 
 
     public abstract boolean estValide(List<Parcelle> parcelles);
+    public abstract  ObjectifVerifier verifierValider(List<Parcelle>parcelles);
 
     @Override
     public boolean equals(Object o) {

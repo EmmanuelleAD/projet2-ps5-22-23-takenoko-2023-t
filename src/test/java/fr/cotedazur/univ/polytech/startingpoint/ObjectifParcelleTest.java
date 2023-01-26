@@ -93,6 +93,8 @@ class ObjectifParcelleTest {
     }
     @Test
     void testverifierValiderPAR4(){
+        Objectif o=ObjectifParcelle.objectifParcelles.get(0);
+        System.out.println(o.getType());
         assertFalse(objectifGRP4.estValide(listPar1));
         assertFalse(objectifGRP4.estValide(listPar2));
         assertFalse(objectifGRP4.estValide(listPar3));

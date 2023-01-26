@@ -10,10 +10,14 @@ public class ObjectifParcelle extends Objectif {
             new ObjectifParcelle("ALI3", 2, false, "3 Parcelles alignées"),
             new ObjectifParcelle("PARC", 3, false, "Parcelles en C"),
             new ObjectifParcelle("GRP3", 4, false, "3 Parcelles groupées"),
-            new ObjectifParcelle("GRP4", 4, false, "4 Parcelles groupées"),
-            new ObjectifParcelle("PARADJ", 2, false, "Adjacence parcelle"),
-            new ObjectifParcelle("POUSSB", 2, false, "Pousse de bambou")
+            new ObjectifParcelle("GRP4", 4, false, "4 Parcelles groupées")
+         //   new ObjectifParcelle("POUSSB", 2, false, "Pousse de bambou")
     ));
+
+    @Override
+    public String getType() {
+        return "Parcelle";
+    }
 
     public ObjectifParcelle(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
@@ -25,6 +29,16 @@ public class ObjectifParcelle extends Objectif {
         parcellesSansEtang.remove(Parcelle.etang);
         return parcellesSansEtang;
     }
+    public ObjectifVerifier verifierValider(List<Parcelle>parcelles){
+        return switch (getNom()) {
+            case "ALI3" -> verifierValiderAli3(parcelles);
+            case "PARC" -> verifierValiderPARC(parcelles);
+            case "GRP3" -> verifierValiderGRP3(parcelles);
+            case "GRP4" -> verifierValiderGRP4(parcelles);
+            default -> null;
+        };
+
+    }
 
 
     @Override
@@ -32,7 +46,6 @@ public class ObjectifParcelle extends Objectif {
         List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
         parcellesSansEtang.remove(Parcelle.etang);
         return switch (getNom()) {
-            case "PARADJ" -> verifierValiderPARADJ(parcellesSansEtang);
             case "POUSSB" -> verifierValiderPOUSSB(parcellesSansEtang);
             case "ALI3" -> verifierValiderAli3(parcellesSansEtang).isManquant;
             case "PARC" -> verifierValiderPARC(parcellesSansEtang).isManquant;
@@ -159,15 +172,7 @@ public class ObjectifParcelle extends Objectif {
     }
 
 
-    private boolean verifierValiderPARADJ(List<Parcelle> parcelles) {
-        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
-        for (Parcelle p : parcellesSansEtang
-        ) {
-            if (p.isAdjacent(parcelles.get(parcelles.size() - 1)))
-                return true;
-        }
-        return false;
-    }
+
     private static void verifierGRP4impair(ObjectifVerifier objectif, List<Position> positions, Position p) {
         verifierParCImpair(positions,objectif,p);
 
