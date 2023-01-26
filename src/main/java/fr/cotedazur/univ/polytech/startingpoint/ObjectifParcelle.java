@@ -20,6 +20,12 @@ public class ObjectifParcelle extends Objectif {
         this.type = "Parcelle";
     }
 
+    private static List<Parcelle>retirerEtang(List<Parcelle>parcelles){
+        List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
+        parcellesSansEtang.remove(Parcelle.etang);
+        return parcellesSansEtang;
+    }
+
 
     @Override
     public boolean estValide(List<Parcelle> parcelles) {
@@ -38,8 +44,9 @@ public class ObjectifParcelle extends Objectif {
     }
 
     static ObjectifVerifier verifierValiderGRP4(List<Parcelle> parcelles) {
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
         ObjectifVerifier objectif = new ObjectifVerifier();
-        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
             if (p.y % 2 == 0) {
@@ -62,8 +69,9 @@ public class ObjectifParcelle extends Objectif {
 
 
     static ObjectifVerifier verifierValiderGRP3(List<Parcelle> parcelles) {
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
         ObjectifVerifier ov = new ObjectifVerifier();
-        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
             if ((p.getY() % 2 == 0)) {
@@ -92,7 +100,8 @@ public class ObjectifParcelle extends Objectif {
     }
 
     static ObjectifVerifier verifierValiderPARC(List<Parcelle> parcelles) {
-        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
+        List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         ObjectifVerifier objectif = new ObjectifVerifier();
         for (Position p : positions
         ) {
@@ -112,8 +121,9 @@ public class ObjectifParcelle extends Objectif {
 
 
     static ObjectifVerifier verifierValiderAli3(List<Parcelle> parcelles) {
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
         ObjectifVerifier objectif = new ObjectifVerifier();
-        List<Position> positions = parcelles.stream().map(Parcelle::getPosition).collect(Collectors.toList());
+        List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
         for (Position p : positions
         ) {
             if ((p.getY() % 2 == 0)) {
@@ -144,13 +154,15 @@ public class ObjectifParcelle extends Objectif {
     }
 
     private boolean verifierValiderPOUSSB(List<Parcelle> parcelles) {
-        if (parcelles.isEmpty())return  false;
-        return parcelles.get(parcelles.size() - 1).getBambou().isPresent();
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
+        if (parcellesSansEtang.isEmpty())return  false;
+        return parcellesSansEtang.get(parcelles.size() - 1).getBambou().isPresent();
     }
 
 
     private boolean verifierValiderPARADJ(List<Parcelle> parcelles) {
-        for (Parcelle p : parcelles
+        List<Parcelle>parcellesSansEtang= retirerEtang(parcelles);
+        for (Parcelle p : parcellesSansEtang
         ) {
             if (p.isAdjacent(parcelles.get(parcelles.size() - 1)))
                 return true;
