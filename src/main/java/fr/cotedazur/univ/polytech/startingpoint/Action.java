@@ -1,6 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.List;
+import java.util.Objects;
 
 public abstract class Action {
 
@@ -33,5 +34,23 @@ public abstract class Action {
 
     public static int getNbreAction() {
         return nbreAction;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Action action = (Action) o;
+
+        if (!Objects.equals(nomAction, action.nomAction)) return false;
+        return Objects.equals(description, action.description);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = nomAction != null ? nomAction.hashCode() : 0;
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        return result;
     }
 }

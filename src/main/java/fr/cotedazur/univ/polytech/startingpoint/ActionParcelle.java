@@ -9,7 +9,7 @@ public class ActionParcelle extends Action {
 
 
     public ActionParcelle(Parcelle p) {
-        super("Parcelle",  "");
+        super(Type.TypeParcelle.getNomType(),  "");
         this.parcelle=p;
     }
 

@@ -12,10 +12,14 @@ public class ObjectifJardinier extends Objectif {
     private int taille;
     private int nombre;
 
+    @Override
+    public String getType() {
+        return Type.TypeJardinier.getNomType();
+    }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
-        this.type="Jardinier";
+        this.type=Type.TypeJardinier.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description, int taille , int nombre) {
@@ -53,6 +57,11 @@ public class ObjectifJardinier extends Objectif {
 
         }
      return false;
+    }
+
+    @Override
+    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
+        return null;
     }
 
 

@@ -29,6 +29,10 @@ public class Parcelle {
 
         return bambou.orElse(new Bambou()).getTaille();
     }
+    public void setTaille(){
+
+        bambou.orElse(new Bambou()).setTaille();
+    }
 
 
 
@@ -36,7 +40,7 @@ public class Parcelle {
     public Parcelle(Position positionCentre){
         this.positionCentre=positionCentre;
         irrigue=true;
-        this.bambou=Optional.empty();
+        this.bambou=(irrigue&&!positionCentre.equals(new Position(0,0)))?Optional.ofNullable(new Bambou()):Optional.empty();
     }
 
 

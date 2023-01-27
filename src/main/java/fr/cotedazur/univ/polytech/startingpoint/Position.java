@@ -43,7 +43,7 @@ public class Position {
 
 
 
-        public String toString(){
+    public String toString(){
             return "(" + this.x + "," + this.y + ")";
         }
 
@@ -67,9 +67,9 @@ public class Position {
 
     }
     public boolean estAdjacente(Position p){
-        for (Position p1:positionsAdjacentes()
-             ) {
-            if(p1.equals(p))return true;
+        for (Position p1: positionsAdjacentes()) {
+            if(p1.equals(p))
+                return true;
         }
             return false;
     }
