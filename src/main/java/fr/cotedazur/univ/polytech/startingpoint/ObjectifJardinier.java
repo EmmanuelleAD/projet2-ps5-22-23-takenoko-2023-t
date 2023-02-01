@@ -33,9 +33,7 @@ public class ObjectifJardinier extends Objectif {
         return this.taille;
     }
     public int getNombre(){return this.nombre;}
-    public String getType(){
-        return "Jardinier";
-    }
+
 
     @Override
     public String toString() {
