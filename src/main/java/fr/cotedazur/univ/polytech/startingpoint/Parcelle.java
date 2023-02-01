@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Objects;
+
 import static java.lang.Math.sqrt;
 
 public class Parcelle {
@@ -18,10 +20,21 @@ public class Parcelle {
         return positionCentre;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Parcelle parcelle = (Parcelle) o;
+        return positionCentre.equals(parcelle.positionCentre);
+    }
 
+    @Override
+    public int hashCode() {
+        return Objects.hash(positionCentre);
+    }
 
     public boolean isAdjacent(Parcelle parcelle) {
-        Position[] tabPos = positionsAdjacentes(parcelle);
+        Position[] tabPos = parcelle.getPosition().positionsAdjacentes();
         for (int i=0;i<6;i++){
             if (this.getPosition().equals(tabPos[i])){
                 return true;
@@ -31,8 +44,8 @@ public class Parcelle {
 
     }
 
-    public Parcelle[] parcelleAdjacentes(Parcelle parcelle) {
-        Position[] tabPos = positionsAdjacentes(parcelle);
+    public Parcelle[] parcelleAdjacentes() {
+        Position[] tabPos = this.getPosition().positionsAdjacentes();
         Parcelle tabParcelle[] = new Parcelle[6];
         for (int i = 0; i < 6; i++) {
             tabParcelle[i] = new Parcelle(tabPos[i]);
@@ -41,20 +54,7 @@ public class Parcelle {
     }
 
 
-    public Position[] positionsAdjacentes(Parcelle parcelle) {
-        int x = this.positionCentre.getX();
-        int y = this.positionCentre.getY();
 
-        Position tabPos[] = new Position[6];
-        tabPos[0] = new Position(x, y);
-        tabPos[1] = new Position((x + 1), y);
-        tabPos[2] = new Position(x - 1, y - 1);
-        tabPos[3] = new Position(x - 1, y + 1);
-        tabPos[4] = new Position(x, y - 1);
-        tabPos[5] = new Position(x, y + 1);
-        return tabPos;
-
-    }
 
 }
 

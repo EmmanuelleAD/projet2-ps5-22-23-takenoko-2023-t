@@ -2,36 +2,69 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.Random;
 
 public class Joueur {
-    public String nom;
-    public Parcelle[] tabParcelle;
-    ArrayList list = new ArrayList();
-
-    public Joueur(String nom, Parcelle[] tabParcelle) {
-        this.nom = nom;
-        this.tabParcelle = tabParcelle;
-    }
-
-    public Joueur() {
-    }
-
-    public void addParcelle(Parcelle parcelle) {
-        list.add(parcelle);
-    }
+    public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
+    private double taille;
+    private Plateau plateau;
+    private List<Objectif>cartesObjectifs;
+    private String nom;
 
     public String getNom() {
         return nom;
     }
 
-
-    public Parcelle jouerParcelle(){
-        Random rand = new Random();
-        int x = rand.nextInt();
-        int y = rand.nextInt();
-        Position positionParcelle1 = new Position(x, y);
-        Parcelle parcelle1 = new Parcelle(positionParcelle1);
-        return parcelle1;
+    public void setNom(String nom) {
+        this.nom = nom;
     }
+
+    public List<Objectif> getCartesObjectifs() {
+        return cartesObjectifs;
+    }
+
+    public void setCartesObjectifs(List<Objectif> cartesObjectifs) {
+        this.cartesObjectifs = cartesObjectifs;
+    }
+
+    public double getTaille() {
+        return taille;
+    }
+
+    public void setTaille(double taille) {
+        this.taille = taille;
+    }
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    public void setPlateau(Plateau plateau) {
+        this.plateau = plateau;
+    }
+
+
+
+
+    public Joueur(double taille,String nom) {
+        this.nom=nom;
+        this.taille = taille;
+        this.plateau = new Plateau();
+        this.cartesObjectifs=new ArrayList<>();
+    }
+
+    public Action jouer(List<Position>positions) {
+
+        Random rand = new Random();
+       int index=rand.nextInt(positions.size());
+        Parcelle parcelle1 = new Parcelle(positions.get(index));
+
+        return new Action("Parcelle",parcelle1.getPosition());
+
+
+    }
+
+
 }
