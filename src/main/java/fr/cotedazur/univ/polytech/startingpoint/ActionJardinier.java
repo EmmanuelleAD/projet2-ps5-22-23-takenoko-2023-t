@@ -10,7 +10,7 @@ public class ActionJardinier extends Action{
 
     private Parcelle parcelle;
     public ActionJardinier(Parcelle p) {
-        super("Jardinier", "");
+        super(Type.TypeJardinier.getNomType(), "");
         this.parcelle=p;
 
     }

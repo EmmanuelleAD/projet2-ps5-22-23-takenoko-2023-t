@@ -24,7 +24,7 @@ class CerveauTest {
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
-        jeu.jouer();
+
         cerveauParcelleJoueur1.decider(jeu);
         assertEquals(3, cerveauParcelleJoueur1.decider(jeu).getNbreAction());
 
@@ -36,7 +36,7 @@ class CerveauTest {
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
-        jeu.jouer();
+
         cerveauParcelleJoueur1.decider(jeu);
         assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveauParcelleJoueur1.decider(jeu));
 

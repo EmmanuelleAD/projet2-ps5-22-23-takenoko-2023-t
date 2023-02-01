@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 public class ObjectifVerifier {
-    boolean isManquant=false;
-    List<List<Position>> parcellesManquant = new ArrayList();
+    boolean isManquant;
+    List<List<Position>> parcellesManquant ;
     Comparator<List> tailleComparator=Comparator.comparing(List::size);
 
 
@@ -26,9 +26,19 @@ public class ObjectifVerifier {
 
     }
     public List<Position>getMoinsManquants(){
+        supprimerManquantAvecEtang();
     Optional<List<Position>> min;
         min = parcellesManquant.stream().min(tailleComparator);
         return min.orElse(new ArrayList<>());
+    }
+    private void supprimerManquantAvecEtang(){
+        List<List<Position>> aGarder=new ArrayList<>();
+        for (List<Position>manquant:parcellesManquant
+             ) {
+            if(!manquant.contains(Parcelle.etang.getPosition())) aGarder.add(manquant);
+
+        }
+        parcellesManquant.retainAll(aGarder);
     }
 
 
@@ -37,7 +47,8 @@ public class ObjectifVerifier {
         return isManquant;
     }
 
-    public List getParcellesManquant() {
+    public  List<List<Position>> getParcellesManquant() {
+        supprimerManquantAvecEtang();
         return parcellesManquant;
     }
 

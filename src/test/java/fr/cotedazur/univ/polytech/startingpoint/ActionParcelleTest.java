@@ -12,10 +12,10 @@ class ActionParcelleTest {
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
-        jeu.jouer();
+
         Position position = new Position(1, 1);
         ActionParcelle actionParcelle = new ActionParcelle(new Parcelle(position));
-        assertEquals(position, actionParcelle.getParcelle().getPosition());
+        assertEquals(new Parcelle(position), actionParcelle.getParcelle());
     }
 
     @Test
@@ -24,7 +24,7 @@ class ActionParcelleTest {
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
-        jeu.jouer();
+
         Position position = new Position(1, 1);
         ActionParcelle actionParcelle = new ActionParcelle(new Parcelle(position));
         String comment = " vient d'éffectuer une action Parcelle .Il a  placé une parcelle irriguée en " + position.toString();
