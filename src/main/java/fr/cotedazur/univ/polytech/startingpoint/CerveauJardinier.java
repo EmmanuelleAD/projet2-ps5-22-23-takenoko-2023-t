@@ -33,7 +33,7 @@ public class CerveauJardinier extends Cerveau {
                     listParcelleObj.add(parcelle);
                     copyList.remove(parcelle);
                 }
-                return new ActionJardinier(listParcelleObj.get(listParcelleObj.size() - 1));
+                return new ActionJardinier(Parcelle.dernier(listParcelleObj));
             }
         }
         List<Position> listPlacement = jeu.getPlacementsPossibles();

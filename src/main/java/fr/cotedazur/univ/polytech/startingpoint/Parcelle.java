@@ -144,6 +144,14 @@ public class Parcelle {
         }
         return parcelle0;
     }
+    public static Parcelle dernier(List<Parcelle>list){
+        for (int i = list.size()-1; i >=0 ; i--) {
+            if(!list.get(i).equals(etang)) return list.get(i);
+
+        }
+        return etang;
+
+    }
 
 
 
