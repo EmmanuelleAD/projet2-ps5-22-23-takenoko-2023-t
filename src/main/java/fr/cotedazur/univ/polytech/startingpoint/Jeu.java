@@ -59,7 +59,6 @@ public class Jeu {
     public List<Parcelle> getParcellesPlacees() {
         return parcellesPlacees;
     }
-
     public List<Position> getPlacementsPossibles() {
         return placementsPossibles;
     }

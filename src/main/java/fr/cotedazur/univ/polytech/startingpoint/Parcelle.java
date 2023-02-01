@@ -27,7 +27,7 @@ public class Parcelle {
 
    public int getTaille(){
 
-        return bambou.orElse(new Bambou()).getTaille();
+        return bambou.orElse(new Bambou(0)).getTaille();
     }
     public void setTaille(){
 
@@ -120,6 +120,29 @@ public class Parcelle {
         }
         listPosition.removeAll(toRemove);
         return listPosition;
+    }
+
+    public static List<Parcelle> ParcellesTailleN(List<Parcelle> list,int taille){
+        List<Parcelle> parcelleList=new ArrayList<>();
+        for (Parcelle parcelle : list){
+            if (parcelle.getTaille()<=taille){
+                parcelleList.add(parcelle);
+            }
+        }
+        return parcelleList;
+    }
+
+    public static Parcelle parcelleTailleMax(List<Parcelle> list){
+        if (list.isEmpty()){
+            return new Parcelle(new Position(0,0));
+        }
+        Parcelle parcelle0=list.get(0);
+        for (Parcelle parcelle:list){
+            if (parcelle.getTaille()>=parcelle0.getTaille()){
+                parcelle0=parcelle;
+            }
+        }
+        return parcelle0;
     }
 
 

@@ -61,10 +61,10 @@ class CerveauTest {
     @Test
     void testerCasSansCarte(){
         joueur1.setCartesObjectifs(new ArrayList<>());
-       Action act= cerveauJardinierJoueur1.decider(jeu);
+        Action act= cerveauJardinierJoueur1.decider(jeu);
         List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
         Objectif newObjectif = op.get(op.size()-1);
-       assertEquals(new ActionPiocher(newObjectif),act);
+        assertEquals(new ActionPiocher(newObjectif),act);
     }
 
     @Test
@@ -86,15 +86,12 @@ class CerveauTest {
         joueur1.setCartesObjectifs(listObjectifs);
         jeu.getParcellesPlacees().add(new Parcelle(new Position(1,0)));
         jeu.getParcellesPlacees().add(new Parcelle(new Position(0,1)));
-        jeu.getParcellesPlacees().add(new Parcelle(new Position(2,1)));
         jeu.getParcellesPlacees().add(new Parcelle(new Position(1,1)));
         jeu.getParcellesPlacees().get(0).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(1).setBambou(new Bambou(3));
-        jeu.getParcellesPlacees().get(2).setBambou(new Bambou(3));
-        jeu.getParcellesPlacees().get(3).setBambou(new Bambou(2));
-
+        jeu.getParcellesPlacees().get(2).setBambou(new Bambou(2));
         Action act= cerveauJardinierJoueur1.decider(jeu);
-        assertEquals(act,new ActionJardinier(jeu.getParcellesPlacees().get(3)));
+        assertEquals(act,new ActionJardinier(jeu.getParcellesPlacees().get(2)));
     }
 
     @Test
@@ -109,10 +106,6 @@ class CerveauTest {
         jeu.getParcellesPlacees().get(1).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(2).setBambou(new Bambou(3));
         Action act= cerveauJardinierJoueur1.decider(jeu);
-       // assertEquals(act.,new ActionParcelle(jeu.getParcellesPlacees().get(2)));
+        assertEquals(act,new ActionParcelle(jeu.getParcellesPlacees().get(2)));
     }
-
-        }
-
-
-
+}
