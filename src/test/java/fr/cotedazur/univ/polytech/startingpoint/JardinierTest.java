@@ -18,6 +18,7 @@ public class JardinierTest {
         pdeTaille4.setBambou(new Bambou(4));
         parcelles.add(pdeTaille4);
         parcelles.add(parcellesSansBambou);
+        parcellesSansBambou.setBambou(new Bambou(0));
 
 
     }
