@@ -88,6 +88,7 @@ public class Jeu {
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
         for (int i = 0; i < 4 ; i++) {
 
+
             objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
             objectifsJardinier.addAll(ObjectifJardinier.objectifsJardinier);
         }
