@@ -1,18 +1,41 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 import static java.lang.Math.sqrt;
 
 public class Parcelle {
     public Position positionCentre;
-//    public final double size=(10/sqrt(3));
-//    public final double width=(sqrt(3)*size);
-//    public final double height=2*size;
+    public Optional<Bambou> bambou;
+    private boolean irrigue;
+
+    public Optional<Bambou> getBambou() {
+        return bambou;
+    }
+
+    public void setBambou(Bambou bambou) {
+        this.bambou = Optional.ofNullable(bambou);
+    }
+
+    public boolean estIrrigue() {
+        return irrigue;
+    }
+
+   public int getTaille(){
+
+        return bambou.orElse(new Bambou()).getTaille();
+    }
+
+
 
 
     public Parcelle(Position positionCentre){
         this.positionCentre=positionCentre;
+        irrigue=true;
+        this.bambou=Optional.empty();
     }
 
 
@@ -52,6 +75,48 @@ public class Parcelle {
         }
         return tabParcelle;
     }
+
+
+
+    public static List<Position> positionsPossibleEnTenantCompteDeCellesPlacees(List<Parcelle> parcellePlacees,List<Position> positionPossible) {
+        Parcelle dernier=parcellePlacees.get(parcellePlacees.size()-1);
+        positionPossible.addAll(List.of(dernier.getPosition().positionsAdjacentes()));
+        List<Position> res=new ArrayList<>(positionPossible);
+        for (int i = 0; i < positionPossible.size(); i++) {
+            for (int j =0; j < parcellePlacees.size(); j++) {
+                if (parcellePlacees.get(j).getPosition().equals(positionPossible.get(i))){
+                    res.remove(positionPossible.get(i));
+                }
+            }
+        }return res;
+    }
+    public static boolean isValide(Position position, List<Parcelle> parcellesPlacees){
+        int count=0;
+        Parcelle parcellePosition=new Parcelle(position);
+        for (Parcelle parcelle : parcellesPlacees){
+            if (parcellePosition.isAdjacent(parcelle)){
+                count++;
+            }
+        }
+        if ((count >= 2) || (parcellePosition.isAdjacent(new Parcelle(new Position(0,0))))){
+            return true;
+        } else{
+            return false;
+        }
+    }
+
+    public static List<Position> positionsPossible(List<Parcelle> parcellesPlacees, List<Position> positionPossible){
+        List<Position> listPosition=Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(parcellesPlacees,positionPossible);
+        List<Position> toRemove=new ArrayList<>();
+        for (Position position : listPosition){
+            if (!isValide(position, parcellesPlacees)){
+                toRemove.add(position);
+            }
+        }
+        listPosition.removeAll(toRemove);
+        return listPosition;
+    }
+
 
 
 

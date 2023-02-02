@@ -3,10 +3,16 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.List;
 
 public abstract class Objectif{
-    private String nom;
-    private int points ;
-    private boolean statut;
-    private String description ;
+    protected String nom;
+    protected int points ;
+    protected boolean statut;
+    protected String description ;
+
+    public String getType() {
+        return type;
+    }
+
+    protected String type;
     public String getNom() {
         return nom;
     }
