@@ -7,6 +7,7 @@ public abstract class Personnage{
 
     protected Position position;
 
+
     public PersonnageName getName() {
         return PersonnageName.Jardinier;
     }

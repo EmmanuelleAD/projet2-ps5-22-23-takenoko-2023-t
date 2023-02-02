@@ -10,6 +10,7 @@ public class Jardinier extends Personnage{
     this.nom = PersonnageName.Jardinier;
     }
 
+
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle>parcelles) {
         this.position = parcelle.getPosition();
@@ -28,5 +29,19 @@ public class Jardinier extends Personnage{
 
         return parcelle.getBambou();
     }
+    public Optional<Bambou> moveStraight(Parcelle parcelle, List<Parcelle>parcelles, int x, int y) {
+        this.position = parcelle.getPosition();
+        if (parcelle.getBambou().isPresent()){
+            parcelle.getBambou().orElse(new Bambou()).setTaille();
+        }else{
+            parcelle.setBambou(new Bambou());
+        }
 
+        int newX = parcelle.getPosition().getX() + x;
+        int newY = parcelle.getPosition().getY() + y;
+        Parcelle newParcelle = parcelles.stream().filter(p -> p.getPosition().getX() == newX && p.getPosition().getY() == newY).findFirst().orElse(null);
+        if(newParcelle != null && newParcelle.estIrrigue() && !newParcelle.equals(Parcelle.etang)) newParcelle.setBambou(new Bambou());
+
+        return parcelle.getBambou();
+    }
 }

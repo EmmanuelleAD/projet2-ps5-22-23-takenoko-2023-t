@@ -13,6 +13,8 @@ public class ActionParcelle extends Action {
         this.parcelle=p;
     }
 
+
+
     @Override
     public String getDescription() {
         String info=(parcelle.estIrrigue())?"irriguée en ": "non irriguée en ";
