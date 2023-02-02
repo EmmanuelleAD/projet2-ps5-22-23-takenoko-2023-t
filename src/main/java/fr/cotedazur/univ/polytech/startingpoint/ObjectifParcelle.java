@@ -38,7 +38,6 @@ public class ObjectifParcelle extends Objectif {
             default -> null;
         };
 
-    }
 
 
     @Override
