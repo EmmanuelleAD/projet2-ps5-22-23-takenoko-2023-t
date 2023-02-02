@@ -15,7 +15,7 @@ class ActionJardinierTest {
 
         Position position = new Position(1, 1);
         ActionJardinier actionJardinier = new ActionJardinier(new Parcelle(position));
-        String comment = " a éffectué une action Jardinier en " + position.toString();
+        String comment = " a éffectué une action Jardinier en " + position.toString()+". Le bambou a une taille actuelle de 1";
         assertEquals(comment , actionJardinier.getDescription());
     }
 

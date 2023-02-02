@@ -32,6 +32,8 @@ public class ObjectifJardinier extends Objectif {
     public int getTaille(){
         return this.taille;
     }
+    public int getNombre(){return this.nombre;}
+
 
     @Override
     public String toString() {

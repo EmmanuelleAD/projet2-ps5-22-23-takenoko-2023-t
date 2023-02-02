@@ -59,7 +59,6 @@ public class Jeu {
     public List<Parcelle> getParcellesPlacees() {
         return parcellesPlacees;
     }
-
     public List<Position> getPlacementsPossibles() {
         return placementsPossibles;
     }
@@ -90,6 +89,7 @@ public class Jeu {
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
         for (int i = 0; i < 4 ; i++) {
+
 
             objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
             objectifsJardinier.addAll(ObjectifJardinier.objectifsJardinier);
@@ -196,6 +196,7 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
+
         List<Joueur> joueurGagnant=getGagnant();
         if (joueurGagnant.size()==1){
             Joueur joueur = joueurGagnant.get(0);
@@ -214,6 +215,7 @@ public class Jeu {
     public Joueur getJoueur1() {
         return joueurs.get(0);
     }
+
 
     public Joueur getJoueur2() {
         return joueurs.get(1);
