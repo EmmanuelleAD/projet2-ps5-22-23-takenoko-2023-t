@@ -150,20 +150,7 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
-<<<<<<< HEAD
-        Joueur joueur = getGagnant();
-        System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
 
-    }
-
-
-    public static void main(String[] args) {
-        Joueur joueur1 = new Joueur(1.85, "Wassim");
-        Joueur joueur2 = new Joueur(1.6, "Brahim");
-        Jeu jeu = new Jeu(joueur1, joueur2);
-        jeu.initialisation();
-        jeu.jouer();
-=======
         List<Joueur> joueurGagnant=getGagnant();
         if (joueurGagnant.size()==1){
             Joueur joueur = joueurGagnant.get(0);
@@ -174,18 +161,10 @@ public class Jeu {
                 System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
             }
         }
->>>>>>> cdb8700df7b28b421e9345d62ccdffe921a91627
 
-
-    }
-
-
-<<<<<<< HEAD
 }
-=======
 
 
 
 }
 
->>>>>>> cdb8700df7b28b421e9345d62ccdffe921a91627
