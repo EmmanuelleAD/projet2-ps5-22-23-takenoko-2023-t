@@ -216,7 +216,6 @@ public class Jeu {
         return joueurs.get(0);
     }
 
-}
 
     public Joueur getJoueur2() {
         return joueurs.get(1);
