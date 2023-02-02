@@ -7,6 +7,9 @@ public abstract class Personnage{
 
     protected Position position;
 
+    public Personnage(String panda) {
+    }
+
 
     public PersonnageName getName() {
         return PersonnageName.Jardinier;
