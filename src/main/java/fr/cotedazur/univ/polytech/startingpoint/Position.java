@@ -43,7 +43,7 @@ public class Position {
 
 
 
-        public String toString(){
+    public String toString(){
             return "(" + this.x + "," + this.y + ")";
         }
 
@@ -67,12 +67,25 @@ public class Position {
 
     }
     public boolean estAdjacente(Position p){
-        for (Position p1:positionsAdjacentes()
-             ) {
-            if(p1.equals(p))return true;
+        for (Position p1: positionsAdjacentes()) {
+            if(p1.equals(p))
+                return true;
         }
             return false;
     }
+
+
+
+    public boolean positionEnLigneDroite(Position p1,Position p2, Position p3){
+           if(   ( p1.getX()+1==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()==p2.getY() && p1.getY()==p3.getY() ) ||
+                   ( p1.getX()==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()+1==p2.getY() && p2.getY()+1==p3.getY() )   ||
+                   ( p1.getX()==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()+1==p2.getY() && p2.getY()+1==p3.getY() ) )  {
+               return true;
+           }return false;
+    }
+
+
+
 
     }
 

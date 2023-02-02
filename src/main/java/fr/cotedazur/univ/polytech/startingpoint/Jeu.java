@@ -21,6 +21,7 @@ public class Jeu {
     private List<ObjectifParcelle> objectifsParcelles;
     private List<ObjectifJardinier> objectifsJardinier;
 
+
     public Jardinier getJardinier() {
         return jardinier;
     }
@@ -34,7 +35,9 @@ public class Jeu {
     public Jeu(Joueur joueur1, Joueur joueur2) {
         joueurs = new ArrayList<>();
         joueurs.add(joueur1);
+        joueur1.setCerveau(new CerveauJardinier(joueur1));
         joueurs.add(joueur2);
+        joueur2.setCerveau(new CerveauParcelle(joueur2));
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
@@ -56,7 +59,6 @@ public class Jeu {
     public List<Parcelle> getParcellesPlacees() {
         return parcellesPlacees;
     }
-
     public List<Position> getPlacementsPossibles() {
         return placementsPossibles;
     }
@@ -106,16 +108,16 @@ public class Jeu {
 
         for (Joueur j : joueurs) {
             Action action = j.jouer(this);
-            if (action.getNomAction().equals("Parcelle")) {
+            if (action.getNomAction().equals(Type.TypeParcelle.getNomType())) {
                 if (nombreObjectifs==-2){
                     break;
                 }
                 traiterActionParcelle(j, action);
 
-            } else if (action.getNomAction().equals("Jardinier")) {
+            } else if (action.getNomAction().equals(Type.TypeJardinier.getNomType())) {
                 traiterActionJardinier(j,action);
             }
-            else if (action.getNomAction().equals("Piocher")) {
+            else if (action.getNomAction().equals(Type.TypePiocher.getNomType())) {
                 traiterActionPiocher(j,action);
             }
             List<Objectif> aSupp=new ArrayList<>();
@@ -132,6 +134,7 @@ public class Jeu {
 
             }
             j.getCartesObjectifs().removeAll(aSupp);
+
             if (nombreObjectifs == 0) {
                 nombreObjectifs--;// to be sure that this condition won't be executed twice
                 j.addScore(2);
@@ -148,6 +151,15 @@ public class Jeu {
     private void traiterActionPiocher(Joueur j, Action action) {
         ActionPiocher api=(ActionPiocher) action;
         j.getCartesObjectifs().add(api.getObjectif());
+        int index;
+        if(api.getObjectif().getType().equals(Type.TypeParcelle.getNomType())){
+            index  =  this.objectifsParcelles.lastIndexOf(api.getObjectif());
+            objectifsParcelles.remove(index);
+        }
+        else if(api.getObjectif().getType().equals(Type.TypeJardinier.getNomType())){
+            index  =  this.objectifsJardinier.lastIndexOf(api.getObjectif());
+            objectifsJardinier.remove(index);
+        }
         System.out.println(j.getNom() + api.getDescription());
     }
 
@@ -174,6 +186,8 @@ public class Jeu {
     }
     void traiterActionJardinier(Joueur j,Action action){
         ActionJardinier aj=(ActionJardinier) action;
+        getJardinier().move(aj.getParcelle(),getParcellesPlacees());
+
         System.out.println(j.getNom() + aj.getDescription());
     }
 
@@ -194,9 +208,18 @@ public class Jeu {
             }
         }
 
+
+    }
+
+
+    public Joueur getJoueur1() {
+        return joueurs.get(0);
+    }
+
 }
 
-
-
+    public Joueur getJoueur2() {
+        return joueurs.get(1);
+    }
 }
 

@@ -1,0 +1,142 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <title>Coverage Report > CerveauJardinier</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">fr.cotedazur.univ.polytech.startingpoint</a>
+</div>
+
+<h1>Coverage Summary for Class: CerveauJardinier (fr.cotedazur.univ.polytech.startingpoint)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CerveauJardinier</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (18/18)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package fr.cotedazur.univ.polytech.startingpoint;
+&nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.Random;
+&nbsp;
+&nbsp;public class CerveauJardinier extends Cerveau {
+&nbsp;
+&nbsp;    public CerveauJardinier(Joueur joueur) {
+<b class="fc">&nbsp;        super(joueur);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public Action decider(Jeu jeu){
+<b class="fc">&nbsp;        if (joueur.getCartesObjectifs().size()==0){</b>
+<b class="fc">&nbsp;            List&lt;ObjectifJardinier&gt; op = jeu.getObjectifsJardinier();</b>
+<b class="fc">&nbsp;            Objectif newObjectif = op.get(op.size()-1);</b>
+<b class="fc">&nbsp;            ActionPiocher newAction= new ActionPiocher(newObjectif);</b>
+<b class="fc">&nbsp;            return newAction;</b>
+&nbsp;        }
+<b class="fc">&nbsp;        int nbParcellesBamboo2=0;</b>
+<b class="fc">&nbsp;        for (Parcelle parcelle : jeu.getParcellesPlacees()){</b>
+<b class="fc">&nbsp;            if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 &amp;&amp; joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(0))){</b>
+<b class="fc">&nbsp;                return new ActionJardinier(parcelle);</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (parcelle.getBambou().orElse(new Bambou()).getTaille()==3 &amp;&amp; joueur.getCartesObjectifs().contains(ObjectifJardinier.objectifsJardinier.get(1))){</b>
+<b class="fc">&nbsp;                nbParcellesBamboo2++;</b>
+&nbsp;            }
+<b class="fc">&nbsp;            if (nbParcellesBamboo2==3 &amp;&amp; parcelle.getBambou().orElse(new Bambou()).getTaille()==2){</b>
+<b class="fc">&nbsp;                return new ActionJardinier(parcelle);</b>
+&nbsp;            }
+<b class="fc">&nbsp;        }</b>
+<b class="fc">&nbsp;        Random ran=new Random();</b>
+<b class="fc">&nbsp;       int i= ran.nextInt(jeu.getParcellesPlacees().size());</b>
+&nbsp;
+<b class="fc">&nbsp;        return new ActionJardinier(jeu.getParcellesPlacees().get(i));</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-01-26 12:04</div>
+</div>
+</body>
+</html>
