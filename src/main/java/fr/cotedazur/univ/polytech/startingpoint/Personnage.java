@@ -7,7 +7,6 @@ public abstract class Personnage{
 
     protected Position position;
 
-    public abstract Bambou move(Parcelle parcelle);
 
     public PersonnageName getName() {
         return PersonnageName.Jardinier;
