@@ -11,6 +11,7 @@ public class Parcelle {
     public Position positionCentre;
     public Optional<Bambou> bambou;
     private boolean irrigue;
+    public  final static Parcelle etang=new Parcelle(new Position(0,0));
 
     public Optional<Bambou> getBambou() {
         return bambou;
