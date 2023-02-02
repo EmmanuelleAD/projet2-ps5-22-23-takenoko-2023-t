@@ -182,6 +182,7 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
+
         List<Joueur> joueurGagnant=getGagnant();
         if (joueurGagnant.size()==1){
             Joueur joueur = joueurGagnant.get(0);
@@ -193,10 +194,7 @@ public class Jeu {
             }
         }
 
-
-    }
-
-
+}
 
 
 
