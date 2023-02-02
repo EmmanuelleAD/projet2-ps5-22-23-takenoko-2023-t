@@ -10,6 +10,7 @@ public abstract class Action {
     protected String description;
     private final static int  nbreAction=3;
 
+
     public abstract String getDescription();
     public String getNomAction() {
         return nomAction;

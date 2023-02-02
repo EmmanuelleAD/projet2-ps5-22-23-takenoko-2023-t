@@ -10,7 +10,7 @@ public class Jardinier extends Personnage{
     this.nom = PersonnageName.Jardinier;
     }
 
-    
+
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle>parcelles) {
         this.position = parcelle.getPosition();

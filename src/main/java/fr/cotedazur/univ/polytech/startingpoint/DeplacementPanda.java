@@ -4,7 +4,7 @@ public class DeplacementPanda extends Action {
 
 
     public DeplacementPanda(String player, Personnage panda) {
-        super(player,panda);
+        super(player, panda.toString());
     }
 
     public DeplacementPanda(String nomAction, String description) {
@@ -12,10 +12,7 @@ public class DeplacementPanda extends Action {
     }
 
 
-    @Override
-    public boolean isActionDecrementedFromPlayer() {
-        return true;
-    }
+
 
 
     @Override

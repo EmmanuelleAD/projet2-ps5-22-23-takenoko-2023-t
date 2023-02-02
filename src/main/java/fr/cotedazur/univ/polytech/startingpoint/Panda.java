@@ -10,10 +10,7 @@ public class Panda extends Personnage{
         this.position = parcelle.getPosition();
     }
 
-    @Override
-    public Bambou move(Parcelle parcelle) {
-        return null;
-    }
+
 
     @Override
     public PersonnageName getName() {
