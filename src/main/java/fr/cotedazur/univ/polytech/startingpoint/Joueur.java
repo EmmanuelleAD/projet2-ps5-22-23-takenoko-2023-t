@@ -67,6 +67,7 @@ public class Joueur {
     public Joueur(double taille,String nom) {
         this.nom=nom;
         this.taille = taille;
+        this.plateau=new Plateau();
         this.cartesObjectifs=new ArrayList<>();
     }
 

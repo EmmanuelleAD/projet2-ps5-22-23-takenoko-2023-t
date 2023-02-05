@@ -9,10 +9,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ObjectifPandaTest {
+    Joueur joueur=new Joueur(1.8,"tam");
+    Plateau plateau=joueur.getPlateau();
     ObjectifPanda objectifPanda;
     List<Bambou> bambouList=new ArrayList<>();
     @BeforeEach
     void setUp(){
+        objectifPanda=ObjectifPanda.objectifPandas.get(0);
+
 
 
     }
@@ -22,5 +26,16 @@ public class ObjectifPandaTest {
         assertEquals(new ArrayList<Bambou>(),bambouList);
         assertEquals(2,objectifPanda.getPoints());
         assertEquals("MANGB",objectifPanda.getNom());
+    }
+    @Test
+    void  estValiderCasNormal(){
+        plateau.ajouterBambou(new Bambou(1));
+        assertTrue(objectifPanda.estValide(new ArrayList<>(),joueur));
+
+    }
+    @Test
+    void  estPasValiderCasNormal(){
+        assertFalse(objectifPanda.estValide(new ArrayList<>(),joueur));
+
     }
 }

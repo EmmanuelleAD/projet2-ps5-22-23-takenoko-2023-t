@@ -1,9 +1,13 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ObjectifPanda extends Objectif{
+    static List<ObjectifPanda>objectifPandas=new ArrayList<>(Arrays.asList(
+            new ObjectifPanda("MANGB",2,false,"",Arrays.asList(new Bambou(1)))
+    ));
     public List<Bambou> getBambous() {
         return bambous;
     }
