@@ -138,5 +138,10 @@ class PositionTest {
         boolean expected2 = false;
         assertEquals(res2,expected2);
     }
+    @Test
+    void estDroitCasNormalTest(){
+        Position pos=new Position(1,2);
+        assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
+    }
 
 }

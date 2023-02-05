@@ -1,5 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -19,7 +20,16 @@ public abstract class Personnage {
         if(parcelles.contains(parcelle)) this.position=parcelle.getPosition();
 
     }
+public List<Parcelle> deplacementsPossibles(List<Parcelle>parcelles){
+        List<Parcelle>res=new ArrayList<>();
+    for (Parcelle parcelle:parcelles
+         ) {
+        if(Position.isStraightMovement(this.getPosition(),parcelle.getPosition())) res.add(parcelle);
 
+    }
+    return res;
+
+}
 
     public Position getPosition() {
         return position;

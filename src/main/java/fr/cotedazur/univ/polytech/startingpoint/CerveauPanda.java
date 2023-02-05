@@ -29,6 +29,7 @@ public class CerveauPanda extends Cerveau{
                     if(bambousJoueur.contains(bambou)) bambousJoueur.remove(bambou);
                     else {
                        List<Parcelle> parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),bambou);
+                       parcellesAvec=jeu.getPanda().deplacementsPossibles(parcellesAvec);
                        if(!parcellesAvec.isEmpty()) return new ActionPanda(parcellesAvec.get(0));
                     }
 

@@ -1,6 +1,5 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.lang.reflect.Type;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -26,14 +25,16 @@ public class CerveauJardinier extends Cerveau {
         for (Objectif objectif : listObjectif) {
             ObjectifJardinier obj = (ObjectifJardinier) objectif;
             if (!obj.estValide(jeu.getParcellesPlacees())) {
-                List<Parcelle> copyList = jeu.getParcellesPlacees().stream().collect(Collectors.toList());
+                List<Parcelle> copyList = new ArrayList<>(jeu.getParcellesPlacees());
                 List<Parcelle> listParcelleObj = new ArrayList<>();
                 for (int i = 0; i < obj.getNombre(); i++) {
                     Parcelle parcelle = Parcelle.parcelleTailleMax(Parcelle.ParcellesTailleN(copyList, obj.getTaille()));
-                    listParcelleObj.add(parcelle);
-                    copyList.remove(parcelle);
+                    if(Position.isStraightMovement(jeu.getJardinier().position, parcelle.getPosition())){
+                        listParcelleObj.add(parcelle);
+                        copyList.remove(parcelle);
+                    }
                 }
-                return new ActionJardinier(Parcelle.dernier(listParcelleObj));
+              if(!listParcelleObj.isEmpty())  return new ActionJardinier(Parcelle.dernier(listParcelleObj));
             }
         }
         List<Position> listPlacement = jeu.getPlacementsPossibles();

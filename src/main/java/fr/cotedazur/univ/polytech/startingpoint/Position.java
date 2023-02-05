@@ -91,8 +91,31 @@ public class Position {
       return new Position(q,r);
     }
 
+    public static boolean isStraightMovement(Position oldPosition, Position newPosition) {
+        int x1 = oldPosition.getX();
+        int y1 = oldPosition.getY();
+        int x2 = newPosition.getX();
+        int y2 = newPosition.getY();
 
-
+        // check if movement is horizontal
+        if (y1 == y2) {
+            return true;
+        }
+        // check if movement is vertical
+        if (x1 == x2) {
+            return true;
+        }
+        Position doublePosition=Position.evenRToDouble(newPosition);
+        // check if movement is diagonal
+        if (Math.abs(doublePosition.getX() - x1) == Math.abs(doublePosition.getY()) - y1) {
+            return true;
+        }
+        return false;
     }
+
+
+
+
+}
 
 

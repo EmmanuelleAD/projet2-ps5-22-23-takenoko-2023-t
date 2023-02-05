@@ -41,9 +41,5 @@ public class PandaTest {
         assertEquals(Optional.empty(),bambouMange);
 
     }
-    @Test
-    void estDroitCasNormalTest(){
-        Position pos=new Position(1,2);
-        assertTrue(panda.isStraightMovement(Parcelle.etang.getPosition(), pos));
-    }
+
 }
