@@ -6,20 +6,29 @@ import java.util.Optional;
 public class Panda extends Personnage{
 
 
-    public Panda(Parcelle parcelle) {
-        this.position = parcelle.getPosition();
+    public Panda() {
+        this.nom=PersonnageName.Panda;
+        this.position=Parcelle.etang.getPosition();
     }
 
 
 
     @Override
     public PersonnageName getName() {
-        return PersonnageName.Panda;
+        return nom;
     }
 
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle> parcelles) {
-        return Optional.empty();
+        this.deplacer(parcelle,parcelles);
+        this.mangerBambou(parcelle,parcelles);
+
+        return parcelle.getBambou();
+    }
+    private void mangerBambou(Parcelle parcelle,List<Parcelle>parcelles){
+        if(parcelles.contains(parcelle)) {
+            if (parcelle.getTaille() > 0) parcelle.enleverUneSection();
+        }
     }
 
     public boolean isStraightMovement(Position oldPosition, Position newPosition) {

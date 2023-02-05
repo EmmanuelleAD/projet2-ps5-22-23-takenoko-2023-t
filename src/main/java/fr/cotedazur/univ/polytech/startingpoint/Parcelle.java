@@ -29,9 +29,12 @@ public class Parcelle {
 
         return bambou.orElse(new Bambou(0)).getTaille();
     }
-    public void setTaille(){
+    public void ajouterUneSection(){
 
-        bambou.orElse(new Bambou()).setTaille();
+        bambou.orElse(new Bambou()).ajouterUneSection();
+    }
+    public void enleverUneSection(){
+        bambou.orElse(new Bambou()).enleverUneSection();
     }
 
 

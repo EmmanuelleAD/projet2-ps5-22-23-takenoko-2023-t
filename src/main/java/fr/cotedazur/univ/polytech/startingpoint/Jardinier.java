@@ -10,29 +10,39 @@ public class Jardinier extends Personnage{
     this.nom = PersonnageName.Jardinier;
     }
 
+    @Override
+    public PersonnageName getName() {
+        return PersonnageName.Jardinier;
+    }
+
 
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle>parcelles) {
-        this.position = parcelle.getPosition();
+        this.deplacer(parcelle,parcelles);
+        pousserBambou(parcelle, parcelles);
+        return parcelle.getBambou();
+    }
+
+    private  void pousserBambou(Parcelle parcelle, List<Parcelle> parcelles) {
+        if(!parcelles.contains(parcelle)) return;
         if(!parcelle.equals(Parcelle.etang)) {
 
             if (parcelle.getBambou().isPresent()) {
-                if (parcelle.getTaille() < 4) parcelle.setTaille();
+                if (parcelle.getTaille() < 4) parcelle.ajouterUneSection();
             } else {
                 parcelle.setBambou(new Bambou());
             }
         }
-        for (Parcelle p :parcelle.parcelleAdjacentes()
+        for (Parcelle p : parcelle.parcelleAdjacentes()
              ) {
             if(parcelles.contains(p)&& p.estIrrigue()&&!p.equals(Parcelle.etang)) p.setBambou(new Bambou());
         }
-
-        return parcelle.getBambou();
     }
+
     public Optional<Bambou> moveStraight(Parcelle parcelle, List<Parcelle>parcelles, int x, int y) {
         this.position = parcelle.getPosition();
         if (parcelle.getBambou().isPresent()){
-            parcelle.getBambou().orElse(new Bambou()).setTaille();
+            parcelle.getBambou().orElse(new Bambou()).ajouterUneSection();
         }else{
             parcelle.setBambou(new Bambou());
         }

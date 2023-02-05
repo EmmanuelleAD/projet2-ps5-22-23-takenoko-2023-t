@@ -16,7 +16,10 @@ public class Bambou {
         return taille;
     }
 
-    public void setTaille() {
+    public void ajouterUneSection(){
         this.taille++;
+    }
+    public void enleverUneSection(){
+        this.taille--;
     }
 }
