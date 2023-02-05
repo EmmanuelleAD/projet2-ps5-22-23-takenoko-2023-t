@@ -4,6 +4,12 @@ import java.util.Optional;
 
 public class ActionPanda extends Action{
     Parcelle parcelle;
+
+    @Override
+    public String getNomAction() {
+        return Type.TypePanda.getNomType();
+    }
+
     public ActionPanda(Parcelle parcelle) {
         super(Type.TypePanda.getNomType(), "");
         this.parcelle=parcelle;
