@@ -12,6 +12,7 @@ public class ObjectifPandaTest {
     Joueur joueur=new Joueur(1.8,"tam");
     Plateau plateau=joueur.getPlateau();
     ObjectifPanda objectifPanda;
+
     List<Bambou> bambouList=new ArrayList<>();
     @BeforeEach
     void setUp(){
@@ -35,6 +36,38 @@ public class ObjectifPandaTest {
     }
     @Test
     void  estPasValiderCasNormal(){
+        assertFalse(objectifPanda.estValide(new ArrayList<>(),joueur));
+
+    }
+    @Test
+    void testEstValide2Bambous(){
+        objectifPanda=ObjectifPanda.objectifPandas.get(1);
+        plateau.ajouterBambou(new Bambou(1));
+        plateau.ajouterBambou(new Bambou(1));
+        assertTrue(objectifPanda.estValide(new ArrayList<>(),joueur));
+
+    }
+    @Test
+    void testEstPasValide2Bambous(){
+        objectifPanda=ObjectifPanda.objectifPandas.get(1);
+        plateau.ajouterBambou(new Bambou(1));
+        assertFalse(objectifPanda.estValide(new ArrayList<>(),joueur));
+
+    }
+    @Test
+    void testEstValide3Bambous(){
+        objectifPanda=ObjectifPanda.objectifPandas.get(2);
+        plateau.ajouterBambou(new Bambou(1));
+        plateau.ajouterBambou(new Bambou(1));
+        plateau.ajouterBambou(new Bambou(1));
+        assertTrue(objectifPanda.estValide(new ArrayList<>(),joueur));
+
+    }
+    @Test
+    void testEstPasValide3Bambous(){
+        objectifPanda=ObjectifPanda.objectifPandas.get(2);
+        plateau.ajouterBambou(new Bambou(1));
+        plateau.ajouterBambou(new Bambou(1));
         assertFalse(objectifPanda.estValide(new ArrayList<>(),joueur));
 
     }
