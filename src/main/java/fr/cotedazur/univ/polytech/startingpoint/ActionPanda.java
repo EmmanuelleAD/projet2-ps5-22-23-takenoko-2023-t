@@ -19,6 +19,8 @@ public class ActionPanda extends Action{
     public void traiter(Joueur j, Jeu jeu) {
        Optional<Bambou>bambouMange= jeu.getPanda().move(this.parcelle,jeu.getParcellesPlacees());
        if(bambouMange.isPresent()) j.getPlateau().ajouterBambou(bambouMange.get());
+        System.out.println(j.getNom() + this.getDescription());
+
 
     }
 }

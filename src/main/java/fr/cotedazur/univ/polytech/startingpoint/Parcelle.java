@@ -147,6 +147,16 @@ public class Parcelle {
         }
         return parcelle0;
     }
+    public static List<Parcelle> getParcellesAvec(List<Parcelle> parcellesPlacees,Bambou bambou){
+        List<Parcelle>parcelles=new ArrayList<>();
+        for (Parcelle parcelle:parcellesPlacees
+             ) {
+            if(parcelle.getTaille()>=1)parcelles.add(parcelle);
+
+        }
+
+        return parcelles;
+    }
     public static Parcelle dernier(List<Parcelle>list){
         for (int i = list.size()-1; i >=0 ; i--) {
             if(!list.get(i).equals(etang)) return list.get(i);
