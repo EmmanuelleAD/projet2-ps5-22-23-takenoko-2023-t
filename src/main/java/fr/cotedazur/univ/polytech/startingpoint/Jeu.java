@@ -124,7 +124,7 @@ public class Jeu {
             for (Objectif o : j.getCartesObjectifs()
             ) {
 
-                if (o.estValide(parcellesPlacees)) {
+                if (o.estValide(parcellesPlacees,j)) {
                     j.addScore(o.getPoints());
                     System.out.println("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
                     System.out.println("Le score de " + j.getNom() + " est " + j.getScore());

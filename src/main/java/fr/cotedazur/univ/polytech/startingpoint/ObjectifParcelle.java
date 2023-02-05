@@ -40,9 +40,13 @@ public class ObjectifParcelle extends Objectif {
         };
     }
 
+    @Override
+    public boolean estValide(List<Parcelle> parcelles, Joueur joueur) {
+        if(!joueur.getCartesObjectifs().contains(this))return false;
+        else return estValide(parcelles);
+    }
 
-        @Override
-        public boolean estValide (List < Parcelle > parcelles) {
+    public boolean estValide (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
             parcellesSansEtang.remove(Parcelle.etang);
             return switch (getNom()) {

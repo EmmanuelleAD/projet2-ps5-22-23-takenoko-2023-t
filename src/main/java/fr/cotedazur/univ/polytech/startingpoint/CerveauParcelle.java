@@ -22,7 +22,7 @@ public class CerveauParcelle extends Cerveau {
         }
         for (Objectif objectif:listObjectif
              ) {
-            if(!objectif.estValide(jeu.getParcellesPlacees())){
+            if(!objectif.estValide(jeu.getParcellesPlacees(),joueur)){
                 ObjectifVerifier objectifVerifier=objectif.verifierValider(jeu.getParcellesPlacees());
                 if(objectifVerifier.getMoinsManquants().isEmpty()) break;
                 Position nouvellePos=objectifVerifier.getMoinsManquants().get(0);

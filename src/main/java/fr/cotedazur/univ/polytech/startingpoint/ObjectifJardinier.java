@@ -48,6 +48,16 @@ public class ObjectifJardinier extends Objectif {
     }
 
     @Override
+    public boolean estValide(List<Parcelle> parcelles, Joueur joueur) {
+        if(!joueur.getCartesObjectifs().contains(this)) return false;
+       return estValide(parcelles);
+    }
+
+    @Override
+    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
+        return null;
+    }
+
     public boolean estValide(List<Parcelle> parcelles) {
         int i=0;
         for (Parcelle p:parcelles
@@ -61,10 +71,6 @@ public class ObjectifJardinier extends Objectif {
      return false;
     }
 
-    @Override
-    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
-        return null;
-    }
 
 
 }
