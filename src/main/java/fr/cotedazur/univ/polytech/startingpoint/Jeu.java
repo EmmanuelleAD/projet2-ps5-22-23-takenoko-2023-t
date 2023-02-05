@@ -8,30 +8,21 @@ public class Jeu {
     private List<Joueur> joueurs;
     private List<Parcelle> parcellesPlacees;
 
-    public void setPlacementsPossibles(List<Position> placementsPossibles) {
-        this.placementsPossibles = placementsPossibles;
-    }
 
     private List<Position> placementsPossibles;
     private List<Objectif> cartesObjectis;
 
-    public List<ObjectifParcelle> getObjectifsParcelles() {
-        return objectifsParcelles;
-    }
-
-    public List<ObjectifJardinier> getObjectifsJardinier() {
-        return objectifsJardinier;
-    }
 
     private List<ObjectifParcelle> objectifsParcelles;
     private List<ObjectifJardinier> objectifsJardinier;
 
-
-    public Jardinier getJardinier() {
-        return jardinier;
-    }
-
+    private List<ObjectifPanda> objectifsPanda;
     private Jardinier jardinier;
+
+
+
+    private  Panda panda;
+
     private static final int MAX_CARTES_OBJECTIFS = 46;
 
     private int nombreObjectifs;
@@ -46,33 +37,62 @@ public class Jeu {
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
-        this.objectifsParcelles=new ArrayList<>();
-        this.objectifsJardinier=new ArrayList<>();
+        this.objectifsParcelles = new ArrayList<>();
+        this.objectifsJardinier = new ArrayList<>();
+        this.objectifsPanda=new ArrayList<>();
+        this.panda=new Panda();
 
     }
-    public Jeu(List<Joueur>joueurs) {
+
+    public Jeu(List<Joueur> joueurs) {
         this.joueurs = new ArrayList<>();
-       this.joueurs.addAll(joueurs);
+        this.joueurs.addAll(joueurs);
         this.parcellesPlacees = new ArrayList<>();
         this.placementsPossibles = new ArrayList<>();
         this.cartesObjectis = new ArrayList<>();
-        this.objectifsParcelles=new ArrayList<>();
-        this.objectifsJardinier=new ArrayList<>();
+        this.objectifsParcelles = new ArrayList<>();
+        this.objectifsJardinier = new ArrayList<>();
+        this.objectifsPanda=new ArrayList<>();
+        this.panda=new Panda();
 
+
+
+    }
+    public Panda getPanda() {
+        return panda;
     }
 
     public List<Parcelle> getParcellesPlacees() {
         return parcellesPlacees;
     }
+
     public List<Position> getPlacementsPossibles() {
         return placementsPossibles;
     }
+
     public List<Joueur> getJoueurs() {
         return joueurs;
     }
+
     public int getNombreObjectifs() {
         return nombreObjectifs;
     }
+
+    public void setPlacementsPossibles(List<Position> placementsPossibles) {
+        this.placementsPossibles = placementsPossibles;
+    }
+
+    public List<ObjectifParcelle> getObjectifsParcelles() {
+        return objectifsParcelles;
+    }
+
+    public List<ObjectifJardinier> getObjectifsJardinier() {
+        return objectifsJardinier;
+    }
+    public Jardinier getJardinier() {
+        return jardinier;
+    }
+
 
 
     public void initialisation() {
@@ -93,11 +113,11 @@ public class Jeu {
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
         //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
-        for (int i = 0; i < 4 ; i++) {
-
+        for (int i = 0; i < 4; i++) {
 
             objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
             objectifsJardinier.addAll(ObjectifJardinier.objectifsJardinier);
+            objectifsPanda.addAll(ObjectifPanda.objectifPandas);
         }
         for (Joueur joueur : joueurs
         ) {
@@ -105,6 +125,8 @@ public class Jeu {
             objectifsParcelles.remove(objectifsParcelles.size() - 1);
             joueur.getCartesObjectifs().add(objectifsJardinier.get(objectifsJardinier.size() - 1));
             objectifsJardinier.remove(objectifsJardinier.size() - 1);
+            joueur.getCartesObjectifs().add(objectifsPanda.get(objectifsPanda.size() - 1));
+            objectifsPanda.remove(objectifsPanda.size() - 1);
         }
     }
 
@@ -113,24 +135,16 @@ public class Jeu {
 
         for (Joueur j : joueurs) {
             Action action = j.jouer(this);
-            //if (action.getNomAction().equals(Type.TypeParcelle.getNomType())) {
-                if (nombreObjectifs==-2){
-                    break;
-                }
-                action.traiter(j,this);
-               // traiterActionParcelle(j, action);
-
-          /*  } else if (action.getNomAction().equals(Type.TypeJardinier.getNomType())) {
-                traiterActionJardinier(j,action);
+            if (nombreObjectifs == -2) {
+                break;
             }
-            else if (action.getNomAction().equals(Type.TypePiocher.getNomType())) {
-                traiterActionPiocher(j,action);
-            }*/
-            List<Objectif> aSupp=new ArrayList<>();
+            action.traiter(j, this);
+
+            List<Objectif> aSupp = new ArrayList<>();
             for (Objectif o : j.getCartesObjectifs()
             ) {
 
-                if (o.estValide(parcellesPlacees,j)) {
+                if (o.estValide(parcellesPlacees, j)) {
                     j.addScore(o.getPoints());
                     System.out.println("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
                     System.out.println("Le score de " + j.getNom() + " est " + j.getScore());
@@ -154,48 +168,20 @@ public class Jeu {
         }
     }
 
-    private void traiterActionPiocher(Joueur j, Action action) {
-        ActionPiocher api=(ActionPiocher) action;
-        j.getCartesObjectifs().add(api.getObjectif());
-        int index;
-        if(api.getObjectif().getType().equals(Type.TypeParcelle.getNomType())){
-            index  =  this.objectifsParcelles.lastIndexOf(api.getObjectif());
-            objectifsParcelles.remove(index);
-        }
-        else if(api.getObjectif().getType().equals(Type.TypeJardinier.getNomType())){
-            index  =  this.objectifsJardinier.lastIndexOf(api.getObjectif());
-            objectifsJardinier.remove(index);
-        }
-        System.out.println(j.getNom() + api.getDescription());
-    }
 
     public List<Joueur> getGagnant() {
 
         Collections.sort(joueurs, Joueur.scoreComparator.reversed());
-        List<Joueur> joueurGagnant=new ArrayList<>();
-        int maxValeur=joueurs.get(0).getScore();
-        for (Joueur joueur: joueurs){
-            if (maxValeur==joueur.getScore()){
+        List<Joueur> joueurGagnant = new ArrayList<>();
+        int maxValeur = joueurs.get(0).getScore();
+        for (Joueur joueur : joueurs) {
+            if (maxValeur == joueur.getScore()) {
                 joueurGagnant.add(joueur);
             }
         }
         return joueurGagnant;
     }
 
-    void traiterActionParcelle(Joueur j, Action action) {
-        ActionParcelle ap = (ActionParcelle) action;
-        Parcelle nouvelleParcelle = ap.getParcelle();
-        this.parcellesPlacees.add(nouvelleParcelle);
-        placementsPossibles = Parcelle.positionsPossible(this.parcellesPlacees, placementsPossibles);
-        System.out.println(j.getNom() + ap.getDescription());
-
-    }
-    void traiterActionJardinier(Joueur j,Action action){
-        ActionJardinier aj=(ActionJardinier) action;
-        getJardinier().move(aj.getParcelle(),getParcellesPlacees());
-
-        System.out.println(j.getNom() + aj.getDescription());
-    }
 
 
     public void jouer() {
@@ -203,13 +189,13 @@ public class Jeu {
             jouerUnTour(joueurs);
         }
 
-        List<Joueur> joueurGagnant=getGagnant();
-        if (joueurGagnant.size()==1){
+        List<Joueur> joueurGagnant = getGagnant();
+        if (joueurGagnant.size() == 1) {
             Joueur joueur = joueurGagnant.get(0);
             System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
         } else {
             System.out.println("Égalité! les joueurs suivants ont gagnés :");
-            for (Joueur joueur: joueurGagnant){
+            for (Joueur joueur : joueurGagnant) {
                 System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
             }
         }

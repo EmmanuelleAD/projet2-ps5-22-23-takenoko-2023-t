@@ -19,6 +19,11 @@ public class ObjectifPanda extends Objectif{
     }
 
     @Override
+    public String getType() {
+        return Type.TypePanda.getNomType();
+    }
+
+    @Override
     public boolean estValide(List<Parcelle> parcelles,Joueur joueur) {
         List<Bambou>joueurBambous=joueur.getPlateau().getBambous();
         if(joueurBambous.containsAll(this.bambous)) return true;
