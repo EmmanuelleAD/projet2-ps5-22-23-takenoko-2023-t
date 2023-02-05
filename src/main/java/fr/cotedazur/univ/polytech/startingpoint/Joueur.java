@@ -7,6 +7,12 @@ import java.util.stream.Collectors;
 public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
+
+    public Plateau getPlateau() {
+        return plateau;
+    }
+
+    private Plateau plateau;
     private double taille;
     private List<Objectif>cartesObjectifs;
     private String nom;
