@@ -6,7 +6,11 @@ import java.util.List;
 
 public class ObjectifPanda extends Objectif{
     static List<ObjectifPanda>objectifPandas=new ArrayList<>(Arrays.asList(
-            new ObjectifPanda("MANGB",2,false,"",Arrays.asList(new Bambou(1)))
+            new ObjectifPanda("MANGB",2,false," une section mangée ",Arrays.asList(new Bambou(1))),
+            new ObjectifPanda("P2J",4,false,"2 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1))),
+            new ObjectifPanda("P3V",3,false,"3 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1)))
+
+
     ));
     public List<Bambou> getBambous() {
         return bambous;
@@ -26,8 +30,15 @@ public class ObjectifPanda extends Objectif{
     @Override
     public boolean estValide(List<Parcelle> parcelles,Joueur joueur) {
         List<Bambou>joueurBambous=joueur.getPlateau().getBambous();
-        if(joueurBambous.containsAll(this.bambous)) return true;
-        return false;
+        List<Bambou >temp=new ArrayList<>(joueurBambous);
+        for (Bambou bambou:this.getBambous()
+             ) {
+            if(temp.contains(bambou)) temp.remove(bambou);
+            else return false;
+
+
+        }
+        return true;
     }
 
     @Override
