@@ -1,7 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.Objects;
-import java.util.Optional;
 
 public class ActionJardinier extends Action{
     public Parcelle getParcelle() {
@@ -23,6 +22,9 @@ public class ActionJardinier extends Action{
 
     @Override
     public void traiter(Joueur joueur, Jeu jeu) {
+        if(!Position.isStraightMovement(jeu.getJardinier().getPosition(), this.parcelle.getPosition())) {
+            throw new IllegalArgumentException("Le jardinier peut seulement se déplacer en ligne droite ! ");
+        }
         jeu.getJardinier().move(this.getParcelle(),jeu.getParcellesPlacees());
 
         System.out.println(joueur.getNom() + this.getDescription());

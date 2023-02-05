@@ -39,19 +39,5 @@ public class Jardinier extends Personnage{
         }
     }
 
-    public Optional<Bambou> moveStraight(Parcelle parcelle, List<Parcelle>parcelles, int x, int y) {
-        this.position = parcelle.getPosition();
-        if (parcelle.getBambou().isPresent()){
-            parcelle.getBambou().orElse(new Bambou()).ajouterUneSection();
-        }else{
-            parcelle.setBambou(new Bambou());
-        }
 
-        int newX = parcelle.getPosition().getX() + x;
-        int newY = parcelle.getPosition().getY() + y;
-        Parcelle newParcelle = parcelles.stream().filter(p -> p.getPosition().getX() == newX && p.getPosition().getY() == newY).findFirst().orElse(null);
-        if(newParcelle != null && newParcelle.estIrrigue() && !newParcelle.equals(Parcelle.etang)) newParcelle.setBambou(new Bambou());
-
-        return parcelle.getBambou();
-    }
 }

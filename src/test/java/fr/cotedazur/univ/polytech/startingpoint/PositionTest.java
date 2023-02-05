@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PositionTest {
-
+    Position pos;
     @Test
     void testEquals() {
         Position p1=new Position(0,0);
@@ -20,7 +20,6 @@ class PositionTest {
 
     }
 
-
     @Test
     void testPositionsAdjacentes() {
         //Position y Paire
@@ -33,10 +32,6 @@ class PositionTest {
 
 
         //Position y imPaire
-
-        Position p2= new Position(0,1);
-        Position[] tabTest2=p2.positionsAdjacentes();
-        Position[] tab2={new Position(-1,0),new Position(1,0),new Position(0,-1),new Position(0,1),new Position(-1,-1),new Position(-1,1)};
         for (int i=0;i<6;i++){
             assertEquals(tabTest1[i],tab1[i]);
         }
@@ -140,7 +135,11 @@ class PositionTest {
     }
     @Test
     void estDroitCasNormalTest(){
-        Position pos=new Position(1,2);
+        pos=new Position(1,2);
+        assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
+         pos=new Position(3,6);
+        assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
+        pos=new Position(2,4);
         assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
     }
 

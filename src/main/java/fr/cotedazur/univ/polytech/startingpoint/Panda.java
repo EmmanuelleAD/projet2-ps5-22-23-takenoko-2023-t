@@ -34,13 +34,10 @@ public class Panda extends Personnage{
             }
         return Optional.empty();
         }
-        /*public  void deplacerDroit(Parcelle parcelle, List<Parcelle> parcelles){
-            if(!isStraightMovement(oldPosition, newPosition)) {
-                throw new IllegalArgumentException("Panda can only move in a straight line.");
-            }
-        }
 
-*/
+
+
+
 
     
 

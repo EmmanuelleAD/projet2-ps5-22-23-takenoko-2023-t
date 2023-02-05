@@ -6,8 +6,8 @@ import java.util.List;
 
 public class ObjectifJardinier extends Objectif {
     static List<ObjectifJardinier> objectifsJardinier=new ArrayList<>(Arrays.asList(
-            new ObjectifJardinier("B14",20,false,"1 Bambou de Taille 4",4,1),
-            new ObjectifJardinier("B43",6,false,"4 Bambous de taille 3",3,4)));
+            new ObjectifJardinier("B14",6,false,"1 Bambou de Taille 4",4,1),
+            new ObjectifJardinier("B43",8,false,"4 Bambous de taille 3",3,4)));
 
     private int taille;
     private int nombre;
@@ -42,8 +42,7 @@ public class ObjectifJardinier extends Objectif {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ObjectifJardinier)) return false;
-        ObjectifJardinier o = (ObjectifJardinier) obj;
+        if (!(obj instanceof ObjectifJardinier o)) return false;
         return super.equals(obj) && o.taille == this.taille && o.nombre == this.nombre;
     }
 
