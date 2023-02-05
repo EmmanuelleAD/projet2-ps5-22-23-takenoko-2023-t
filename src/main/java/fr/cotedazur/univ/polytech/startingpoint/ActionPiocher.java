@@ -18,6 +18,21 @@ public class ActionPiocher extends Action{
     }
 
     @Override
+    public void traiter(Joueur j, Jeu jeu) {
+        j.getCartesObjectifs().add(this.getObjectif());
+        int index;
+        if(this.getObjectif().getType().equals(Type.TypeParcelle.getNomType())){
+            index  =  jeu.getObjectifsParcelles().lastIndexOf(this.getObjectif());
+            jeu.getObjectifsParcelles().remove(index);
+        }
+        else if(this.getObjectif().getType().equals(Type.TypeJardinier.getNomType())){
+            index  =  jeu.getObjectifsJardinier().lastIndexOf(this.getObjectif());
+            jeu.getObjectifsJardinier().remove(index);
+        }
+        System.out.println(j.getNom() + this.getDescription());
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (!(o instanceof ActionPiocher)){
             return false;

@@ -15,6 +15,7 @@ public abstract class Action {
     public String getNomAction() {
         return nomAction;
     }
+    public abstract  void traiter(Joueur j, Jeu jeu);
 
 
 

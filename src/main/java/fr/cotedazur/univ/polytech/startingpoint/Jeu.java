@@ -7,6 +7,11 @@ public class Jeu {
 
     private List<Joueur> joueurs;
     private List<Parcelle> parcellesPlacees;
+
+    public void setPlacementsPossibles(List<Position> placementsPossibles) {
+        this.placementsPossibles = placementsPossibles;
+    }
+
     private List<Position> placementsPossibles;
     private List<Objectif> cartesObjectis;
 
@@ -108,18 +113,19 @@ public class Jeu {
 
         for (Joueur j : joueurs) {
             Action action = j.jouer(this);
-            if (action.getNomAction().equals(Type.TypeParcelle.getNomType())) {
+            //if (action.getNomAction().equals(Type.TypeParcelle.getNomType())) {
                 if (nombreObjectifs==-2){
                     break;
                 }
-                traiterActionParcelle(j, action);
+                action.traiter(j,this);
+               // traiterActionParcelle(j, action);
 
-            } else if (action.getNomAction().equals(Type.TypeJardinier.getNomType())) {
+          /*  } else if (action.getNomAction().equals(Type.TypeJardinier.getNomType())) {
                 traiterActionJardinier(j,action);
             }
             else if (action.getNomAction().equals(Type.TypePiocher.getNomType())) {
                 traiterActionPiocher(j,action);
-            }
+            }*/
             List<Objectif> aSupp=new ArrayList<>();
             for (Objectif o : j.getCartesObjectifs()
             ) {

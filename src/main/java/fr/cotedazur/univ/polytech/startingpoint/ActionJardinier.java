@@ -22,6 +22,14 @@ public class ActionJardinier extends Action{
     }
 
     @Override
+    public void traiter(Joueur joueur, Jeu jeu) {
+        jeu.getJardinier().move(this.getParcelle(),jeu.getParcellesPlacees());
+
+        System.out.println(joueur.getNom() + this.getDescription());
+
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

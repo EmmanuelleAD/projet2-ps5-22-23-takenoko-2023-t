@@ -20,4 +20,12 @@ public class ActionParcelle extends Action {
         String info=(parcelle.estIrrigue())?"irriguée en ": "non irriguée en ";
         return " vient d'éffectuer une action Parcelle .Il a  placé une parcelle "+info+parcelle.getPosition();
     }
+
+    @Override
+    public void traiter(Joueur j, Jeu jeu) {
+        Parcelle nouvelleParcelle = this.getParcelle();
+        jeu.getParcellesPlacees().add(nouvelleParcelle);
+        jeu.setPlacementsPossibles(Parcelle.positionsPossible(jeu.getParcellesPlacees(), jeu.getPlacementsPossibles()));
+        System.out.println(j.getNom() + this.getDescription());
+    }
 }

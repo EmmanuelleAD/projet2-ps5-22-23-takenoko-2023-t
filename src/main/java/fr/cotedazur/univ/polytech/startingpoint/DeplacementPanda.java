@@ -19,4 +19,9 @@ public class DeplacementPanda extends Action {
     public String getDescription() {
         return null;
     }
+
+    @Override
+    public void traiter(Joueur j, Jeu jeu) {
+
+    }
 }
