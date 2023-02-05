@@ -25,7 +25,7 @@ public class Panda extends Personnage{
 
         return parcelle.getBambou();
     }
-    private void mangerBambou(Parcelle parcelle,List<Parcelle>parcelles){
+     void mangerBambou(Parcelle parcelle,List<Parcelle>parcelles){
         if(parcelles.contains(parcelle)) {
             if (parcelle.getTaille() > 0) parcelle.enleverUneSection();
         }
