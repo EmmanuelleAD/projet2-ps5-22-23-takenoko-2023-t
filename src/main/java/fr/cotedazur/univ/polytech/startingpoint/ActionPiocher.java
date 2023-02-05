@@ -29,6 +29,10 @@ public class ActionPiocher extends Action{
             index  =  jeu.getObjectifsJardinier().lastIndexOf(this.getObjectif());
             jeu.getObjectifsJardinier().remove(index);
         }
+        else if(this.getObjectif().getType().equals(Type.TypePanda.getNomType())){
+            index  =  jeu.getObjectifsPanda().lastIndexOf(this.getObjectif());
+            jeu.getObjectifsPanda().remove(index);
+        }
         System.out.println(j.getNom() + this.getDescription());
     }
 
