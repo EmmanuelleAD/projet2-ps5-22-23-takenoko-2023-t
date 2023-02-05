@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -27,15 +28,17 @@ public class PandaTest {
     @Test
     void  mangerBambouCasNormal(){
         assertEquals(1,p01.getTaille());
-        panda.mangerBambou(p01,parcelles);
+       Optional<Bambou>bambouMange= panda.mangerBambou(p01,parcelles);
         assertEquals(0,p01.getTaille());
+        assertEquals(Optional.ofNullable(new Bambou(1)),bambouMange);
 
     }
     @Test
     void mangerBambouCasNonDansParcelles(){
         assertEquals(1,p01.getTaille());
-        panda.mangerBambou(p01,new ArrayList<>());
+       Optional<Bambou> bambouMange=panda.mangerBambou(p01,new ArrayList<>());
         assertEquals(1,p01.getTaille());
+        assertEquals(Optional.empty(),bambouMange);
 
     }
 }

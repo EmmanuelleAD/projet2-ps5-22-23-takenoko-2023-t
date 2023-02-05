@@ -21,15 +21,20 @@ public class Panda extends Personnage{
     @Override
     public Optional<Bambou> move(Parcelle parcelle, List<Parcelle> parcelles) {
         this.deplacer(parcelle,parcelles);
-        this.mangerBambou(parcelle,parcelles);
+       return this.mangerBambou(parcelle,parcelles);
 
-        return parcelle.getBambou();
     }
-     void mangerBambou(Parcelle parcelle,List<Parcelle>parcelles){
+     Optional<Bambou> mangerBambou(Parcelle parcelle,List<Parcelle>parcelles){
         if(parcelles.contains(parcelle)) {
-            if (parcelle.getTaille() > 0) parcelle.enleverUneSection();
+            if (parcelle.getTaille() > 0) {
+                parcelle.enleverUneSection();
+                return Optional.ofNullable(new Bambou(1));
+
+            }
+            }
+        return Optional.empty();
         }
-    }
+
 
     public boolean isStraightMovement(Position oldPosition, Position newPosition) {
         int x1 = oldPosition.getX();
