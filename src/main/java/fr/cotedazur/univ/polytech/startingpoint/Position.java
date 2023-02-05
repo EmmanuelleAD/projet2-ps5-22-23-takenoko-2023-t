@@ -83,7 +83,13 @@ public class Position {
                return true;
            }return false;
     }
+   static Position evenRToDouble(Position hex) {
+        var q = hex.x - (hex.y+ (hex.y & 1)) / 2;
+        var r = hex.y;
+       q=2*q +r;
 
+      return new Position(q,r);
+    }
 
 
 

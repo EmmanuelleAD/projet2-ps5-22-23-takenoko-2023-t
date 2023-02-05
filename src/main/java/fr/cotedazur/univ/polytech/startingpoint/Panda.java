@@ -50,8 +50,9 @@ public class Panda extends Personnage{
         if (x1 == x2) {
             return true;
         }
+        Position doublePosition=Position.evenRToDouble(newPosition);
         // check if movement is diagonal
-        if (Math.abs(x2 - x1) == Math.abs(y2 - y1)) {
+        if (Math.abs(doublePosition.getX() - x1) == Math.abs(doublePosition.getY()) - y1) {
             return true;
         }
         return false;
