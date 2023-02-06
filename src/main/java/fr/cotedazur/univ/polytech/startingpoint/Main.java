@@ -11,6 +11,9 @@ public class Main {
     boolean estDemo=true;
 
     static int nbEgalite=0;
+    private static double getPourcentage(double nbre){
+        return nbre/10;
+    }
     public static void main(String ...args){
 
         Main mainParametre=new Main();
@@ -48,12 +51,20 @@ public class Main {
         }
         for (Joueur joueur:joueurs
              ) {
-            System.out.println("nb de partie gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees);
+            System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees+" soit "+getPourcentage(joueur.partieGagnees)+"% ");
+            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.partieGagnees- joueur.getPartieNulles())+" soit "+getPourcentage(1000-joueur.partieGagnees- joueur.getPartieNulles())+"% ");
+            System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(joueur.getPartieNulles())+"% ");
+
+            System.out.println("Le score moyen  de " + joueur.getNom()+" est "+joueur.getScoreMoyen()/1000);
+
+
             joueur.partieGagnees=0;
+            joueur.setPartieNulles(0);
+            joueur.setScoreMoyen(0);
 
 
         }
-        System.out.println("nb de partie égalité est " +nbEgalite);
+        //System.out.println("Le nombre  de parties égalité est " +nbEgalite);
 
 
     }

@@ -201,6 +201,9 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
+        for(Joueur joueur:joueurs){
+            joueur.ajoutScoreMoyen(joueur.getScore());
+        }
 
         List<Joueur> joueurGagnant = getGagnant();
         if (joueurGagnant.size() == 1) {
@@ -211,6 +214,7 @@ public class Jeu {
             logger.info("Égalité! les joueurs suivants ont gagnés :");
             Egalite=true;
             for (Joueur joueur : joueurGagnant) {
+                joueur.ajoutPartieNulles(1);
                 logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
             }
         }

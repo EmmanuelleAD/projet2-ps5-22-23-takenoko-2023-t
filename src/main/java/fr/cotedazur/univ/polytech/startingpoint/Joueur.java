@@ -12,16 +12,41 @@ public class Joueur {
     public Plateau getPlateau() {
         return plateau;
     }
-
     private Plateau plateau;
     public int partieGagnees=0;
+
+    private double scoreMoyen;
+
+    private Cerveau cerveau;
+
+    private int partieNulles=0;
+
     private double taille;
     private List<Objectif>cartesObjectifs;
     private String nom;
 
+    public double getScoreMoyen() {
+        return scoreMoyen;
+    }
+
+    public void setScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen = scoreMoyen;
+    }
+    public void ajoutScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen += scoreMoyen;
+    }
+    public int getPartieNulles() {
+        return partieNulles;
+    }
+
+    public void setPartieNulles(int partieNulles) {
+        this.partieNulles = partieNulles;
+    }
+    public void ajoutPartieNulles(int partieNulles) {
+        this.partieNulles += partieNulles;
+    }
 
 
-    private Cerveau cerveau;
 
     public Cerveau getCerveau() {
         return cerveau;
@@ -72,6 +97,7 @@ public class Joueur {
         this.taille = taille;
         this.plateau=new Plateau();
         this.cartesObjectifs=new ArrayList<>();
+        this.scoreMoyen=0;
     }
 
 
