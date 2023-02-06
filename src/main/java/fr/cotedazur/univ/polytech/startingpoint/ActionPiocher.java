@@ -33,7 +33,7 @@ public class ActionPiocher extends Action{
             index  =  jeu.getObjectifsPanda().lastIndexOf(this.getObjectif());
             jeu.getObjectifsPanda().remove(index);
         }
-        Jeu.logger.fine(j.getNom() + this.getDescription());
+        Jeu.logger.info(j.getNom() + this.getDescription());
     }
 
     @Override
