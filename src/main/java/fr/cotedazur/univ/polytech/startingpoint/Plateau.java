@@ -16,4 +16,5 @@ public class Plateau {
     public Plateau() {
         this.bambous=new ArrayList<>();
     }
+
 }

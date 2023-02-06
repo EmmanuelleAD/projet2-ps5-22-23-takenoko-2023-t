@@ -267,6 +267,4 @@ public class ObjectifParcelle extends Objectif {
             traitementsManquants(objectif, positions, positionList);
 
         }
-
-
     }

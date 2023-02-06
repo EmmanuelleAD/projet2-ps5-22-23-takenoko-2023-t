@@ -141,6 +141,10 @@ class PositionTest {
         assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
         pos=new Position(2,4);
         assertTrue(Position.isStraightMovement(Parcelle.etang.getPosition(), pos));
+        Position pos1=new Position(-1,0);
+        Position pos2=new Position(-1,1);
+        assertTrue(Position.isStraightMovement(pos1, pos2));
+
     }
 
 }
