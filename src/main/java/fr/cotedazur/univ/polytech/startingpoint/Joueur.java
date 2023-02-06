@@ -8,11 +8,13 @@ public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
 
+
     public Plateau getPlateau() {
         return plateau;
     }
 
     private Plateau plateau;
+    public int partieGagnees=0;
     private double taille;
     private List<Objectif>cartesObjectifs;
     private String nom;
@@ -34,6 +36,7 @@ public class Joueur {
     public void addScore(int score) {
         this.score+= score;
     }
+    public void setScore(int score){this.score=score;}
 
     public int getScore() {
         return score;
@@ -114,6 +117,9 @@ public class Joueur {
 
 
         return new ActionParcelle(parcelle1);
+    }
+    public void setPlateau(Plateau plateau){
+        this.plateau=plateau;
     }
 
 
