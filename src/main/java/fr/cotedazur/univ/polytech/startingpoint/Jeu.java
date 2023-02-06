@@ -1,11 +1,17 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.logging.Logger;
-
+import java.util.logging.Level;
+import java.util.logging.Handler;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 public class Jeu {
     public final static Logger logger = Logger.getLogger(Jeu.class.getName());
+
     private List<Joueur> joueurs;
     private List<Parcelle> parcellesPlacees;
 
@@ -153,8 +159,8 @@ public class Jeu {
 
                 if (o.estValide(parcellesPlacees, j)) {
                     j.addScore(o.getPoints());
-                    logger.fine("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
-                    logger.fine("Le score de " + j.getNom() + " est " + j.getScore());
+                    logger.info("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
+                    logger.info("Le score de " + j.getNom() + " est " + j.getScore());
                     nombreObjectifs--;
                     aSupp.add(o);
                 }
@@ -166,7 +172,7 @@ public class Jeu {
                 nombreObjectifs--;// to be sure that this condition won't be executed twice
                 j.addScore(2);
                 Joueur joueurDernierTour = j;
-                logger.fine("Le joueur " + j.getNom() + " a declenché le dernier tour et remporte le bonus de 2 points");
+                logger.info("Le joueur " + j.getNom() + " a declenché le dernier tour et remporte le bonus de 2 points");
                 List<Joueur> joueursSansGagnant = new ArrayList(joueurs);
                 joueursSansGagnant.remove(j);
                 jouerUnTour(joueursSansGagnant);
