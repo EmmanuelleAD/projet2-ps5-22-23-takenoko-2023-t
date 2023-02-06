@@ -2,10 +2,13 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 public class Main {
     @Parameter(names={"--2thousands"})
-    boolean typeExec=false;
+    boolean est2000=false;
+    @Parameter(names={"--demo"})
+    boolean estDemo=true;
 
     static int nbEgalite=0;
     public static void main(String ...args){
@@ -36,6 +39,8 @@ public class Main {
             }
             Jeu jeu = new Jeu(Arrays.asList(joueurs));
             jeu.initialisation();
+            jeu.logger.setLevel(Level.OFF);
+
             jeu.jouer();
             if (jeu.Egalite) {
                 nbEgalite++;
@@ -53,7 +58,7 @@ public class Main {
 
     }
     public  void run() {
-        if(typeExec)
+        if(est2000)
         {
             Joueur joueur1 = new Joueur(1.62, "Wassim");
             joueur1.setCerveau(new CerveauParcelle(joueur1));
