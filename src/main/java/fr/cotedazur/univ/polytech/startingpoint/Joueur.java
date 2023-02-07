@@ -7,13 +7,8 @@ import java.util.stream.Collectors;
 public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
-
-
-    public Plateau getPlateau() {
-        return plateau;
-    }
     private Plateau plateau;
-    public int partieGagnees=0;
+    private int partieGagnees=0;
 
     private double scoreMoyen;
 
@@ -24,7 +19,13 @@ public class Joueur {
     private double taille;
     private List<Objectif>cartesObjectifs;
     private String nom;
-
+    private int score=0;
+    public int getPartieGagnees(){return partieGagnees;}
+    public void setPartieGagnees(int partieGagnees){this.partieGagnees = partieGagnees;}
+    public void ajoutPartieGagnees(int partieGagnees){this.partieGagnees += partieGagnees;}
+    public Plateau getPlateau() {
+        return plateau;
+    }
     public double getScoreMoyen() {
         return scoreMoyen;
     }
@@ -45,9 +46,6 @@ public class Joueur {
     public void ajoutPartieNulles(int partieNulles) {
         this.partieNulles += partieNulles;
     }
-
-
-
     public Cerveau getCerveau() {
         return cerveau;
     }
@@ -55,8 +53,6 @@ public class Joueur {
     public void setCerveau(Cerveau cerveau) {
         this.cerveau = cerveau;
     }
-
-    private int score=0;
 
     public void addScore(int score) {
         this.score+= score;
