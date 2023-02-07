@@ -1,6 +1,5 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.util.List;
 import java.util.Objects;
 
 public abstract class Action {
@@ -11,11 +10,17 @@ public abstract class Action {
     private final static int  nbreAction=3;
 
 
+
+
     public abstract String getDescription();
     public String getNomAction() {
         return nomAction;
     }
-    public abstract  void traiter(Joueur j, Jeu jeu);
+
+
+
+
+    public abstract boolean traiter(Joueur j, Jeu jeu);
 
 
 

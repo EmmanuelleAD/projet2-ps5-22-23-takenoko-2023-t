@@ -18,7 +18,7 @@ public class ActionPiocher extends Action{
     }
 
     @Override
-    public void traiter(Joueur j, Jeu jeu) {
+    public boolean traiter(Joueur j, Jeu jeu) {
         j.getCartesObjectifs().add(this.getObjectif());
         int index;
         if(this.getObjectif().getType().equals(Type.TypeParcelle.getNomType())){

@@ -17,10 +17,5 @@ public class Writing {
         //close the writer
         writer.close();
     }
-    public static void readCsv(String source){
-
-    }
-    public static void main(String[]args) throws Exception {
-        appendCsv("nombre\n nombre");
-    }
+    
 }
