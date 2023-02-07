@@ -34,6 +34,7 @@ public class ActionPiocher extends Action{
             jeu.getObjectifsPanda().remove(index);
         }
         Jeu.logger.info(j.getNom() + this.getDescription());
+        return true;
     }
 
     @Override

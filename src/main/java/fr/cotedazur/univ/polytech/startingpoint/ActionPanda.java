@@ -29,6 +29,7 @@ public class ActionPanda extends Action{
        Optional<Bambou>bambouMange= jeu.getPanda().move(this.parcelle,jeu.getParcellesPlacees());
        if(bambouMange.isPresent()) j.getPlateau().ajouterBambou(bambouMange.get());
         Jeu.logger.info(j.getNom() + this.getDescription());
+        return true;
 
 
     }

@@ -28,6 +28,7 @@ public class ActionJardinier extends Action{
         jeu.getJardinier().move(this.getParcelle(),jeu.getParcellesPlacees());
 
         Jeu.logger.info(joueur.getNom() + this.getDescription());
+        return true;
 
     }
 
