@@ -11,7 +11,9 @@ public class Main {
         joueur2.setCerveau(new CerveauParcelle(joueur2));
         Joueur joueur3=new Joueur(1.65,"Emmanuelle");
         joueur3.setCerveau(new CerveauPanda(joueur3));
-        Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2,joueur3));
+        Joueur botSaboteur=new Joueur(1.6,"Bot Saboteur");
+        botSaboteur.setCerveau(new CerveauLivraison(botSaboteur));
+        Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2,joueur3,botSaboteur));
         jeu.initialisation();
         jeu.jouer();
 

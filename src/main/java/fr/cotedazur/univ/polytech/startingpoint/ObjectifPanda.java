@@ -12,6 +12,9 @@ public class ObjectifPanda extends Objectif{
 
 
     ));
+
+
+
     public List<Bambou> getBambous() {
         return bambous;
     }
