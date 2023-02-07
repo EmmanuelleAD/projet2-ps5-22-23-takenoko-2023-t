@@ -17,11 +17,18 @@ public class CerveauLivraison extends Cerveau {
             ActionPiocher newAction = new ActionPiocher(newObjectif);
             return newAction;
         }
+        List<Parcelle>parcellesAvecUneSection=jeu.getParcellesPlacees().stream().filter(p->p.getTaille()>=1).collect(Collectors.toList());
+        parcellesAvecUneSection=jeu.getPanda().deplacementsPossibles(parcellesAvecUneSection);
+        if(!parcellesAvecUneSection.isEmpty()) return new ActionPanda(parcellesAvecUneSection.get(0));
+        else{
+            List<Position> listPlacement = jeu.getPlacementsPossibles();
+            return new ActionParcelle(new Parcelle( listPlacement.get(0)));
+
+        }
 
 
 
-        List<Position> listPlacement = jeu.getPlacementsPossibles();
-        return new ActionParcelle(new Parcelle( listPlacement.get(0)));
+
     }
 
 

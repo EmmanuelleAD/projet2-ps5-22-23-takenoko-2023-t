@@ -61,13 +61,13 @@ class CerveauLivraisonTest {
         jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),5);
-        assertEquals(Type.TypeParcelle.getNomType(),act.getNomAction());
+        assertEquals(Type.TypePanda.getNomType(),act.getNomAction());
 
     }
 
 
     @Test
-    void testNbCartesSuperieurA5(){
+    void testNbCartesSuperieurA5SansParc(){
         botSaboteur.setCartesObjectifs(new ArrayList<>());
         List<Bambou>joueurBambous=botSaboteur.getPlateau().getBambous();
         List<Bambou > listBambou=new ArrayList<>(joueurBambous);
@@ -76,11 +76,8 @@ class CerveauLivraisonTest {
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(0));
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(2));
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(2));
-        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
-        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(0));
-        jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauLivraison.decider(jeu);
-        assertEquals(botSaboteur.getCartesObjectifs().size(),7);
+        assertEquals(botSaboteur.getCartesObjectifs().size(),5);
         assertEquals(Type.TypeParcelle.getNomType(),act.getNomAction());
 
     }
