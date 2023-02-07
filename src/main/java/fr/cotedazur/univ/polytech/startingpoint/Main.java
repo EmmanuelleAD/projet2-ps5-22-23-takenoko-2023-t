@@ -12,8 +12,7 @@ public class Main {
     boolean estDemo=true;
     @Parameter(names={"--csv"})
     boolean estCsv=false;
-
-    static int nbEgalite=0;
+    private static int nbEgalite=0;
     private static double getPourcentage(double nbre){
         return nbre/10;
     }
@@ -44,8 +43,8 @@ public class Main {
             String message="";
             for (Joueur joueur:joueurs
                  ) {
-               message+= "Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees;
-                message+="Le nombre de parties perdues par " + joueur.getNom()+" est "+(1-joueur.partieGagnees);
+               message+= "Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees();
+                message+="Le nombre de parties perdues par " + joueur.getNom()+" est "+(1-joueur.getPartieGagnees());
                 message+="Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles();
                 message+="Le score de " + joueur.getNom()+" est "+joueur.getScoreMoyen();
 
@@ -71,19 +70,19 @@ public class Main {
             jeu.logger.setLevel(Level.OFF);
 
             jeu.jouer();
-            if (jeu.Egalite) {
+            if (jeu.getEgalite()) {
                 nbEgalite++;
             }
         }
         for (Joueur joueur:joueurs
              ) {
-            System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees+" soit "+getPourcentage(joueur.partieGagnees)+"% ");
-            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.partieGagnees- joueur.getPartieNulles())+" soit "+getPourcentage(1000-joueur.partieGagnees- joueur.getPartieNulles())+"% ");
+            System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees()+" soit "+getPourcentage(joueur.getPartieGagnees())+"% ");
+            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+" soit "+getPourcentage(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+"% ");
             System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(joueur.getPartieNulles())+"% ");
             System.out.println("Le score moyen  de " + joueur.getNom()+" est "+joueur.getScoreMoyen()/1000);
 
 
-            joueur.partieGagnees=0;
+            joueur.setPartieGagnees(0);
             joueur.setPartieNulles(0);
             joueur.setScoreMoyen(0);
 
@@ -98,21 +97,18 @@ public class Main {
         {
             Joueur joueur1 = new Joueur(1.62, "Wassim");
             joueur1.setCerveau(new CerveauParcelle(joueur1));
+            Joueur joueur2 = new Joueur(1.62, "Livraison");
+            joueur2.setCerveau(new CerveauParcelle(joueur2));
             Joueur joueur3 = new Joueur(1.5, "Emmanuelle");
             joueur3.setCerveau(new CerveauParcelle(joueur3));
-            mainMille(joueur1,joueur3);
+            mainMille(joueur1,joueur2,joueur3);
             joueur3.setCerveau(new CerveauPanda(joueur3));
-            mainMille(joueur1,joueur3);
+            mainMille(joueur1,joueur2,joueur3);
 
 
         }
         else main(estCsv);
     }
-
-    private void mainCsv() {
-
-    }
-
 
 }
 

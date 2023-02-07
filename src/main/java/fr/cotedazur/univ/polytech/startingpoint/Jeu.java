@@ -26,7 +26,8 @@ public class Jeu {
 
 
     private List<ObjectifPanda> objectifsPanda;
-    public boolean Egalite=false;
+    private boolean Egalite=false;
+    public boolean getEgalite(){return Egalite;}
     private Jardinier jardinier;
 
 
@@ -151,7 +152,6 @@ public class Jeu {
             if (nombreObjectifs == -2) {
                 break;
             }
-            action.traiter(j, this);
 
             List<Objectif> aSupp = new ArrayList<>();
             for (Objectif o : j.getCartesObjectifs()
@@ -208,7 +208,7 @@ public class Jeu {
         List<Joueur> joueurGagnant = getGagnant();
         if (joueurGagnant.size() == 1) {
             Joueur joueur = joueurGagnant.get(0);
-            joueur.partieGagnees++;
+            joueur.ajoutPartieGagnees(1);
             logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
         } else {
             logger.info("Égalité! les joueurs suivants ont gagnés :");

@@ -3,6 +3,10 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.Optional;
 
 public class ActionPanda extends Action{
+    public Parcelle getParcelle() {
+        return parcelle;
+    }
+
     Parcelle parcelle;
 
     @Override
@@ -22,13 +26,14 @@ public class ActionPanda extends Action{
     }
 
     @Override
-    public void traiter(Joueur j, Jeu jeu) {
+    public boolean traiter(Joueur j, Jeu jeu) {
         if(!Position.isStraightMovement(jeu.getPanda().getPosition(), this.parcelle.getPosition())) {
             throw new IllegalArgumentException("Le Panda peut seulement se déplacer en ligne droite ! ");
         }
        Optional<Bambou>bambouMange= jeu.getPanda().move(this.parcelle,jeu.getParcellesPlacees());
        if(bambouMange.isPresent()) j.getPlateau().ajouterBambou(bambouMange.get());
         Jeu.logger.info(j.getNom() + this.getDescription());
+        return true;
 
 
     }
