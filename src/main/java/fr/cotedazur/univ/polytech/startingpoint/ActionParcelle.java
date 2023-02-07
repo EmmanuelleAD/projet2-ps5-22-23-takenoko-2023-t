@@ -22,7 +22,7 @@ public class ActionParcelle extends Action {
     }
 
     @Override
-    public void traiter(Joueur j, Jeu jeu) {
+    public boolean traiter(Joueur j, Jeu jeu) {
         Parcelle nouvelleParcelle = this.getParcelle();
         jeu.getParcellesPlacees().add(nouvelleParcelle);
         jeu.setPlacementsPossibles(Parcelle.positionsPossible(jeu.getParcellesPlacees(), jeu.getPlacementsPossibles()));

@@ -21,7 +21,7 @@ public class ActionJardinier extends Action{
     }
 
     @Override
-    public void traiter(Joueur joueur, Jeu jeu) {
+    public boolean traiter(Joueur joueur, Jeu jeu) {
         if(!Position.isStraightMovement(jeu.getJardinier().getPosition(), this.parcelle.getPosition())) {
             throw new IllegalArgumentException("Le jardinier peut seulement se déplacer en ligne droite ! ");
         }
