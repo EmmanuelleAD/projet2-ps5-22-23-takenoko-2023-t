@@ -92,7 +92,7 @@ class CerveauLivraisonTest {
         assertEquals(Type.TypePanda.getNomType(),act.getNomAction());
     }
 
-    
+
     @Test
     void testCasDefaut(){
         jeu.getParcellesPlacees().add(p11);

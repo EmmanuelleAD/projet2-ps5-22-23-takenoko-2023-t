@@ -1,9 +1,16 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.lang.reflect.Array;
 import java.util.*;
-
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import java.util.logging.Handler;
+import java.util.logging.ConsoleHandler;
+import java.util.logging.Formatter;
+import java.util.logging.LogRecord;
+import java.io.PrintWriter;
+import java.io.StringWriter;
 public class Jeu {
+    public final static Logger logger = Logger.getLogger(Jeu.class.getName());
 
     private List<Joueur> joueurs;
     private List<Parcelle> parcellesPlacees;
@@ -19,6 +26,7 @@ public class Jeu {
 
 
     private List<ObjectifPanda> objectifsPanda;
+    public boolean Egalite=false;
     private Jardinier jardinier;
 
 
@@ -41,7 +49,6 @@ public class Jeu {
         this.objectifsJardinier = new ArrayList<>();
         this.objectifsPanda=new ArrayList<>();
         this.panda=new Panda();
-
     }
 
     public Jeu(List<Joueur> joueurs) {
@@ -119,8 +126,11 @@ public class Jeu {
         for (int i = 0; i < 4; i++) {
 
             objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
+            Collections.shuffle(objectifsParcelles);
             objectifsJardinier.addAll(ObjectifJardinier.objectifsJardinier);
+            Collections.shuffle(objectifsJardinier);
             objectifsPanda.addAll(ObjectifPanda.objectifPandas);
+            Collections.shuffle(objectifsPanda);
         }
         for (Joueur joueur : joueurs
         ) {
@@ -149,8 +159,8 @@ public class Jeu {
 
                 if (o.estValide(parcellesPlacees, j)) {
                     j.addScore(o.getPoints());
-                    System.out.println("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
-                    System.out.println("Le score de " + j.getNom() + " est " + j.getScore());
+                    logger.info("L'objectif " + o.getDescription() + " de " + o.getPoints() + " points est validé");
+                    logger.info("Le score de " + j.getNom() + " est " + j.getScore());
                     nombreObjectifs--;
                     aSupp.add(o);
                 }
@@ -162,7 +172,7 @@ public class Jeu {
                 nombreObjectifs--;// to be sure that this condition won't be executed twice
                 j.addScore(2);
                 Joueur joueurDernierTour = j;
-                System.out.println("Le joueur " + j.getNom() + " a declenché le dernier tour et remporte le bonus de 2 points");
+                logger.info("Le joueur " + j.getNom() + " a declenché le dernier tour et remporte le bonus de 2 points");
                 List<Joueur> joueursSansGagnant = new ArrayList(joueurs);
                 joueursSansGagnant.remove(j);
                 jouerUnTour(joueursSansGagnant);
@@ -191,15 +201,21 @@ public class Jeu {
         while (nombreObjectifs > 0) {
             jouerUnTour(joueurs);
         }
+        for(Joueur joueur:joueurs){
+            joueur.ajoutScoreMoyen(joueur.getScore());
+        }
 
         List<Joueur> joueurGagnant = getGagnant();
         if (joueurGagnant.size() == 1) {
             Joueur joueur = joueurGagnant.get(0);
-            System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
+            joueur.partieGagnees++;
+            logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
         } else {
-            System.out.println("Égalité! les joueurs suivants ont gagnés :");
+            logger.info("Égalité! les joueurs suivants ont gagnés :");
+            Egalite=true;
             for (Joueur joueur : joueurGagnant) {
-                System.out.println(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
+                joueur.ajoutPartieNulles(1);
+                logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
             }
         }
 

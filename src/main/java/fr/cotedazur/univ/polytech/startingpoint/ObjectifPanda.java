@@ -8,9 +8,9 @@ public class ObjectifPanda extends Objectif{
     static List<ObjectifPanda>objectifPandas=new ArrayList<>(Arrays.asList(
             new ObjectifPanda("MANGB",2,false," une section mangée ",Arrays.asList(new Bambou(1))),
             new ObjectifPanda("P2J",4,false,"2 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1))),
-            new ObjectifPanda("P3V",3,false,"3 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1)))
-
-
+            new ObjectifPanda("P3V",3,false,"3 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1))),
+            new ObjectifPanda("P5J",4,false,"5 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1))),
+            new ObjectifPanda("P8V",3,false,"5 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1)))
     ));
 
 

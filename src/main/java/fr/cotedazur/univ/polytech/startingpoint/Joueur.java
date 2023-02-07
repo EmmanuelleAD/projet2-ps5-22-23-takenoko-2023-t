@@ -8,18 +8,45 @@ public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
     public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
 
+
     public Plateau getPlateau() {
         return plateau;
     }
-
     private Plateau plateau;
+    public int partieGagnees=0;
+
+    private double scoreMoyen;
+
+    private Cerveau cerveau;
+
+    private int partieNulles=0;
+
     private double taille;
     private List<Objectif>cartesObjectifs;
     private String nom;
 
+    public double getScoreMoyen() {
+        return scoreMoyen;
+    }
+
+    public void setScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen = scoreMoyen;
+    }
+    public void ajoutScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen += scoreMoyen;
+    }
+    public int getPartieNulles() {
+        return partieNulles;
+    }
+
+    public void setPartieNulles(int partieNulles) {
+        this.partieNulles = partieNulles;
+    }
+    public void ajoutPartieNulles(int partieNulles) {
+        this.partieNulles += partieNulles;
+    }
 
 
-    private Cerveau cerveau;
 
     public Cerveau getCerveau() {
         return cerveau;
@@ -34,6 +61,7 @@ public class Joueur {
     public void addScore(int score) {
         this.score+= score;
     }
+    public void setScore(int score){this.score=score;}
 
     public int getScore() {
         return score;
@@ -69,6 +97,7 @@ public class Joueur {
         this.taille = taille;
         this.plateau=new Plateau();
         this.cartesObjectifs=new ArrayList<>();
+        this.scoreMoyen=0;
     }
 
 
@@ -114,6 +143,9 @@ public class Joueur {
 
 
         return new ActionParcelle(parcelle1);
+    }
+    public void setPlateau(Plateau plateau){
+        this.plateau=plateau;
     }
 
 

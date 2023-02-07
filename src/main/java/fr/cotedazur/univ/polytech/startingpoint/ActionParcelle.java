@@ -26,6 +26,6 @@ public class ActionParcelle extends Action {
         Parcelle nouvelleParcelle = this.getParcelle();
         jeu.getParcellesPlacees().add(nouvelleParcelle);
         jeu.setPlacementsPossibles(Parcelle.positionsPossible(jeu.getParcellesPlacees(), jeu.getPlacementsPossibles()));
-        System.out.println(j.getNom() + this.getDescription());
+        Jeu.logger.info(j.getNom() + this.getDescription());
     }
 }
