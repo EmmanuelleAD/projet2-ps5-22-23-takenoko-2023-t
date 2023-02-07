@@ -152,7 +152,6 @@ public class Jeu {
             if (nombreObjectifs == -2) {
                 break;
             }
-            action.traiter(j, this);
 
             List<Objectif> aSupp = new ArrayList<>();
             for (Objectif o : j.getCartesObjectifs()

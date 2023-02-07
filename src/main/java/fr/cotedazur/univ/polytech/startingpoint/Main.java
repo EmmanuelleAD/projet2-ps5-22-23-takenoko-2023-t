@@ -97,11 +97,13 @@ public class Main {
         {
             Joueur joueur1 = new Joueur(1.62, "Wassim");
             joueur1.setCerveau(new CerveauParcelle(joueur1));
+            Joueur joueur2 = new Joueur(1.62, "Livraison");
+            joueur2.setCerveau(new CerveauParcelle(joueur2));
             Joueur joueur3 = new Joueur(1.5, "Emmanuelle");
             joueur3.setCerveau(new CerveauParcelle(joueur3));
-            mainMille(joueur1,joueur3);
+            mainMille(joueur1,joueur2,joueur3);
             joueur3.setCerveau(new CerveauPanda(joueur3));
-            mainMille(joueur1,joueur3);
+            mainMille(joueur1,joueur2,joueur3);
 
 
         }

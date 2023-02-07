@@ -100,7 +100,11 @@ public class Joueur {
 
 
     public Action jouer(Jeu jeu) {
-        return cerveau.decider(jeu);
+        Action action1=cerveau.decider(jeu);
+        action1.traiter(this,jeu);
+        Action action2=cerveau.decider(jeu);
+        action2.traiter(this,jeu);
+        return action2;
     }
 
     private Action piocherCartesObjectifs(Jeu jeu) {
