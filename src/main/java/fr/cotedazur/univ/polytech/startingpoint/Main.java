@@ -2,6 +2,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import java.util.Arrays;
+import java.util.List;
 import java.util.logging.Level;
 
 public class Main {
@@ -9,6 +10,8 @@ public class Main {
     boolean est2000=false;
     @Parameter(names={"--demo"})
     boolean estDemo=true;
+    @Parameter(names={"--csv"})
+    boolean estCsv=false;
 
     static int nbEgalite=0;
     private static double getPourcentage(double nbre){
@@ -21,16 +24,34 @@ public class Main {
         mainParametre.run();
     }
 
-    public  void main() {
+    public  void main(boolean csv ) {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         joueur1.setCerveau(new CerveauJardinier(joueur1));
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         joueur2.setCerveau(new CerveauParcelle(joueur2));
         Joueur joueur3=new Joueur(1.65,"Emmanuelle");
         joueur3.setCerveau(new CerveauPanda(joueur3));
-        Jeu jeu = new Jeu(Arrays.asList(joueur1, joueur2,joueur3));
+        List<Joueur>joueurs=Arrays.asList(joueur1, joueur2,joueur3);
+        Jeu jeu = new Jeu(joueurs);
         jeu.initialisation();
         jeu.jouer();
+        if(csv){
+            String message="";
+            for (Joueur joueur:joueurs
+                 ) {
+               message+= "Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees;
+                message+="Le nombre de parties perdues par " + joueur.getNom()+" est "+(1-joueur.partieGagnees);
+                message+="Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles();
+                message+="Le score de " + joueur.getNom()+" est "+joueur.getScoreMoyen();
+
+            }
+            try {
+                Writing.appendCsv(message);
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
+
+        }
     }
 
 
@@ -54,7 +75,6 @@ public class Main {
             System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.partieGagnees+" soit "+getPourcentage(joueur.partieGagnees)+"% ");
             System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.partieGagnees- joueur.getPartieNulles())+" soit "+getPourcentage(1000-joueur.partieGagnees- joueur.getPartieNulles())+"% ");
             System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(joueur.getPartieNulles())+"% ");
-
             System.out.println("Le score moyen  de " + joueur.getNom()+" est "+joueur.getScoreMoyen()/1000);
 
 
@@ -81,9 +101,10 @@ public class Main {
 
 
         }
-        else main();
+        else main(estCsv);
+    }
 
-
+    private void mainCsv() {
 
     }
 
