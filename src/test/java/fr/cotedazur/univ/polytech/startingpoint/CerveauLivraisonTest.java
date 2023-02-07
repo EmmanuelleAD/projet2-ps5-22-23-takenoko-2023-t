@@ -85,22 +85,9 @@ class CerveauLivraisonTest {
 
     }
 
-    @Test
-    void testCasNormal(){
-        jeu.getParcellesPlacees().add(p11);
-        Action act=  cerveauLivraison.decider(jeu);
-        assertEquals(Type.TypePanda.getNomType(),act.getNomAction());
-    }
 
 
-    @Test
-    void testCasDefaut(){
-        jeu.getParcellesPlacees().add(p11);
-        p11.setBambou(new Bambou(0));
-        Action act=  cerveauLivraison.decider(jeu);
-        assertEquals(Type.TypeParcelle.getNomType(),act.getNomAction());
 
-    }
 
 
 

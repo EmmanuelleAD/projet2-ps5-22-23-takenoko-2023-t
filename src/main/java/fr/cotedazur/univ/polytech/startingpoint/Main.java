@@ -32,7 +32,10 @@ public class Main {
         Joueur joueur3=new Joueur(1.65,"Emmanuelle");
         joueur3.setCerveau(new CerveauPanda(joueur3));
 
-        List<Joueur>joueurs=Arrays.asList(joueur1, joueur2,joueur3);
+        Joueur joueur4=new Joueur(1.65,"Joueur Saboteur");
+        joueur4.setCerveau(new CerveauLivraison(joueur4));
+
+        List<Joueur>joueurs=Arrays.asList(joueur1, joueur2,joueur3,joueur4);
         Jeu jeu = new Jeu(joueurs);
 
         jeu.initialisation();
