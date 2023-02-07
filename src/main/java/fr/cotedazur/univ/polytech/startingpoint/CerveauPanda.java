@@ -24,21 +24,27 @@ public class CerveauPanda extends Cerveau{
             List<Bambou>bambousJoueur=new ArrayList<>(joueur.getPlateau().getBambous());
             ObjectifPanda obj = (ObjectifPanda) objectif;
             if (!obj.estValide(jeu.getParcellesPlacees(),joueur)) {
-                for (Bambou bambou: obj.getBambous()
-                     ) {
-                    if(bambousJoueur.contains(bambou)) bambousJoueur.remove(bambou);
-                    else {
-                       List<Parcelle> parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),bambou);
-                       parcellesAvec=jeu.getPanda().deplacementsPossibles(parcellesAvec);
-                       if(!parcellesAvec.isEmpty()) return new ActionPanda(parcellesAvec.get(0));
-                    }
-
-                }
+                Action parcellesAvec = getActionObjectif(jeu, bambousJoueur, obj);
+                if (parcellesAvec != null) return parcellesAvec;
 
             }
         }
         List<Position> listPlacement = jeu.getPlacementsPossibles();
         return new ActionParcelle(new Parcelle( listPlacement.get(0)));
     }
+
+    static Action getActionObjectif(Jeu jeu, List<Bambou> bambousJoueur, ObjectifPanda obj) {
+        for (Bambou bambou: obj.getBambous()
+             ) {
+            if(bambousJoueur.contains(bambou)) bambousJoueur.remove(bambou);
+            else {
+               List<Parcelle> parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),bambou);
+               parcellesAvec=jeu.getPanda().deplacementsPossibles(parcellesAvec);
+               if(!parcellesAvec.isEmpty()) return new ActionPanda(parcellesAvec.get(0));
+            }
+
+        }
+        return null;
     }
+}
 

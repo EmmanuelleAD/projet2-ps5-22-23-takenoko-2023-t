@@ -3,6 +3,10 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.Optional;
 
 public class ActionPanda extends Action{
+    public Parcelle getParcelle() {
+        return parcelle;
+    }
+
     Parcelle parcelle;
 
     @Override
