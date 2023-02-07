@@ -17,7 +17,11 @@ public class CerveauLivraison extends Cerveau {
             ActionPiocher newAction = new ActionPiocher(newObjectif);
             return newAction;
         }
-        return null;
+
+
+
+        List<Position> listPlacement = jeu.getPlacementsPossibles();
+        return new ActionParcelle(new Parcelle( listPlacement.get(0)));
     }
 
 

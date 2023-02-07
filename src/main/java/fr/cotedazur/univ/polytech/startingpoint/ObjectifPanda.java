@@ -12,6 +12,9 @@ public class ObjectifPanda extends Objectif{
             new ObjectifPanda("P5J",4,false,"5 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1))),
             new ObjectifPanda("P8V",3,false,"5 sections mangées ",Arrays.asList(new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1),new Bambou(1)))
     ));
+
+
+
     public List<Bambou> getBambous() {
         return bambous;
     }
