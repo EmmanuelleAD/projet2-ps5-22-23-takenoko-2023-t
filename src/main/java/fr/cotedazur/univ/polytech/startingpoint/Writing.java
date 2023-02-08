@@ -1,7 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 import com.opencsv.CSVWriter;
 import java.io.FileWriter;
-import java.net.URL;
 import java.nio.file.Path;
 
 public class Writing {

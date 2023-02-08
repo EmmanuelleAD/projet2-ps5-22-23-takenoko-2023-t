@@ -2,12 +2,17 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionJardinierTest {
 
+
+
+
     @Test
-    void getDescription() {
+    void getDescription() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -15,7 +20,7 @@ class ActionJardinierTest {
 
         Position position = new Position(1, 1);
         ActionJardinier actionJardinier = new ActionJardinier(new Parcelle(position));
-        String comment = " a éffectué une action Jardinier en " + position.toString()+". Le bambou a une taille actuelle de 1";
+        String comment = " a effectue une action JARDINIER en " + position.toString()+". Le bambou a une taille actuelle de 1";
         assertEquals(comment , actionJardinier.getDescription());
     }
 
@@ -35,7 +40,7 @@ class ActionJardinierTest {
     }
 
     @Test
-    void testHashCode() {
+    void testHashCode() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -68,6 +73,19 @@ class ActionJardinierTest {
         ActionJardinier action3 = new ActionJardinier(new Parcelle(new Position(0,0)));
         assertTrue(action1.equals(action2) && action2.equals(action3) && action1.equals(action3));
     }
+
+
+    @Test
+    public void testGetParcelle() {
+        Parcelle parcelle = new Parcelle(new Position(0,0));
+        ActionJardinier actionJardinier = new ActionJardinier(parcelle);
+        assertEquals(parcelle, actionJardinier.getParcelle());
+    }
+
+
+
+
+
 
 
 

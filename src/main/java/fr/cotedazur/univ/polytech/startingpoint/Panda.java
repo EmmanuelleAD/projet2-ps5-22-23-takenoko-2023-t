@@ -7,7 +7,7 @@ public class Panda extends Personnage{
 
 
     public Panda() {
-        this.nom=PersonnageName.Panda;
+        this.nom=PersonnageName.PANDA;
         this.position=Parcelle.etang.getPosition();
     }
 

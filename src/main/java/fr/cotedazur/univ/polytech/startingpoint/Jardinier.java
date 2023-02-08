@@ -7,12 +7,12 @@ public class Jardinier extends Personnage{
 
     public Jardinier() {
     this.position = new Position(0,0);
-    this.nom = PersonnageName.Jardinier;
+    this.nom = PersonnageName.JARDINIER;
     }
 
     @Override
     public PersonnageName getName() {
-        return PersonnageName.Jardinier;
+        return PersonnageName.JARDINIER;
     }
 
 

@@ -1,7 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class CerveauLivraison extends Cerveau {
     int i=0;
@@ -21,6 +21,8 @@ public class CerveauLivraison extends Cerveau {
         if (newAction1 != null) return newAction1;
         Action parcellesAvec = seFocaliser(jeu, derniere);
         if (parcellesAvec != null) return parcellesAvec;
+        parcellesAvec=detecterActionPanda(jeu,derniere);
+        if(parcellesAvec!=null)return parcellesAvec;
         Action newAction = getMaxBambous(jeu, derniere);
         if (newAction != null) return newAction;
         return placerUneParcelle(jeu, derniere);
@@ -36,7 +38,7 @@ public class CerveauLivraison extends Cerveau {
     }
 
     private Action getMaxBambous(Jeu jeu, Action derniere) {
-        List<Parcelle>parcellesAvecUneSection= jeu.getParcellesPlacees().stream().filter(p->p.getTaille()>=1).collect(Collectors.toList());
+        List<Parcelle>parcellesAvecUneSection= jeu.getParcellesPlacees().stream().filter(p->p.getTaille()>=1).toList();
         parcellesAvecUneSection= jeu.getPanda().deplacementsPossibles(parcellesAvecUneSection);
         if(!parcellesAvecUneSection.isEmpty())
         {Action newAction=new ActionPanda(parcellesAvecUneSection.get(0));
@@ -47,7 +49,7 @@ public class CerveauLivraison extends Cerveau {
 
     private Action seFocaliser(Jeu jeu, Action derniere) {
         List<Objectif> objectifBambou = joueur.getCartesObjectifs();
-        objectifBambou = objectifBambou.stream().filter(o->o.getType().equals(Type.TypePanda.getNomType())).collect(Collectors.toList()).subList(0,2);
+        objectifBambou = objectifBambou.stream().filter(o->o.getType().equals(Type.TYPE_PANDA.getNomType())).toList().subList(0,2);
         List<Bambou>bambousJoueur=new ArrayList<>(joueur.getPlateau().getBambous());
         if(!objectifBambou.isEmpty() && (objectifBambou.size() >= 2)){
             ObjectifPanda obj=(ObjectifPanda) objectifBambou.get(i%2);
@@ -79,6 +81,33 @@ public class CerveauLivraison extends Cerveau {
 
         }
         return null;
+    }
+    private Action detecterActionPanda(Jeu jeu,Action derniere){
+        List<Joueur>joueursSansLivraison=new ArrayList<>(jeu.getJoueurs());
+        joueursSansLivraison.remove(joueur);
+        for (Joueur joueur:joueursSansLivraison
+             ) {
+            for (ObjectifPanda o:ObjectifPanda.objectifPandas
+            ) {
+                if(!o.estValide(jeu.getParcellesPlacees(),joueur)){
+                  ObjectifVerifierPanda objectifVerifierPanda=  o.verifierValider(jeu.getParcellesPlacees(),joueur);
+                   if (objectifVerifierPanda.getBambouList().size()==1) {
+                       List<Parcelle>parcellesPotentiels=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),objectifVerifierPanda.getBambouList().get(0));
+                       parcellesPotentiels=jeu.getPanda().deplacementsPossibles(parcellesPotentiels);
+                       if(!parcellesPotentiels.isEmpty()) {
+                           Parcelle parcelle = parcellesPotentiels.get(0);
+                           Action potentiel = new ActionPanda(parcelle);
+                           if (this.retournerAction(potentiel, derniere) != null) return potentiel;
+                       }
+                   }
+                }
+
+            }
+
+        }
+        return null;
+
+
     }
 
 

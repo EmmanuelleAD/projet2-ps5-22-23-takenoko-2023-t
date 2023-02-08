@@ -51,7 +51,7 @@ public abstract class Objectif{
 
 
 
-    public Objectif(String nom, int points, boolean statut, String description) {
+    protected Objectif(String nom, int points, boolean statut, String description) {
         this.nom = nom;
         this.points = points;
         this.statut = statut;
@@ -61,7 +61,11 @@ public abstract class Objectif{
 
 
     public abstract boolean estValide(List<Parcelle> parcelles,Joueur joueur);
-    public abstract  ObjectifVerifier verifierValider(List<Parcelle>parcelles);
+    public abstract ObjectifVerifier verifierValider(List<Parcelle>parcelles,Joueur joueur);
+    public  ObjectifVerifier verifierValider(List<Parcelle>parcelles){
+        return  verifierValider(parcelles,null);
+    }
+
 
     @Override
     public boolean equals(Object o) {

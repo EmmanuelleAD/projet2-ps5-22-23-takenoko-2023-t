@@ -2,6 +2,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -15,6 +16,9 @@ class JoueurTest {
     private Joueur mohamed=new Joueur(1.78,"Mohamed");
 
     private Joueur emmanuelle=new Joueur(1.6,"Emmanuelle");
+
+    JoueurTest() throws NoSuchAlgorithmException {
+    }
 
 
     @Test

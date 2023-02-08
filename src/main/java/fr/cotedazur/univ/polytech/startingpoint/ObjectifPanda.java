@@ -3,6 +3,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectifPanda extends Objectif{
     static List<ObjectifPanda>objectifPandas=new ArrayList<>(Arrays.asList(
@@ -19,7 +20,7 @@ public class ObjectifPanda extends Objectif{
         return bambous;
     }
 
-    private List<Bambou>bambous;
+    private final List<Bambou>bambous;
     public ObjectifPanda(String nom, int points, boolean statut, String description,List<Bambou>bambous) {
         super(nom, points, statut, description);
         this.bambous=new ArrayList<>(bambous);
@@ -27,7 +28,7 @@ public class ObjectifPanda extends Objectif{
 
     @Override
     public String getType() {
-        return Type.TypePanda.getNomType();
+        return Type.TYPE_PANDA.getNomType();
     }
 
     @Override
@@ -45,11 +46,38 @@ public class ObjectifPanda extends Objectif{
     }
 
     @Override
-    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
-        return null;
+    public ObjectifVerifierPanda verifierValider(List<Parcelle> parcelles,Joueur joueur) {
+        if(this.estValide(parcelles,joueur)){
+            ObjectifVerifierPanda objectifVerifierPanda=new ObjectifVerifierPanda();
+            objectifVerifierPanda.setIsManquant(true);
+            return objectifVerifierPanda;
+        }
+        List<Bambou>joueurBambous=joueur.getPlateau().getBambous();
+        List<Bambou>manquants=new ArrayList<>();
+        for (Bambou bambou:this.getBambous()
+        ) {
+            if(!joueurBambous.contains(bambou)) manquants.add(bambou);
+
+
+
+        }
+        return new ObjectifVerifierPanda(manquants);
+
+
     }
 
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ObjectifPanda that = (ObjectifPanda) o;
+        return Objects.equals(bambous, that.bambous);
+    }
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), bambous);
+    }
 }

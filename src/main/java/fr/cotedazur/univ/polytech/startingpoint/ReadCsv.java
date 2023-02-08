@@ -1,9 +1,9 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 import java.io.FileReader;
-import java.net.URL;
+
 import java.nio.file.Path;
 import java.util.Arrays;
-import java.util.Collections;
+
 import com.opencsv.CSVParser;
 import com.opencsv.CSVParserBuilder;
 import com.opencsv.CSVReader;

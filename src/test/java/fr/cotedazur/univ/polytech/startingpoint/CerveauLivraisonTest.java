@@ -3,7 +3,10 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -19,6 +22,10 @@ class CerveauLivraisonTest {
     CerveauLivraison cerveauLivraison=new CerveauLivraison(botSaboteur);
 
     Jeu jeu=new Jeu(botSaboteur,joueur);
+
+    CerveauLivraisonTest() throws NoSuchAlgorithmException {
+    }
+
     @BeforeEach
     void setUp(){
         botSaboteur.setCerveau(new CerveauLivraison(botSaboteur));
@@ -32,7 +39,7 @@ class CerveauLivraisonTest {
         botSaboteur.setCartesObjectifs(new ArrayList<>());
         jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauLivraison.decider(jeu);
-        assertEquals(Type.TypePiocher.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PIOCHER.getNomType(),act.getNomAction());
 
     }
 
@@ -47,7 +54,7 @@ class CerveauLivraisonTest {
         jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),1);
-        assertEquals(Type.TypePiocher.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PIOCHER.getNomType(),act.getNomAction());
     }
 
     @Test
@@ -63,7 +70,7 @@ class CerveauLivraisonTest {
         jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),5);
-        assertEquals(Type.TypePanda.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PANDA.getNomType(),act.getNomAction());
 
     }
 
@@ -80,7 +87,7 @@ class CerveauLivraisonTest {
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(2));
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),5);
-        assertEquals(Type.TypeParcelle.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PARCELLE.getNomType(),act.getNomAction());
 
     }
     @Test
@@ -116,7 +123,33 @@ class CerveauLivraisonTest {
         p12.setBambou(new Bambou(0));
        Action action=cerveauLivraison.decider(jeu);
         assertEquals(1,cerveauLivraison.getI());
-        assertEquals(action.getNomAction(),Type.TypeParcelle.getNomType());
+        assertEquals(action.getNomAction(),Type.TYPE_PARCELLE.getNomType());
+
+
+
+    }
+    @Test
+    void detecterActionPandaTest(){
+        Jeu jeu=new Jeu(botSaboteur,joueur);
+        jeu.initialisation();
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifPanda.objectifPandas.get(2)));
+        joueur.getPlateau().ajouterBambou(new Bambou(1)); //créer la situatuion un seul manquant pour l'adversaire
+        joueur.getPlateau().ajouterBambou(new Bambou(1));
+        jeu.getParcellesPlacees().add(p11);      //ajouter la parcelle ou il peut potentiellement se déplacer
+        ActionPanda act=(ActionPanda) cerveauLivraison.decider(jeu);
+       List<Parcelle> parcelles= Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
+       parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
+       assertEquals(parcelles.get(0),act.getParcelle());
+
+
+
 
 
 

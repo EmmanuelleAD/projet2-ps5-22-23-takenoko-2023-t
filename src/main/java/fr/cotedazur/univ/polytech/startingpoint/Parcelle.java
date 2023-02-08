@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.lang.Math.sqrt;
+
 
 public class Parcelle {
-    public Position positionCentre;
-    public Optional<Bambou> bambou;
+    protected Position positionCentre;
+    protected Optional<Bambou> bambou;
     private boolean irrigue;
     public  final static Parcelle etang=new Parcelle(new Position(0,0));
 
