@@ -18,15 +18,12 @@ public class CerveauJardinier extends Cerveau {
         if (newAction != null) return newAction;
         Action newAction1 = fairePousser(jeu, derniere);
         if (newAction1 != null) return newAction1;
-        return placerUneParcelle(jeu,derniere);
+        newAction= placerUneParcelle(jeu,derniere);
+        if(newAction!=null) return newAction;
+        return mangerUnBambou(jeu,derniere);
     }
 
-    private  Action placerUneParcelle(Jeu jeu,Action derniere) {
-        List<Position> listPlacement = jeu.getPlacementsPossibles();
-        Action newAction=new ActionParcelle(new Parcelle(listPlacement.get(0)));
-       if(this.retournerAction(newAction, derniere)!=null) return newAction;
-       return null;
-    }
+
 
     private Action fairePousser(Jeu jeu, Action derniere) {
         Action newAction;
