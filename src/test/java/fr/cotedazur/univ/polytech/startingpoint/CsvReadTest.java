@@ -18,7 +18,7 @@ public class CsvReadTest {
         sourcePath = Path.of("stats", "gamestats.csv");
     }
 
-    
+
 
     @Test(expected = Exception.class)
     public void testReadCsvFileNotFoundException() throws Exception {
