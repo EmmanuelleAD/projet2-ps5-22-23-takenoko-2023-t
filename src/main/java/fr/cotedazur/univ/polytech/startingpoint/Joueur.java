@@ -90,7 +90,20 @@ public class Joueur {
     }
 
 
-    public Joueur(double taille,String nom) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Double.compare(joueur.taille, taille) == 0 && Objects.equals(plateau, joueur.plateau) && Objects.equals(cerveau, joueur.cerveau) && Objects.equals(nom, joueur.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(plateau, cerveau, taille, nom);
+    }
+
+    public Joueur(double taille, String nom) {
         this.nom=nom;
         this.taille = taille;
         this.plateau=new Plateau();

@@ -142,12 +142,6 @@ class CerveauLivraisonTest {
        List<Parcelle> parcelles= Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
        parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
        assertEquals(parcelles.get(0),act.getParcelle());
-
-
-
-
-
-
     }
 
 

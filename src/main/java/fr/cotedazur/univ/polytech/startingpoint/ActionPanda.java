@@ -10,6 +10,16 @@ public class ActionPanda extends Action{
 
     Parcelle parcelle;
 
+    public boolean isSabotage() {
+        return isSabotage;
+    }
+
+    public void setSabotage(boolean sabotage) {
+        isSabotage = sabotage;
+    }
+
+    private boolean isSabotage=false;
+
     @Override
     public String getNomAction() {
         return Type.TYPE_PANDA.getNomType();
@@ -23,7 +33,8 @@ public class ActionPanda extends Action{
     @Override
     public String getDescription() {
         String msg=(parcelle.bambou.isPresent())?". Le bambou a une taille actuelle de "+parcelle.getTaille():"";
-        return " a éffectué une action PANDA en "+parcelle.getPosition() +msg;
+        String msgsupp=(isSabotage)?" .Ceci est une tentative de sabotage ":"";
+        return " a éffectué une action PANDA en "+parcelle.getPosition() +msg+msgsupp;
     }
 
     @Override

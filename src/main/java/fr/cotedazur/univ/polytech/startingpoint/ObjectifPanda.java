@@ -53,11 +53,12 @@ public class ObjectifPanda extends Objectif{
             return objectifVerifierPanda;
         }
         List<Bambou>joueurBambous=joueur.getPlateau().getBambous();
+        List <Bambou>temp =new ArrayList<>(joueurBambous);
         List<Bambou>manquants=new ArrayList<>();
         for (Bambou bambou:this.getBambous()
         ) {
-            if(!joueurBambous.contains(bambou)) manquants.add(bambou);
-
+            if(!temp.contains(bambou)) manquants.add(bambou);
+            else temp.remove(bambou);
 
 
         }
