@@ -6,6 +6,9 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ActionJardinierTest {
 
+
+
+
     @Test
     void getDescription() {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
@@ -68,6 +71,19 @@ class ActionJardinierTest {
         ActionJardinier action3 = new ActionJardinier(new Parcelle(new Position(0,0)));
         assertTrue(action1.equals(action2) && action2.equals(action3) && action1.equals(action3));
     }
+
+
+    @Test
+    public void testGetParcelle() {
+        Parcelle parcelle = new Parcelle(new Position(0,0));
+        ActionJardinier actionJardinier = new ActionJardinier(parcelle);
+        assertEquals(parcelle, actionJardinier.getParcelle());
+    }
+
+
+
+
+
 
 
 

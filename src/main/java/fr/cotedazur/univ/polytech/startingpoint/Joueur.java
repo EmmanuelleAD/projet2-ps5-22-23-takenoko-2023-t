@@ -2,7 +2,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Joueur {
     public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
