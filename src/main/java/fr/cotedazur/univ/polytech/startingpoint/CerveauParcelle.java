@@ -1,6 +1,5 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
@@ -55,7 +54,7 @@ public class CerveauParcelle extends Cerveau {
         for (Objectif objectif: listObjectif
              ) {
             if(!objectif.estValide(jeu.getParcellesPlacees(),joueur)){
-                ObjectifVerifier objectifVerifier=objectif.verifierValider(jeu.getParcellesPlacees());
+                ObjectifVerifierParcelle objectifVerifier= (ObjectifVerifierParcelle) objectif.verifierValider(jeu.getParcellesPlacees());
                 if(objectifVerifier.getMoinsManquants().isEmpty()) break;
                 Position nouvellePos=objectifVerifier.getMoinsManquants().get(0);
                 return new ActionParcelle((new Parcelle(nouvellePos)));

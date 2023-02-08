@@ -4,6 +4,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -117,6 +119,32 @@ class CerveauLivraisonTest {
        Action action=cerveauLivraison.decider(jeu);
         assertEquals(1,cerveauLivraison.getI());
         assertEquals(action.getNomAction(),Type.TypeParcelle.getNomType());
+
+
+
+    }
+    @Test
+    void detecterActionPandaTest(){
+        Jeu jeu=new Jeu(botSaboteur,joueur);
+        jeu.initialisation();
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifPanda.objectifPandas.get(2)));
+        joueur.getPlateau().ajouterBambou(new Bambou(1)); //créer la situatuion un seul manquant pour l'adversaire
+        joueur.getPlateau().ajouterBambou(new Bambou(1));
+        jeu.getParcellesPlacees().add(p11);      //ajouter la parcelle ou il peut potentiellement se déplacer
+        ActionPanda act=(ActionPanda) cerveauLivraison.decider(jeu);
+       List<Parcelle> parcelles= Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
+       parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
+       assertEquals(parcelles.get(0),act.getParcelle());
+
+
+
 
 
 

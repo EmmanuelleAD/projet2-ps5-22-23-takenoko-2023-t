@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ObjectifVerifierTest {
     ObjectifParcelle ali3;
-    ObjectifVerifier ovAli3=new ObjectifVerifier();
+    ObjectifVerifier ovAli3=new ObjectifVerifierParcelle();
     Parcelle p11=new Parcelle(new Position(1,1));
     List<Parcelle> parcelles=new ArrayList<>();
     @BeforeEach
@@ -21,14 +21,14 @@ class ObjectifVerifierTest {
     }
     @Test
     void CasAli3AvecEtang(){
-        ObjectifVerifier ovali3=ObjectifParcelle.verifierValiderAli3(parcelles);
+        ObjectifVerifierParcelle ovali3=ObjectifParcelle.verifierValiderAli3(parcelles);
         assertFalse(ovali3.isManquant);
         assertEquals(0,ovali3.parcellesManquant.size());
     }
     @Test
     void CasAli3AvecEtangAvec1SeuleParcelle(){
         parcelles.add(p11);
-        ObjectifVerifier ovali3=ObjectifParcelle.verifierValiderAli3(parcelles);
+        ObjectifVerifierParcelle ovali3=ObjectifParcelle.verifierValiderAli3(parcelles);
         assertFalse(ovali3.isManquant);
         System.out.println(ovali3.parcellesManquant);
         assertEquals(2,ovali3.parcellesManquant.get(0).size());
@@ -37,19 +37,19 @@ class ObjectifVerifierTest {
 
     @Test
     void isManquant() {
-        ObjectifVerifier objectifVerifier = new ObjectifVerifier();
+        ObjectifVerifier objectifVerifier = new ObjectifVerifierParcelle();
         assertEquals(false, objectifVerifier.isManquant());
     }
 
     @Test
     void getParcellesManquant() {
-        ObjectifVerifier objectifVerifier = new ObjectifVerifier();
+        ObjectifVerifierParcelle objectifVerifier = new ObjectifVerifierParcelle();
         assertEquals(0, objectifVerifier.getParcellesManquant().size());
     }
 
     @Test
     void setIsManquant() {
-        ObjectifVerifier objectifVerifier = new ObjectifVerifier();
+        ObjectifVerifierParcelle objectifVerifier = new ObjectifVerifierParcelle();
         objectifVerifier.setIsManquant(true);
         assertEquals(true, objectifVerifier.isManquant());
 

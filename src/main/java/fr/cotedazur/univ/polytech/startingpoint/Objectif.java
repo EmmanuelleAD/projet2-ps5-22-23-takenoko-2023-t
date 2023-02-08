@@ -61,7 +61,11 @@ public abstract class Objectif{
 
 
     public abstract boolean estValide(List<Parcelle> parcelles,Joueur joueur);
-    public abstract  ObjectifVerifier verifierValider(List<Parcelle>parcelles);
+    public abstract ObjectifVerifier verifierValider(List<Parcelle>parcelles,Joueur joueur);
+    public  ObjectifVerifier verifierValider(List<Parcelle>parcelles){
+        return  verifierValider(parcelles,null);
+    }
+
 
     @Override
     public boolean equals(Object o) {

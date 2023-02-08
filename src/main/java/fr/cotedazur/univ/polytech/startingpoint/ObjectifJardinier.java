@@ -53,7 +53,12 @@ public class ObjectifJardinier extends Objectif {
     }
 
     @Override
-    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
+    public ObjectifVerifier verifierValider(List<Parcelle> parcelles, Joueur joueur) {
+        return null;
+    }
+
+    @Override
+    public ObjectifVerifierParcelle verifierValider(List<Parcelle> parcelles) {
         return null;
     }
 
