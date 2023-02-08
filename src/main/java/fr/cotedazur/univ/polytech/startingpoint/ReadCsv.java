@@ -29,4 +29,7 @@ public static void readCsv() throws Exception {Path sourcePath= Path.of(" stats 
             System.out.println(Arrays.asList(nextLine));
         }
     }
-}}
+}
+
+
+}
