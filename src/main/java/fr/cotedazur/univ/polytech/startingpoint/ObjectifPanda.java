@@ -45,8 +45,24 @@ public class ObjectifPanda extends Objectif{
     }
 
     @Override
-    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
-        return null;
+    public ObjectifVerifierPanda verifierValider(List<Parcelle> parcelles,Joueur joueur) {
+        if(this.estValide(parcelles,joueur)){
+            ObjectifVerifierPanda objectifVerifierPanda=new ObjectifVerifierPanda();
+            objectifVerifierPanda.setIsManquant(true);
+            return objectifVerifierPanda;
+        }
+        List<Bambou>joueurBambous=joueur.getPlateau().getBambous();
+        List<Bambou>manquants=new ArrayList<>();
+        for (Bambou bambou:this.getBambous()
+        ) {
+            if(!joueurBambous.contains(bambou)) manquants.add(bambou);
+
+
+
+        }
+        return new ObjectifVerifierPanda(manquants);
+
+
     }
 
 
