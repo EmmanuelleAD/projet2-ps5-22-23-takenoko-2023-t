@@ -13,13 +13,23 @@ public class CerveauJardinier extends Cerveau {
     }
 
     @Override
-    public Action decider(Jeu jeu) {
-        if (joueur.getCartesObjectifs().isEmpty()) {
-            List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
-            Objectif newObjectif = op.get(op.size() - 1);
-            ActionPiocher newAction = new ActionPiocher(newObjectif);
-            return newAction;
-        }
+    public Action decider(Jeu jeu,Action derniere) {
+        Action newAction = getActionPiocher(jeu, derniere);
+        if (newAction != null) return newAction;
+        Action newAction1 = fairePousser(jeu, derniere);
+        if (newAction1 != null) return newAction1;
+        return placerUneParcelle(jeu,derniere);
+    }
+
+    private  Action placerUneParcelle(Jeu jeu,Action derniere) {
+        List<Position> listPlacement = jeu.getPlacementsPossibles();
+        Action newAction=new ActionParcelle(new Parcelle(listPlacement.get(0)));
+       if(this.retournerAction(newAction, derniere)!=null) return newAction;
+       return null;
+    }
+
+    private Action fairePousser(Jeu jeu, Action derniere) {
+        Action newAction;
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
         listObjectif = listObjectif.stream().filter(o->o.getType().equals("Jardinier")).collect(Collectors.toList());
         for (Objectif objectif : listObjectif) {
@@ -34,11 +44,21 @@ public class CerveauJardinier extends Cerveau {
                         copyList.remove(parcelle);
                     }
                 }
-              if(!listParcelleObj.isEmpty())  return new ActionJardinier(Parcelle.dernier(listParcelleObj));
+                 newAction=new ActionJardinier(Parcelle.dernier(listParcelleObj));
+              if(!listParcelleObj.isEmpty()&&this.retournerAction(newAction, derniere)!=null) return newAction;
             }
         }
-        List<Position> listPlacement = jeu.getPlacementsPossibles();
-        return new ActionParcelle(new Parcelle( listPlacement.get(0)));
+        return null;
+    }
+
+    private Action getActionPiocher(Jeu jeu, Action derniere) {
+        if (joueur.getCartesObjectifs().isEmpty()) {
+            List<ObjectifJardinier> op = jeu.getObjectifsJardinier();
+            Objectif newObjectif = op.get(op.size() - 1);
+            ActionPiocher newAction = new ActionPiocher(newObjectif);
+            if(this.retournerAction(newAction, derniere)!=null) return newAction;
+        }
+        return null;
     }
 }
 

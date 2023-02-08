@@ -9,7 +9,18 @@ public abstract class Cerveau {
     public Cerveau(Joueur joueur) {
         this.joueur=joueur;
     }
-    public abstract Action decider(Jeu jeu);
+    public Action retournerAction(Action action,Action derniere){
+        if(derniere==null||!derniere.getNomAction().equals(action.nomAction)) {
+            return action;
+        }
+        return  null;
+    }
+
+    public Action decider(Jeu jeu) {
+        return decider(jeu, null);
+    }
+
+    public abstract Action decider(Jeu jeu,Action derniere);
 
 
 
