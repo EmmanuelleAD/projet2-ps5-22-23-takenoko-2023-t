@@ -1,6 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.*;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.io.File;
@@ -25,5 +25,24 @@ public class CsvReadTest {
         sourcePath = Path.of("stats", "invalidFile.csv");
         readCsv.readCsv();
     }
+
+
+    @Test
+    public void testReadCsvWithInvalidCsvFile() throws Exception {
+        File csvFile = new File("stats/invalidGamestats.csv");
+        assertThrows(Exception.class, () -> ReadCsv.readCsv());
+    }
+
+
+    @Test
+    public void testReadCsvWithInvalidFilePath() throws Exception {
+        assertThrows(Exception.class, () -> ReadCsv.readCsv());
+    }
+
+
+
+
+
+
 }
 

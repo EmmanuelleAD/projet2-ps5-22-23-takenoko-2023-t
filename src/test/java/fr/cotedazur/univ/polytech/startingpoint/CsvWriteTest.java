@@ -1,6 +1,8 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
@@ -26,4 +28,15 @@ public class CsvWriteTest {
     void testAppendCsvWithEmptyString() {
         assertDoesNotThrow(() -> Writing.appendCsv(""));
     }
+
+    @Test
+    public void testAppendCsvSuccess() throws Exception {
+        File csvFile = new File("stats/gamestats.csv");
+        Writing.appendCsv("number\nnumber");
+        assertNotNull(csvFile);
+    }
+
+
+
+
 }
