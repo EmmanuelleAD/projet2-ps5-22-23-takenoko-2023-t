@@ -4,7 +4,8 @@ public enum Type {
     TypeJardinier("Jardinier"),
     TypeParcelle("Parcelle"),
     TypePiocher("Piocher"),
-    TypePanda("Panda");
+    TypePanda("Panda"),
+    TypePremierTour("Premier");
 
     public String getNomType() {
         return nomType;

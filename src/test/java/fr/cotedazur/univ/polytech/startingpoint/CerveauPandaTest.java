@@ -32,7 +32,7 @@ public class CerveauPandaTest {
         jeu.getParcellesPlacees().add(p11);
         p11.setBambou(new Bambou(0));
         Action act=  cerveauPanda.decider(jeu);
-        assertEquals(Type.TypeParcelle.getNomType(),act.getNomAction());
+        assertEquals(Type.TypeJardinier.getNomType(),act.getNomAction());
 
 
     }
