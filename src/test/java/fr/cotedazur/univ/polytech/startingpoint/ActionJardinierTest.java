@@ -2,6 +2,8 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionJardinierTest {
@@ -10,7 +12,7 @@ class ActionJardinierTest {
 
 
     @Test
-    void getDescription() {
+    void getDescription() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -38,7 +40,7 @@ class ActionJardinierTest {
     }
 
     @Test
-    void testHashCode() {
+    void testHashCode() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);

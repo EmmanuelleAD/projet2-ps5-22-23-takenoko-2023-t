@@ -2,12 +2,14 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionParcelleTest {
 
     @Test
-    void getParcelle() {
+    void getParcelle() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -19,7 +21,7 @@ class ActionParcelleTest {
     }
 
     @Test
-    void getDescription() {
+    void getDescription() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -33,7 +35,7 @@ class ActionParcelleTest {
 
 
     @Test
-    public void testTraiter() {
+    public void testTraiter() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
