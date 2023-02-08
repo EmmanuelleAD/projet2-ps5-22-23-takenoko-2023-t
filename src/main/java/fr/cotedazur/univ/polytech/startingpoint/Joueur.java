@@ -10,6 +10,9 @@ public class Joueur {
     private Plateau plateau;
     private int partieGagnees=0;
 
+
+
+
     private double scoreMoyen;
 
     private Cerveau cerveau;
@@ -102,7 +105,7 @@ public class Joueur {
     public Action jouer(Jeu jeu) {
         Action action1=cerveau.decider(jeu);
         action1.traiter(this,jeu);
-        Action action2=cerveau.decider(jeu);
+        Action action2=cerveau.decider(jeu,action1);
         action2.traiter(this,jeu);
         return action2;
     }

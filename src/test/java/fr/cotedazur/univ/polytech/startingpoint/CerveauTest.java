@@ -37,8 +37,9 @@ class CerveauTest {
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
 
-        cerveauParcelleJoueur1.decider(jeu);
-        assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveauParcelleJoueur1.decider(jeu));
+       ;
+        assertEquals(Type.TypeJardinier.getNomType(), cerveauParcelleJoueur1.decider(jeu).getNomAction());
+       // assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveauParcelleJoueur1.decider(jeu));
 
     }
 

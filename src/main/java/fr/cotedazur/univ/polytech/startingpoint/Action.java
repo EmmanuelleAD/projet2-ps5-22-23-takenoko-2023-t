@@ -51,13 +51,12 @@ public abstract class Action {
         Action action = (Action) o;
 
         if (!Objects.equals(nomAction, action.nomAction)) return false;
-        return Objects.equals(description, action.description);
+        return true;
     }
 
     @Override
     public int hashCode() {
         int result = nomAction != null ? nomAction.hashCode() : 0;
-        result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
     }
 }

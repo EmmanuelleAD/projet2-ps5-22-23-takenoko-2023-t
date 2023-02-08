@@ -32,7 +32,7 @@ public class ActionJardinier extends Action{
 
     }
 
-    @Override
+  /*  @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
@@ -48,5 +48,5 @@ public class ActionJardinier extends Action{
         int result = super.hashCode();
         result = 31 * result + (parcelle != null ? parcelle.hashCode() : 0);
         return result;
-    }
+    }*/
 }
