@@ -46,6 +46,11 @@ public class ObjectifParcelle extends Objectif {
         else return estValide(parcelles);
     }
 
+    @Override
+    public ObjectifVerifier verifierValider(List<Parcelle> parcelles, Joueur joueur) {
+        return null;
+    }
+
     public boolean estValide (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = new ArrayList<>(parcelles);
             parcellesSansEtang.remove(Parcelle.etang);
@@ -61,7 +66,7 @@ public class ObjectifParcelle extends Objectif {
 
         static ObjectifVerifier verifierValiderGRP4 (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = retirerEtang(parcelles);
-            ObjectifVerifier objectif = new ObjectifVerifier();
+            ObjectifVerifierParcelle objectif = new ObjectifVerifierParcelle();
             List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
             for (Position p : positions
             ) {
@@ -84,7 +89,7 @@ public class ObjectifParcelle extends Objectif {
 
         static ObjectifVerifier verifierValiderGRP3 (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = retirerEtang(parcelles);
-            ObjectifVerifier ov = new ObjectifVerifier();
+            ObjectifVerifierParcelle ov = new ObjectifVerifierParcelle();
             List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
             for (Position p : positions
             ) {
@@ -116,7 +121,7 @@ public class ObjectifParcelle extends Objectif {
         static ObjectifVerifier verifierValiderPARC (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = retirerEtang(parcelles);
             List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
-            ObjectifVerifier objectif = new ObjectifVerifier();
+            ObjectifVerifierParcelle objectif = new ObjectifVerifierParcelle();
             for (Position p : positions
             ) {
                 if (p.y % 2 == 0) {
@@ -134,9 +139,9 @@ public class ObjectifParcelle extends Objectif {
         }
 
 
-        static ObjectifVerifier verifierValiderAli3 (List < Parcelle > parcelles) {
+        static ObjectifVerifierParcelle verifierValiderAli3 (List < Parcelle > parcelles) {
             List<Parcelle> parcellesSansEtang = retirerEtang(parcelles);
-            ObjectifVerifier objectif = new ObjectifVerifier();
+            ObjectifVerifierParcelle objectif = new ObjectifVerifierParcelle();
             List<Position> positions = parcellesSansEtang.stream().map(Parcelle::getPosition).collect(Collectors.toList());
             for (Position p : positions
             ) {
@@ -171,24 +176,24 @@ public class ObjectifParcelle extends Objectif {
         }
 
 
-        private static void verifierGRP4impair (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP4impair (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             verifierParCImpair(positions, objectif, p);
 
         }
 
-        private static void verifierGRP4Pair (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP4Pair (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             verifierParCPair(positions, objectif, p);
 
         }
 
-        private static void verifierGRP3Impair2 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP3Impair2 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x - 1, p.y - 1));
             aVerifier.add(new Position(p.x, p.y - 1));
             traitementsManquants(objectif, positions, aVerifier);
         }
 
-        private static void verifierGRP3Impair1 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP3Impair1 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y + 1));
             aVerifier.add(new Position(p.x - 1, p.y + 1));
@@ -196,7 +201,7 @@ public class ObjectifParcelle extends Objectif {
 
         }
 
-        private static void verifierGRP3Pair2 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP3Pair2 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y - 1));
             aVerifier.add(new Position(p.x + 1, p.y - 1));
@@ -204,7 +209,7 @@ public class ObjectifParcelle extends Objectif {
 
         }
 
-        private static void verifierGRP3Pair1 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierGRP3Pair1 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y + 1));
             aVerifier.add(new Position(p.x + 1, p.y + 1));
@@ -212,7 +217,7 @@ public class ObjectifParcelle extends Objectif {
 
         }
 
-        private static void verifierParCImpair (List < Position > positions, ObjectifVerifier objectif, Position p){
+        private static void verifierParCImpair (List < Position > positions, ObjectifVerifierParcelle objectif, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y + 2));
             aVerifier.add(new Position(p.x - 1, p.y + 1));
@@ -221,7 +226,7 @@ public class ObjectifParcelle extends Objectif {
 
         }
 
-        private static void verifierParCPair (List < Position > positions, ObjectifVerifier objectif, Position p){
+        private static void verifierParCPair (List < Position > positions, ObjectifVerifierParcelle objectif, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y + 2));
             aVerifier.add(new Position(p.x, p.y + 1));
@@ -229,7 +234,7 @@ public class ObjectifParcelle extends Objectif {
             traitementsManquants(objectif, positions, aVerifier);
 
         }
-        private static void verifierAli3Impair2 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierAli3Impair2 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x - 1, p.y + 1));
             aVerifier.add(new Position(p.x - 1, p.y + 2));
@@ -237,13 +242,13 @@ public class ObjectifParcelle extends Objectif {
 
         }
 
-        private static void verifierAli3Pair2 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierAli3Pair2 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x, p.y + 1));
             aVerifier.add(new Position(p.x - 1, p.y + 2));
             traitementsManquants(objectif, positions, aVerifier);
         }
-        private static void traitementsManquants (ObjectifVerifier
+        private static void traitementsManquants (ObjectifVerifierParcelle
         objectif, List < Position > positions, List < Position > positionsAVerifier){
             List<Position> manquants = new ArrayList<>();
             for (Position position : positionsAVerifier
@@ -253,14 +258,14 @@ public class ObjectifParcelle extends Objectif {
             objectif.ajoutManquants(manquants);
 
         }
-        private static void verifierAli3Impair1 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierAli3Impair1 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> aVerifier = new ArrayList<>();
             aVerifier.add(new Position(p.x + 1, p.y + 2));
             aVerifier.add(new Position(p.x, p.y + 1));
             traitementsManquants(objectif, positions, aVerifier);
         }
 
-        private static void verifierAli3Pair1 (ObjectifVerifier objectif, List < Position > positions, Position p){
+        private static void verifierAli3Pair1 (ObjectifVerifierParcelle objectif, List < Position > positions, Position p){
             List<Position> positionList = new ArrayList<>();
             positionList.add(new Position(p.x + 1, p.y + 2));
             positionList.add(new Position(p.x + 1, p.y + 1));
