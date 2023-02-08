@@ -1,6 +1,8 @@
 
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.*;
 
 public class Joueur {
@@ -109,9 +111,18 @@ public class Joueur {
         return action2;
     }
 
-    private Random rand=new Random();
+   private Random rand;
+
+    {
+        try {
+            rand = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private Action piocherCartesObjectifs(Jeu jeu) {
+
         int index=rand.nextInt(2);
         int size;
         Objectif o;
@@ -140,6 +151,7 @@ public class Joueur {
     }
 
     public ActionParcelle effectuerActionParcelle(Jeu jeu){
+
         int index=rand.nextInt(jeu.getPlacementsPossibles().size());
         Parcelle parcelle1 = new Parcelle(jeu.getPlacementsPossibles().get(index));
         parcelle1.setBambou(new Bambou());

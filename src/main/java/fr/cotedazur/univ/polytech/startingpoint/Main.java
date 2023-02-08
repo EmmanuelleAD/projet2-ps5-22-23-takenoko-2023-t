@@ -1,6 +1,8 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
+
+import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -16,14 +18,14 @@ public class Main {
     private static double getPourcentage(double nbre){
         return nbre/10;
     }
-    public static void main(String ...args){
+    public static void main(String ...args) throws NoSuchAlgorithmException {
 
         Main mainParametre=new Main();
         JCommander.newBuilder().addObject(mainParametre).build().parse(args);
         mainParametre.run();
     }
 
-    public  void main(boolean csv ) {
+    public  void main(boolean csv ) throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         joueur1.setCerveau(new CerveauJardinier(joueur1));
         Joueur joueur2 = new Joueur(1.6, "Brahim");
@@ -92,7 +94,7 @@ public class Main {
 
 
     }
-    public  void run() {
+    public  void run() throws NoSuchAlgorithmException {
         if(est2000)
         {
             Joueur joueur1 = new Joueur(1.62, "Wassim");

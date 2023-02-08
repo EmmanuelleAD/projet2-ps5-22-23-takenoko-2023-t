@@ -2,6 +2,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -13,6 +14,10 @@ public class CerveauPandaTest {
     Joueur joueuse=new Joueur(1.6,"Emmanuelle");
     CerveauPanda cerveauPanda=new CerveauPanda(joueuse);
     Jeu jeu=new Jeu(joueuse,joueur);
+
+    public CerveauPandaTest() throws NoSuchAlgorithmException {
+    }
+
     @BeforeEach
     void setUp(){
         joueuse.setCerveau(new CerveauPanda(joueuse));

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +16,10 @@ public class ObjectifPandaTest {
     ObjectifPanda objectifPanda;
 
     List<Bambou> bambouList=new ArrayList<>();
+
+    public ObjectifPandaTest() throws NoSuchAlgorithmException {
+    }
+
     @BeforeEach
     void setUp(){
         objectifPanda=ObjectifPanda.objectifPandas.get(0);

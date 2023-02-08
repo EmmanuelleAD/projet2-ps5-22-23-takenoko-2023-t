@@ -3,6 +3,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -21,6 +22,10 @@ class CerveauLivraisonTest {
     CerveauLivraison cerveauLivraison=new CerveauLivraison(botSaboteur);
 
     Jeu jeu=new Jeu(botSaboteur,joueur);
+
+    CerveauLivraisonTest() throws NoSuchAlgorithmException {
+    }
+
     @BeforeEach
     void setUp(){
         botSaboteur.setCerveau(new CerveauLivraison(botSaboteur));

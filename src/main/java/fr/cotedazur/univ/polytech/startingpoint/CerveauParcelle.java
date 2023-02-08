@@ -1,6 +1,8 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.List;
 import java.util.Random;
 
@@ -25,7 +27,18 @@ public class CerveauParcelle extends Cerveau {
         return placerUneParcelleRandom(jeu,derniere);
     }
 
-    public static final Random ran=new Random();
+
+
+
+    private Random ran;
+
+    {
+        try {
+            ran = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     private  Action placerUneParcelleRandom(Jeu jeu,Action derniere) {
         List<Position> listPlacement = jeu.getPlacementsPossibles();

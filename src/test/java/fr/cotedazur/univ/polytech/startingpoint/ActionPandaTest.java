@@ -1,6 +1,8 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 import org.junit.jupiter.api.Test;
 
+import java.security.NoSuchAlgorithmException;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 
@@ -21,7 +23,7 @@ public class ActionPandaTest {
     }
 
     @Test
-    public void testTraiter() {
+    public void testTraiter() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1,"wassim");
         Joueur joueur2 = new Joueur(1,"brahim");
         Jeu jeu = new Jeu(joueur1,joueur2);
