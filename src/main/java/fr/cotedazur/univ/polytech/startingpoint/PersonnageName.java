@@ -2,8 +2,8 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 public enum PersonnageName {
 
-    Panda("Panda"),
-    Jardinier("Jardinier");
+    PANDA("PANDA"),
+    JARDINIER("JARDINIER");
 
     private final String name;
 

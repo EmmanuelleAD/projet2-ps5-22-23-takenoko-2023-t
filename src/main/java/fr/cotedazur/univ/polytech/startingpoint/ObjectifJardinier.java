@@ -3,6 +3,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectifJardinier extends Objectif {
     static List<ObjectifJardinier> objectifsJardinier=new ArrayList<>(Arrays.asList(
@@ -14,12 +15,12 @@ public class ObjectifJardinier extends Objectif {
 
     @Override
     public String getType() {
-        return Type.TypeJardinier.getNomType();
+        return Type.TYPE_JARDINIER.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
-        this.type=Type.TypeJardinier.getNomType();
+        this.type=Type.TYPE_JARDINIER.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description, int taille , int nombre) {
@@ -76,5 +77,8 @@ public class ObjectifJardinier extends Objectif {
     }
 
 
-
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), taille, nombre);
+    }
 }

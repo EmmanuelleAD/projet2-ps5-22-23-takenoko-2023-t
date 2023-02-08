@@ -3,7 +3,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,7 +22,7 @@ public class CerveauPandaTest {
     void testCasNormal(){
         jeu.getParcellesPlacees().add(p11);
       Action act=  cerveauPanda.decider(jeu);
-      assertEquals(Type.TypePanda.getNomType(),act.getNomAction());
+      assertEquals(Type.TYPE_PANDA.getNomType(),act.getNomAction());
 
 
     }
@@ -32,7 +31,7 @@ public class CerveauPandaTest {
         jeu.getParcellesPlacees().add(p11);
         p11.setBambou(new Bambou(0));
         Action act=  cerveauPanda.decider(jeu);
-        assertEquals(Type.TypeJardinier.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_JARDINIER.getNomType(),act.getNomAction());
 
 
     }
@@ -41,7 +40,7 @@ public class CerveauPandaTest {
         joueuse.setCartesObjectifs(new ArrayList<>());
         jeu.getParcellesPlacees().add(p11);
         Action act=  cerveauPanda.decider(jeu);
-        assertEquals(Type.TypePiocher.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PIOCHER.getNomType(),act.getNomAction());
 
 
     }

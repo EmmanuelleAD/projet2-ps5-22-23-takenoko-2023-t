@@ -2,7 +2,7 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class CerveauPanda extends Cerveau{
     public CerveauPanda(Joueur joueur) {
@@ -12,9 +12,9 @@ public class CerveauPanda extends Cerveau{
     @Override
     public Action decider(Jeu jeu,Action derniere) {
         ActionPiocher newAction = piocherUneCarte(jeu, derniere);
-        if (newAction != null) return newAction;
+        if (newAction != null) {return newAction;}
         Action parcellesAvec = mangerBambou(jeu, derniere);
-        if (parcellesAvec != null) return parcellesAvec;
+        if (parcellesAvec != null) {return parcellesAvec;}
          parcellesAvec = pousserBambou(jeu, derniere);
         if (parcellesAvec != null) return parcellesAvec;
         return placerUneParcelle(jeu,derniere);
@@ -28,7 +28,7 @@ public class CerveauPanda extends Cerveau{
 
     private Action mangerBambou(Jeu jeu, Action derniere) {
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-        listObjectif = listObjectif.stream().filter(o->o.getType().equals(Type.TypePanda.getNomType())).collect(Collectors.toList());
+        listObjectif = listObjectif.stream().filter(o->o.getType().equals(Type.TYPE_PANDA.getNomType())).toList();
 
         for (Objectif objectif : listObjectif) {
             List<Bambou>bambousJoueur=new ArrayList<>(joueur.getPlateau().getBambous());
@@ -45,7 +45,7 @@ public class CerveauPanda extends Cerveau{
 
     private  ActionPiocher piocherUneCarte(Jeu jeu, Action derniere) {
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-        listObjectif = listObjectif.stream().filter(o->o.getType().equals(Type.TypePanda.getNomType())).collect(Collectors.toList());
+        listObjectif = listObjectif.stream().filter(o->o.getType().equals(Type.TYPE_PANDA.getNomType())).toList();
         if (listObjectif.isEmpty()) {
             List<ObjectifPanda> op = jeu.getObjectifsPanda();
             Objectif newObjectif = op.get(op.size() - 1);

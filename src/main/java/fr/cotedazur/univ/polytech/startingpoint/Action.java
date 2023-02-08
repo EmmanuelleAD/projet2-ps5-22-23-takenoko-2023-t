@@ -7,7 +7,7 @@ public abstract class Action {
 
     protected String nomAction;
     protected String description;
-    private final static int  nbreAction=3;
+    private final static int NBRE_ACTION =3;
 
 
 
@@ -26,7 +26,7 @@ public abstract class Action {
 
 
 
-    public Action(String nomAction,  String description) {
+    protected Action(String nomAction,  String description) {
         this.nomAction = nomAction;
         this.description=description;
     }
@@ -34,13 +34,9 @@ public abstract class Action {
 
 
 
-    public void setNomAction(String nomAction) {
-        this.nomAction = nomAction;
-    }
-
 
     public static int getNbreAction() {
-        return nbreAction;
+        return NBRE_ACTION;
     }
 
     @Override
@@ -50,13 +46,12 @@ public abstract class Action {
 
         Action action = (Action) o;
 
-        if (!Objects.equals(nomAction, action.nomAction)) return false;
-        return true;
+        return Objects.equals(nomAction, action.nomAction);
+
     }
 
     @Override
     public int hashCode() {
-        int result = nomAction != null ? nomAction.hashCode() : 0;
-        return result;
+        return nomAction != null ? nomAction.hashCode() : 0;
     }
 }
