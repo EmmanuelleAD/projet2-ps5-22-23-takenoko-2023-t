@@ -5,11 +5,11 @@ public class ActionParcelle extends Action {
         return parcelle;
     }
 
-    private Parcelle parcelle;
+    private final Parcelle parcelle;
 
 
     public ActionParcelle(Parcelle p) {
-        super(Type.TypeParcelle.getNomType(),  "");
+        super(Type.TYPE_PARCELLE.getNomType(),  "");
         this.parcelle=p;
     }
 

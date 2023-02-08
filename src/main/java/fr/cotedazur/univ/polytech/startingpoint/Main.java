@@ -77,7 +77,7 @@ public class Main {
         for (Joueur joueur:joueurs
              ) {
             System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees()+" soit "+getPourcentage(joueur.getPartieGagnees())+"% ");
-            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+" soit "+getPourcentage(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+"% ");
+            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+" soit "+getPourcentage(1000- (double) joueur.getPartieGagnees()- (double) joueur.getPartieNulles())+"% ");
             System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(joueur.getPartieNulles())+"% ");
             System.out.println("Le score moyen  de " + joueur.getNom()+" est "+joueur.getScoreMoyen()/1000);
 
@@ -88,7 +88,7 @@ public class Main {
 
 
         }
-        //System.out.println("Le nombre  de parties égalité est " +nbEgalite);
+
 
 
     }

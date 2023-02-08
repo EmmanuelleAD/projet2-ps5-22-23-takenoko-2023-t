@@ -1,9 +1,9 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
-import java.util.stream.Collectors;
+
 
 public class CerveauParcelle extends Cerveau {
 
@@ -25,9 +25,10 @@ public class CerveauParcelle extends Cerveau {
         return placerUneParcelleRandom(jeu,derniere);
     }
 
+    public static final Random ran=new Random();
+
     private  Action placerUneParcelleRandom(Jeu jeu,Action derniere) {
         List<Position> listPlacement = jeu.getPlacementsPossibles();
-        Random ran=new Random();
         int i= ran.nextInt(listPlacement.size());
         Action action= new ActionParcelle(new Parcelle(listPlacement.get(i)));
         if(this.retournerAction(action, derniere)!=null) return action;
@@ -40,7 +41,7 @@ public class CerveauParcelle extends Cerveau {
         return null;
     }
     private Action mangerUnBambou(Jeu jeu,Action derniere){
-        List <Parcelle>parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));;
+        List <Parcelle>parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
         parcellesAvec=jeu.getPanda().deplacementsPossibles(parcellesAvec);
         if(!parcellesAvec.isEmpty()) {
             Action action = new ActionPanda(parcellesAvec.get(0));
@@ -51,7 +52,7 @@ public class CerveauParcelle extends Cerveau {
 
     private ActionParcelle placerUneParcelle(Jeu jeu, Action derniere) {
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-        listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TypeParcelle.getNomType())).collect(Collectors.toList());
+        listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TYPE_PARCELLE.getNomType())).toList();
         for (Objectif objectif: listObjectif
              ) {
             if(!objectif.estValide(jeu.getParcellesPlacees(),joueur)){
@@ -67,7 +68,7 @@ public class CerveauParcelle extends Cerveau {
 
     private  ActionPiocher piocherUneCarte(Jeu jeu, Action derniere) {
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-        listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TypeParcelle.getNomType())).collect(Collectors.toList());
+        listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TYPE_PARCELLE.getNomType())).toList();
         if (listObjectif.isEmpty()){
             List<ObjectifParcelle> op = jeu.getObjectifsParcelles();
             Objectif newObjectif = op.get(op.size()-1);

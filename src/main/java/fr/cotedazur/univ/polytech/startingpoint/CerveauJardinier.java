@@ -31,7 +31,7 @@ public class CerveauJardinier extends Cerveau {
     private Action fairePousser(Jeu jeu, Action derniere) {
         Action newAction;
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
-        listObjectif = listObjectif.stream().filter(o->o.getType().equals("Jardinier")).collect(Collectors.toList());
+        listObjectif = listObjectif.stream().filter(o->o.getType().equals("JARDINIER")).toList();
         for (Objectif objectif : listObjectif) {
             ObjectifJardinier obj = (ObjectifJardinier) objectif;
             if (!obj.estValide(jeu.getParcellesPlacees())) {

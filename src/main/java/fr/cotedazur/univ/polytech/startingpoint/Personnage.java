@@ -9,7 +9,7 @@ public abstract class Personnage {
 
     protected Position position;
 
-    public Personnage() {
+    protected Personnage() {
     }
 
 

@@ -22,7 +22,7 @@ public class PandaTest {
     @Test
     void creationPanda(){
         Panda panda=new Panda();
-        assertEquals(panda.getName(),PersonnageName.Panda);
+        assertEquals(panda.getName(),PersonnageName.PANDA);
         assertEquals(panda.getPosition(),Parcelle.etang.getPosition());
     }
     @Test

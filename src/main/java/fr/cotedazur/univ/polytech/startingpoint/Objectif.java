@@ -51,7 +51,7 @@ public abstract class Objectif{
 
 
 
-    public Objectif(String nom, int points, boolean statut, String description) {
+    protected Objectif(String nom, int points, boolean statut, String description) {
         this.nom = nom;
         this.points = points;
         this.statut = statut;

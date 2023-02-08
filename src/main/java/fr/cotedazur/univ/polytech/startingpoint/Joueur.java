@@ -4,8 +4,8 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.*;
 
 public class Joueur {
-    public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
-    public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
+    public static final Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
+    public static final Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
     private Plateau plateau;
     private int partieGagnees=0;
 

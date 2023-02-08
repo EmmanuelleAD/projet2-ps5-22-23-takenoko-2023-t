@@ -1,12 +1,10 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
-import java.util.Collection;
-import java.util.List;
 
 public abstract class Cerveau {
-    public Joueur joueur;
+    protected Joueur joueur;
 
-    public Cerveau(Joueur joueur) {
+    protected Cerveau(Joueur joueur) {
         this.joueur=joueur;
     }
     public Action retournerAction(Action action,Action derniere){

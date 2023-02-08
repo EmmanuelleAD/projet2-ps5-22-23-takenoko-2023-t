@@ -41,4 +41,20 @@ class MainTest {
         jeu.initialisation();
 
     }
+
+    @Test
+    void testMain() {
+    }
+
+    @Test
+    void testMain1() {
+    }
+
+    @Test
+    void mainMille() {
+    }
+
+    @Test
+    void run() {
+    }
 }

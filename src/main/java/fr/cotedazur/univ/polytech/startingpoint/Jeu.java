@@ -2,37 +2,31 @@ package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.*;
 import java.util.logging.Logger;
-import java.util.logging.Level;
-import java.util.logging.Handler;
-import java.util.logging.ConsoleHandler;
-import java.util.logging.Formatter;
-import java.util.logging.LogRecord;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+
 public class Jeu {
     public final static Logger logger = Logger.getLogger(Jeu.class.getName());
 
-    private List<Joueur> joueurs;
-    private List<Parcelle> parcellesPlacees;
+    private final List<Joueur> joueurs;
+    private final List<Parcelle> parcellesPlacees;
 
 
     private List<Position> placementsPossibles;
-    private List<Objectif> cartesObjectis;
+    private final List<Objectif> cartesObjectis;
 
 
-    private List<ObjectifParcelle> objectifsParcelles;
-    private List<ObjectifJardinier> objectifsJardinier;
+    private final List<ObjectifParcelle> objectifsParcelles;
+    private final List<ObjectifJardinier> objectifsJardinier;
 
 
 
-    private List<ObjectifPanda> objectifsPanda;
-    private boolean Egalite=false;
-    public boolean getEgalite(){return Egalite;}
+    private final List<ObjectifPanda> objectifsPanda;
+    private boolean egalite =false;
+    public boolean getEgalite(){return egalite;}
     private Jardinier jardinier;
 
 
 
-    private  Panda panda;
+    private final  Panda panda;
 
     private static final int MAX_CARTES_OBJECTIFS = 46;
 
@@ -123,7 +117,7 @@ public class Jeu {
         parcellesPlacees.add(etang);
         placementsPossibles = Parcelle.positionsPossibleEnTenantCompteDeCellesPlacees(this.parcellesPlacees, placementsPossibles);
         Collections.sort(joueurs, Joueur.tailleComparator.reversed());
-        //placementsPossibles.addAll(List.of(etang.getPosition().positionsAdjacentes()));
+
         for (int i = 0; i < 4; i++) {
 
             objectifsParcelles.addAll(ObjectifParcelle.objectifParcelles);
@@ -212,7 +206,7 @@ public class Jeu {
             logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
         } else {
             logger.info("Égalité! les joueurs suivants ont gagnés :");
-            Egalite=true;
+            egalite =true;
             for (Joueur joueur : joueurGagnant) {
                 joueur.ajoutPartieNulles(1);
                 logger.info(joueur.getNom() + " a gagné avec un score de " + joueur.getScore());
