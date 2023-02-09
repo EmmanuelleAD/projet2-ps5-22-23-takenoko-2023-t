@@ -23,13 +23,13 @@ public class CerveauLivraison extends Cerveau {
         ActionPanda sabotage2 = (ActionPanda) detecterActionJardinier(jeu,derniere);
         Action parcellesAvec = seFocaliser(jeu, derniere);
         if (parcellesAvec != null) return parcellesAvec;
-        if (sabotage != null) {
-            sabotage.setSabotage(true);
-            return sabotage;
-        }
         if (sabotage2 != null){
             sabotage2.setSabotage(true);
             return sabotage2;
+        }
+        if (sabotage != null) {
+            sabotage.setSabotage(true);
+            return sabotage;
         }
 
         Action newAction = getMaxBambous(jeu, derniere);

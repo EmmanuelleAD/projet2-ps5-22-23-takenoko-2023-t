@@ -126,10 +126,7 @@ class CerveauLivraisonTest {
         p12.setBambou(new Bambou(0));
        Action action=cerveauLivraison.decider(jeu);
         assertEquals(1,cerveauLivraison.getI());
-        assertEquals(action.getNomAction(),Type.TYPE_PARCELLE.getNomType());
-
-
-
+        assertEquals(action.getNomAction(),Type.TYPE_PANDA.getNomType());
     }
     @Test
     void detecterSabotagePandaVrai(){
@@ -235,11 +232,15 @@ class CerveauLivraisonTest {
         jeu2.getParcellesPlacees().add(new Parcelle(new Position(1,0)));
         jeu2.getParcellesPlacees().add(new Parcelle(new Position(2,1)));
         jeu2.getParcellesPlacees().add(p12);
-        ActionPanda act2 = (ActionPanda) cerveauLivraison.detecterActionJardinier(jeu, new ActionJardinier(p11));
+        ActionPanda act2 = (ActionPanda) cerveauLivraison.detecterActionJardinier(jeu2, new ActionJardinier(p11));
+        assertNull(act2);
         List<Joueur> joueursSansLivraison = new ArrayList<>(jeu2.getJoueurs());
         Collections.sort(joueursSansLivraison, Joueur.scoreComparator.reversed());
         assertEquals(joueursSansLivraison.get(0),joueur1);
     }
+
+    @Test
+    void
 
 
 
