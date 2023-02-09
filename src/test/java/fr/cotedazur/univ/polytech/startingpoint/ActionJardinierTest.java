@@ -1,5 +1,6 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.security.NoSuchAlgorithmException;
@@ -84,9 +85,58 @@ class ActionJardinierTest {
 
 
 
+    private ActionJardinier actionJardinier;
+    private Parcelle parcelle;
 
 
+    @BeforeEach
+    public void setUp() {
+        parcelle = new Parcelle(new Position(1, 2));
+        actionJardinier = new ActionJardinier(parcelle);
+    }
 
+    @Test
+    public void testEqualsWithSameObject() {
+        assertEquals(actionJardinier, actionJardinier);
+    }
 
+    @Test
+    public void testEqualsWithNullObject() {
+        assertNotEquals(actionJardinier, null);
+    }
 
+    @Test
+    public void testEqualsWithDifferentClass() {
+        assertNotEquals(actionJardinier, parcelle);
+    }
+
+    @Test
+    public void testEqualsWithDifferentParcelle() {
+        Parcelle parcelle2 = new Parcelle(new Position(2, 3));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertNotEquals(actionJardinier, actionJardinier2);
+    }
+
+    @Test
+    public void testEqualsWithEqualParcelle() {
+        Parcelle parcelle2 = new Parcelle(new Position(1, 2));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertEquals(actionJardinier, actionJardinier2);
+    }
+
+    @Test
+    public void testHashCodeWithEqualObjects() {
+        Parcelle parcelle2 = new Parcelle(new Position(1, 2));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertEquals(actionJardinier.hashCode(), actionJardinier2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeWithDifferentObjects() {
+        Parcelle parcelle2 = new Parcelle(new Position(2, 3));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertNotEquals(actionJardinier.hashCode(), actionJardinier2.hashCode());
+    }
 }
+
+
