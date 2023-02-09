@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class CerveauPandaTest {
+class CerveauPandaTest {
     Parcelle p11=new Parcelle(new Position(1,1));
     Joueur joueur=new Joueur(1.7,"Mohamed");
     Joueur joueuse=new Joueur(1.6,"Emmanuelle");

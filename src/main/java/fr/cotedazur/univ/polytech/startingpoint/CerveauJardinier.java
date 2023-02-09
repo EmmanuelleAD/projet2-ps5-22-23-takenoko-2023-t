@@ -1,7 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
 import java.util.*;
-import java.util.stream.Collectors;
+
 
 public class CerveauJardinier extends Cerveau {
     public CerveauJardinier(Joueur joueur) {

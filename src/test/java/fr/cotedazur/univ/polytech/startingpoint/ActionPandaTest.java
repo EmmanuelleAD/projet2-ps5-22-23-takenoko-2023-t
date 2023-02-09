@@ -6,24 +6,24 @@ import java.security.NoSuchAlgorithmException;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class ActionPandaTest {
+class ActionPandaTest {
 
     @Test
-    public void testGetNomAction() {
+    void testGetNomAction() {
         Parcelle parcelle = new Parcelle(new Position(1, 1));
         ActionPanda actionPanda = new ActionPanda(parcelle);
         assertEquals("PANDA", actionPanda.getNomAction());
     }
 
     @Test
-    public void testGetDescription() {
+    void testGetDescription() {
         Parcelle parcelle = new Parcelle(new Position(1, 1));
         ActionPanda actionPanda = new ActionPanda(parcelle);
         assertEquals(" a éffectué une action PANDA en (1,1). Le bambou a une taille actuelle de 1", actionPanda.getDescription());
     }
 
     @Test
-    public void testTraiter() throws NoSuchAlgorithmException {
+    void testTraiter() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1,"wassim");
         Joueur joueur2 = new Joueur(1,"brahim");
         Jeu jeu = new Jeu(joueur1,joueur2);
@@ -35,7 +35,7 @@ public class ActionPandaTest {
 
 
     @Test
-    public void testEquals() {
+    void testEquals() {
         Parcelle parcelle = new Parcelle(new Position(1, 1));
         ActionPanda actionPanda1 = new ActionPanda(parcelle);
         ActionPanda actionPanda2 = new ActionPanda(parcelle);
@@ -43,7 +43,7 @@ public class ActionPandaTest {
     }
 
     @Test
-    public void testHashCode() {
+    void testHashCode() {
         Parcelle parcelle = new Parcelle(new Position(1, 1));
         ActionPanda actionPanda1 = new ActionPanda(parcelle);
         ActionPanda actionPanda2 = new ActionPanda(parcelle);
@@ -52,7 +52,7 @@ public class ActionPandaTest {
 
 
     @Test
-    public void testEqualsActionPanda() {
+    void testEqualsActionPanda() {
         Parcelle parcelle1 = new Parcelle(new Position(1,1));
         ActionPanda actionPanda1 = new ActionPanda(parcelle1);
         Parcelle parcelle2 = new Parcelle(new Position(1,1));
@@ -61,12 +61,12 @@ public class ActionPandaTest {
         ActionPanda actionPanda3 = new ActionPanda(parcelle3);
         assertTrue(actionPanda1.equals(actionPanda2));
         assertFalse(actionPanda1.equals(actionPanda3));
-        assertFalse(actionPanda1.equals(null));
+        assertFalse(actionPanda1 == null);
         assertFalse(actionPanda1.equals("actionPanda1"));
     }
 
     @Test
-    public void testHashCodeActionPanda() {
+    void testHashCodeActionPanda() {
         Parcelle parcelle1 = new Parcelle(new Position(1,1));
         ActionPanda actionPanda1 = new ActionPanda(parcelle1);
         Parcelle parcelle2 = new Parcelle(new Position(1,1));

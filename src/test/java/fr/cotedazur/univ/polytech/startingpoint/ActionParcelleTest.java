@@ -43,4 +43,30 @@ class ActionParcelleTest {
         ActionParcelle actionParcelle = new ActionParcelle(parcelle);
         assertTrue(actionParcelle.traiter(joueur1, jeu));
     }
+
+    @Test
+    void testEquals() {
+        Joueur joueur1 = new Joueur(1.85, "Wassim");
+        Joueur joueur2 = new Joueur(1.6, "Brahim");
+        Jeu jeu = new Jeu(joueur1, joueur2);
+        jeu.initialisation();
+
+        Position position = new Position(1, 1);
+        ActionParcelle actionParcelle = new ActionParcelle(new Parcelle(position));
+        ActionParcelle actionParcelle1 = new ActionParcelle(new Parcelle(position));
+        assertEquals(actionParcelle, actionParcelle1);
+    }
+
+    @Test
+    void testHashCode() {
+        Joueur joueur1 = new Joueur(1.85, "Wassim");
+        Joueur joueur2 = new Joueur(1.6, "Brahim");
+        Jeu jeu = new Jeu(joueur1, joueur2);
+        jeu.initialisation();
+
+        Position position = new Position(1, 1);
+        ActionParcelle actionParcelle = new ActionParcelle(new Parcelle(position));
+        ActionParcelle actionParcelle1 = new ActionParcelle(new Parcelle(position));
+        assertEquals(actionParcelle.hashCode(), actionParcelle1.hashCode());
+    }
 }
