@@ -53,17 +53,9 @@ public class CerveauParcelle extends Cerveau {
         if(this.retournerAction(action, derniere)!=null)   return action;
         return null;
     }
-    private Action mangerUnBambou(Jeu jeu,Action derniere){
-        List <Parcelle>parcellesAvec=Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
-        parcellesAvec=jeu.getPanda().deplacementsPossibles(parcellesAvec);
-        if(!parcellesAvec.isEmpty()) {
-            Action action = new ActionPanda(parcellesAvec.get(0));
-            if (this.retournerAction(action, derniere) != null)return action;
-        }
-        return null;
-    }
 
-    private ActionParcelle placerUneParcelle(Jeu jeu, Action derniere) {
+
+    protected ActionParcelle placerUneParcelle(Jeu jeu, Action derniere) {
         List<Objectif> listObjectif = joueur.getCartesObjectifs();
         listObjectif= listObjectif.stream().filter(o->o.getType().equals(Type.TYPE_PARCELLE.getNomType())).toList();
         for (Objectif objectif: listObjectif
@@ -72,7 +64,8 @@ public class CerveauParcelle extends Cerveau {
                 ObjectifVerifierParcelle objectifVerifier= (ObjectifVerifierParcelle) objectif.verifierValider(jeu.getParcellesPlacees());
                 if(objectifVerifier.getMoinsManquants().isEmpty()) break;
                 Position nouvellePos=objectifVerifier.getMoinsManquants().get(0);
-                return new ActionParcelle((new Parcelle(nouvellePos)));
+                ActionParcelle action=new ActionParcelle((new Parcelle(nouvellePos)));
+                if(this.retournerAction(action, derniere)!=null)  return action ;
             }
 
         }

@@ -129,9 +129,8 @@ class CerveauLivraisonTest {
 
     }
     @Test
-    void detecterActionPandaTest(){
+    void detecterSabotagePandaVrai(){
         Jeu jeu=new Jeu(botSaboteur,joueur);
-        jeu.initialisation();
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
@@ -147,12 +146,45 @@ class CerveauLivraisonTest {
        List<Parcelle> parcelles= Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
        parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
        assertEquals(parcelles.get(0),act.getParcelle());
-
-
-
-
-
-
+    }
+    @Test
+    void detecterSabotagePandaFaux(){
+        Jeu jeu=new Jeu(botSaboteur,joueur);
+        jeu.initialisation();
+        botSaboteur.setCartesObjectifs(new ArrayList<>());
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        System.out.println(botSaboteur.getCartesObjectifs());
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifPanda.objectifPandas.get(2)));
+        joueur.getPlateau().ajouterBambou(new Bambou(1)); //créer la situatuion un seul manquant pour l'adversaire
+        joueur.getPlateau().ajouterBambou(new Bambou(1));
+        jeu.getParcellesPlacees().add(p11);//ajouter la parcelle ou il peut potentiellement se déplacer
+        ActionPanda actionPanda=new ActionPanda(p11);
+        Action act= cerveauLivraison.decider(jeu,actionPanda); //on ne peut pas éffectuer 2 actions de suite
+        List<Position> listPlacement = jeu.getPlacementsPossibles();
+        Action action=new ActionParcelle(new Parcelle( listPlacement.get(0)));
+        assertEquals(action,act);
+    }
+    @Test
+    void detecterSabotagePandaCasPiocher(){
+        Jeu jeu=new Jeu(botSaboteur,joueur);
+        jeu.initialisation();
+        botSaboteur.setCartesObjectifs(Arrays.asList(ObjectifPanda.objectifPandas.get(1)));
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifPanda.objectifPandas.get(2)));
+        joueur.getPlateau().ajouterBambou(new Bambou(1)); //créer la situatuion un seul manquant pour l'adversaire
+        joueur.getPlateau().ajouterBambou(new Bambou(1));
+        jeu.getParcellesPlacees().add(p11);      //ajouter la parcelle ou il peut potentiellement se déplacer
+        ActionPanda act=(ActionPanda) cerveauLivraison.decider(jeu,new ActionPiocher(ObjectifPanda.objectifPandas.get(2)));//passer une action piocher pour le forcer à faire une autre action
+        List<Parcelle> parcelles= Parcelle.getParcellesAvec(jeu.getParcellesPlacees(),new Bambou(1));
+        parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
+        assertEquals(parcelles.get(0),act.getParcelle());
     }
 
 

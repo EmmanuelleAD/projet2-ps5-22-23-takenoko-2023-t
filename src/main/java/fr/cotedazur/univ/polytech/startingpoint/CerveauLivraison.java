@@ -16,13 +16,16 @@ public class CerveauLivraison extends Cerveau {
 
     @Override
     public Action decider(Jeu jeu,Action derniere) {
-
         Action newAction1 = getActionPiocher(jeu,derniere);
         if (newAction1 != null) return newAction1;
+        ActionPanda sabotage=detecterActionPanda(jeu,derniere);
+
         Action parcellesAvec = seFocaliser(jeu, derniere);
         if (parcellesAvec != null) return parcellesAvec;
-        parcellesAvec=detecterActionPanda(jeu,derniere);
-        if(parcellesAvec!=null)return parcellesAvec;
+        if(sabotage!=null){
+            sabotage.setSabotage(true);
+            return sabotage;}
+
         Action newAction = getMaxBambous(jeu, derniere);
         if (newAction != null) return newAction;
         return placerUneParcelle(jeu, derniere);
@@ -30,12 +33,7 @@ public class CerveauLivraison extends Cerveau {
 
     }
 
-    private Action placerUneParcelle(Jeu jeu, Action derniere) {
-        List<Position> listPlacement = jeu.getPlacementsPossibles();
-        Action action=new ActionParcelle(new Parcelle( listPlacement.get(0)));
-        if(this.retournerAction(action, derniere)!=null) return action;
-        return null;
-    }
+
 
     private Action getMaxBambous(Jeu jeu, Action derniere) {
         List<Parcelle>parcellesAvecUneSection= jeu.getParcellesPlacees().stream().filter(p->p.getTaille()>=1).toList();
@@ -49,9 +47,10 @@ public class CerveauLivraison extends Cerveau {
 
     private Action seFocaliser(Jeu jeu, Action derniere) {
         List<Objectif> objectifBambou = joueur.getCartesObjectifs();
-        objectifBambou = objectifBambou.stream().filter(o->o.getType().equals(Type.TYPE_PANDA.getNomType())).toList().subList(0,2);
+        objectifBambou = objectifBambou.stream().filter(o->o.getType().equals(Type.TYPE_PANDA.getNomType())).toList();
         List<Bambou>bambousJoueur=new ArrayList<>(joueur.getPlateau().getBambous());
         if(!objectifBambou.isEmpty() && (objectifBambou.size() >= 2)){
+            objectifBambou=objectifBambou.subList(0,2);
             ObjectifPanda obj=(ObjectifPanda) objectifBambou.get(i%2);
             i++;
             if (!obj.estValide(jeu.getParcellesPlacees(),joueur)) {
@@ -82,7 +81,7 @@ public class CerveauLivraison extends Cerveau {
         }
         return null;
     }
-    private Action detecterActionPanda(Jeu jeu,Action derniere){
+    private ActionPanda detecterActionPanda(Jeu jeu,Action derniere){
         List<Joueur>joueursSansLivraison=new ArrayList<>(jeu.getJoueurs());
         joueursSansLivraison.remove(joueur);
         for (Joueur joueur:joueursSansLivraison
@@ -96,8 +95,9 @@ public class CerveauLivraison extends Cerveau {
                        parcellesPotentiels=jeu.getPanda().deplacementsPossibles(parcellesPotentiels);
                        if(!parcellesPotentiels.isEmpty()) {
                            Parcelle parcelle = parcellesPotentiels.get(0);
-                           Action potentiel = new ActionPanda(parcelle);
-                           if (this.retournerAction(potentiel, derniere) != null) return potentiel;
+                           ActionPanda potentiel = new ActionPanda(parcelle);
+                           if (this.retournerAction(potentiel, derniere) != null) {
+                               return potentiel;}
                        }
                    }
                 }
