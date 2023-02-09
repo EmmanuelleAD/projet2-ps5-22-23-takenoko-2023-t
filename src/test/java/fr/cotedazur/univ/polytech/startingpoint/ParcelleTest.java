@@ -9,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParcelleTest {
-    private Parcelle etang=new Parcelle(new Position(0,0));
+    private final Parcelle etang=new Parcelle(new Position(0,0));
 
     @Test
     void testEquals() {

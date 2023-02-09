@@ -1,5 +1,7 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.util.Objects;
+
 public class ActionParcelle extends Action {
     public Parcelle getParcelle() {
         return parcelle;
@@ -28,5 +30,19 @@ public class ActionParcelle extends Action {
         jeu.setPlacementsPossibles(Parcelle.positionsPossible(jeu.getParcellesPlacees(), jeu.getPlacementsPossibles()));
         Jeu.logger.info(j.getNom() + this.getDescription());
         return true;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        ActionParcelle that = (ActionParcelle) o;
+        return Objects.equals(parcelle, that.parcelle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), parcelle);
     }
 }
