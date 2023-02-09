@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-public class JardinierTest {
+ class JardinierTest {
     Jardinier jardinier=new Jardinier();
     List<Parcelle> parcelles = new ArrayList<>();
     Parcelle pdeTaille4 = new Parcelle(new Position(2, 2));

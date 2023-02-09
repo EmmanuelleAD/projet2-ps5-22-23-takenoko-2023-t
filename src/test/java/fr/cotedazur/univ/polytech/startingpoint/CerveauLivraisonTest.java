@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 class CerveauLivraisonTest {
 
@@ -17,11 +18,13 @@ class CerveauLivraisonTest {
     Parcelle p12=new Parcelle(new Position(1,2));
 
     Joueur joueur=new Joueur(1.7,"Mohamed");
+    Joueur joueur1 = new Joueur(1.6, "Emmanuelle");
     Joueur botSaboteur =new Joueur(1.6,"Bot Saboteur");
 
     CerveauLivraison cerveauLivraison=new CerveauLivraison(botSaboteur);
 
     Jeu jeu=new Jeu(botSaboteur,joueur);
+
 
     CerveauLivraisonTest() throws NoSuchAlgorithmException {
     }
@@ -87,7 +90,7 @@ class CerveauLivraisonTest {
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(2));
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),5);
-        assertEquals(Type.TYPE_PARCELLE.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PANDA.getNomType(),act.getNomAction());
 
     }
     @Test
@@ -123,10 +126,7 @@ class CerveauLivraisonTest {
         p12.setBambou(new Bambou(0));
        Action action=cerveauLivraison.decider(jeu);
         assertEquals(1,cerveauLivraison.getI());
-        assertEquals(action.getNomAction(),Type.TYPE_PARCELLE.getNomType());
-
-
-
+        assertEquals(action.getNomAction(),Type.TYPE_PANDA.getNomType());
     }
     @Test
     void detecterSabotagePandaVrai(){
@@ -186,6 +186,59 @@ class CerveauLivraisonTest {
         parcelles=jeu.getPanda().deplacementsPossibles(parcelles);
         assertEquals(parcelles.get(0),act.getParcelle());
     }
+    @Test
+    void detecterSabotageJardinierVrai(){
+        Jeu jeu=new Jeu(botSaboteur,joueur);
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifJardinier.objectifsJardinier.get(0)));
+        p11.setBambou(new Bambou(3));
+        jeu.getParcellesPlacees().add(p11);
+        ActionPanda act=(ActionPanda) cerveauLivraison.decider(jeu);
+        assertEquals(act.getParcelle(),p11);
+        p11.setBambou(new Bambou(1));
+        p12.setBambou(new Bambou(3));
+        jeu.getParcellesPlacees().add(new Parcelle(new Position(1,0)));
+        jeu.getParcellesPlacees().add(new Parcelle(new Position(2,1)));
+        jeu.getParcellesPlacees().add(p12);
+        ActionPanda act2 = (ActionPanda) cerveauLivraison.detecterActionJardinier(jeu, new ActionJardinier(p11));
+        assertEquals(p12, act2.getParcelle());
+    }
+
+    @Test
+    void detecterSabotageJardinierScore(){
+        Jeu jeu2 = new Jeu(Arrays.asList(botSaboteur,joueur,joueur1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1)); //mettre 5 cartes pour que ça soit pas actionPiocher
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(1));
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1)); //valider les objectifs du saboteur pour qu'ils ne cherchent pas à les réaliser
+        botSaboteur.getPlateau().ajouterBambou(new Bambou(1));
+        joueur.setCartesObjectifs(Arrays.asList(ObjectifJardinier.objectifsJardinier.get(1)));
+        p11.setBambou(new Bambou(3));
+        jeu2.getParcellesPlacees().add(p11);
+        ActionPanda act=(ActionPanda) cerveauLivraison.decider(jeu2);
+        assertEquals(act.getParcelle(),p11);
+        joueur1.setScore(2);
+        joueur.setScore(0);
+        p11.setBambou(new Bambou(1));
+        p12.setBambou(new Bambou(3));
+        jeu2.getParcellesPlacees().add(new Parcelle(new Position(1,0)));
+        jeu2.getParcellesPlacees().add(new Parcelle(new Position(2,1)));
+        jeu2.getParcellesPlacees().add(p12);
+        ActionPanda act2 = (ActionPanda) cerveauLivraison.detecterActionJardinier(jeu2, new ActionJardinier(p11));
+        assertNull(act2);
+        List<Joueur> joueursSansLivraison = new ArrayList<>(jeu2.getJoueurs());
+        Collections.sort(joueursSansLivraison, Joueur.scoreComparator.reversed());
+        assertEquals(joueursSansLivraison.get(0),joueur1);
+    }
+
 
 
 
