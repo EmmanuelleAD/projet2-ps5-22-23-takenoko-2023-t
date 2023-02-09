@@ -17,6 +17,22 @@ Ce rapport global porte sur les progrès réalisés par notre équipe dans le co
 
 
 - Le programme simule une partie entre différents joueurs et enregistre les statistiques dans un fichier CSV. Les résultats sont enregistrés à l'aide de la méthode appendCsv de la classe Writing. JCommander gère les arguments en ligne de commande et permet à l'utilisateur de choisir le mode de jeu (démo ou 2 mille) et s'il souhaite enregistrer les statistiques dans un fichier CSV.
+- Concernant le bot demandé pour la livraison les fonctionnalités récupérer le maximum de bambous,5 cartes ont été complètement implémentées. N'ayant pas les canaux d'irriguation et la météo nous n'avons pas pu impémenter "Quand il tire une la météo « ? » dans les premiers tours, il prend une irrigation.". Le cerveau de livraison à chaque fois qu'il a au moins 2 objectifs panda en main, alterne les actions pour essayer de les réaliser à la fois.
+-Puisque notre jeu est sans couleur, nous ne pouvions pas implémenter le sabotage des objectifs parcelles; néanmoins nous avons réussi l'implémentation des objectifs pandas et jardinier tout ceci confirmé par des tests.
+## 2. Architecture et qualité
+Pour plus d'informations ou si vous souhaitez contribuer, consulter le contributing.md et le readme
+Les commits sont bien évidemment reliés aux issues
+
+
+## 3 Processus
+Sur un plan global l'ensemble des fonctionnalités a été fait en commun. En termes de valeur : 
+Wassim : implémentation cerveau parcelle, amélioration de qualité du code et intégration de sonar, écriture de tests
+Brahim : implémentation du cerveau jardinier, du sabotage jardinier, de la détection des placements de parcelles possibles.
+Emmanuelle : détection des objectifs parcelles dans tous les sens, création du cerveau Panda, intégration d'objectif vérifier pour détecter les manquants pour un objectif
+Amine : implémentation du jardinier, implémentation du panda, déplacements possibles pour le jardinier et le panda, écriture et lecture csv
+Notre travail s'est fait avec la création de branches "feature/<nom>" à chaque fois que nous avions une nouvelle fonctionnalité à implémenter. A la fin de l'implémentation, la branche est merge avec master par un système de pull request.
+
+
 1. This is a numbered list
 2. Another item in the list
 
