@@ -42,6 +42,18 @@ public class CsvReadTest {
 
 
 
+    @Test
+    public void testReadCsvWithIncorrectFileFormat() throws Exception {
+        File csvFile = new File("stats/incorrectFormatGamestats.csv");
+        assertThrows(Exception.class, () -> ReadCsv.readCsv());
+    }
+
+    @Test
+    public void testReadCsvWithIncompleteFileData() throws Exception {
+        File csvFile = new File("stats/incompleteGamestats.csv");
+        assertThrows(Exception.class, () -> ReadCsv.readCsv());
+    }
+
 
 
 }
