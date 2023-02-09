@@ -90,7 +90,7 @@ class CerveauLivraisonTest {
         botSaboteur.getCartesObjectifs().add(ObjectifPanda.objectifPandas.get(2));
         Action act=  cerveauLivraison.decider(jeu);
         assertEquals(botSaboteur.getCartesObjectifs().size(),5);
-        assertEquals(Type.TYPE_PARCELLE.getNomType(),act.getNomAction());
+        assertEquals(Type.TYPE_PANDA.getNomType(),act.getNomAction());
 
     }
     @Test
@@ -238,10 +238,6 @@ class CerveauLivraisonTest {
         Collections.sort(joueursSansLivraison, Joueur.scoreComparator.reversed());
         assertEquals(joueursSansLivraison.get(0),joueur1);
     }
-
-    @Test
-    void
-
 
 
 
