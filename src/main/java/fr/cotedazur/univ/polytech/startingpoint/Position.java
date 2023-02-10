@@ -78,15 +78,43 @@ public class Position {
 
     public boolean positionEnLigneDroite(Position p1,Position p2, Position p3){
            if(   ( p1.getX()+1==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()==p2.getY() && p1.getY()==p3.getY() ) ||
-                   ( p1.getX()==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()+1==p2.getY() && p2.getY()+1==p3.getY() )   ||
-                   ( p1.getX()==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()+1==p2.getY() && p2.getY()+1==p3.getY() ) )  {
+                   ( p1.getX()==p2.getX() && p2.getX()+1==p3.getX() && p1.getY()+1==p2.getY() && p2.getY()+1==p3.getY() )  )  {
                return true;
            }return false;
     }
+   static Position evenRToDouble(Position hex) {
+        var q = hex.x - (hex.y+ (hex.y & 1)) / 2;
+        var r = hex.y;
+       q=2*q +r;
 
-
-
-
+      return new Position(q,r);
     }
+
+    public static boolean isStraightMovement(Position oldPosition, Position newPosition) {
+        int x1 = oldPosition.getX();
+        int y1 = oldPosition.getY();
+        int x2 = newPosition.getX();
+        int y2 = newPosition.getY();
+
+        // check if movement is horizontal
+        if (y1 == y2) {
+            return true;
+        }
+        // check if movement is vertical
+        if (x1 == x2) {
+            return true;
+        }
+        Position doublePosition=Position.evenRToDouble(newPosition);
+        // check if movement is diagonal
+        if (Math.abs(doublePosition.getX() - x1) == Math.abs(doublePosition.getY()) - y1) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+}
 
 

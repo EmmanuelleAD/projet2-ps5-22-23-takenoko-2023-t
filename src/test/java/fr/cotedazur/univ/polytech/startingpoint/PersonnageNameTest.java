@@ -8,7 +8,7 @@ class PersonnageNameTest {
 
     @Test
     void getName() {
-        PersonnageName personnageName = PersonnageName.Jardinier;
-        assertEquals("Jardinier", personnageName.getName());
+        PersonnageName personnageName = PersonnageName.JARDINIER;
+        assertEquals("JARDINIER", personnageName.getName());
     }
 }

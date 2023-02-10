@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.lang.Math.sqrt;
+
 
 public class Parcelle {
-    public Position positionCentre;
-    public Optional<Bambou> bambou;
+    protected Position positionCentre;
+    protected Optional<Bambou> bambou;
     private boolean irrigue;
     public  final static Parcelle etang=new Parcelle(new Position(0,0));
 
@@ -29,9 +29,12 @@ public class Parcelle {
 
         return bambou.orElse(new Bambou(0)).getTaille();
     }
-    public void setTaille(){
+    public void ajouterUneSection(){
 
-        bambou.orElse(new Bambou()).setTaille();
+        bambou.orElse(new Bambou()).ajouterUneSection();
+    }
+    public void enleverUneSection(){
+        bambou.orElse(new Bambou()).enleverUneSection();
     }
 
 
@@ -143,6 +146,16 @@ public class Parcelle {
             }
         }
         return parcelle0;
+    }
+    public static List<Parcelle> getParcellesAvec(List<Parcelle> parcellesPlacees,Bambou bambou){
+        List<Parcelle>parcelles=new ArrayList<>();
+        for (Parcelle parcelle:parcellesPlacees
+             ) {
+            if(parcelle.getTaille()>=1)parcelles.add(parcelle);
+
+        }
+
+        return parcelles;
     }
     public static Parcelle dernier(List<Parcelle>list){
         for (int i = list.size()-1; i >=0 ; i--) {

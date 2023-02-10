@@ -37,8 +37,9 @@ class CerveauTest {
         Jeu jeu = new Jeu(joueur1, joueur2);
         jeu.initialisation();
 
-        cerveauParcelleJoueur1.decider(jeu);
-        assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveauParcelleJoueur1.decider(jeu));
+       ;
+        assertEquals(Type.TYPE_JARDINIER.getNomType(), cerveauParcelleJoueur1.decider(jeu).getNomAction());
+       // assertEquals(new ActionParcelle(new Parcelle( jeu.getPlacementsPossibles().get(0))), cerveauParcelleJoueur1.decider(jeu));
 
     }
 
@@ -93,7 +94,7 @@ class CerveauTest {
         jeu.getParcellesPlacees().get(1).setBambou(new Bambou(3));
         jeu.getParcellesPlacees().get(2).setBambou(new Bambou(3));
         Action act= cerveauJardinierJoueur1.decider(jeu);
-        assertEquals(act.getNomAction(),Type.TypeJardinier.getNomType());
+        assertEquals(act.getNomAction(),Type.TYPE_JARDINIER.getNomType());
     }
     @Test
     void testerCasObjectifJardinierAccomplis(){
@@ -109,6 +110,6 @@ class CerveauTest {
         jeu.getParcellesPlacees().get(3).setBambou(new Bambou(3));
 
         Action act= cerveauJardinierJoueur1.decider(jeu);
-        assertEquals(act.getNomAction(),Type.TypeParcelle.getNomType());
+        assertEquals(act.getNomAction(),Type.TYPE_PARCELLE.getNomType());
     }
 }

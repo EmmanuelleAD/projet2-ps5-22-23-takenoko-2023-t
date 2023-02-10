@@ -21,7 +21,7 @@ public class ObjectifJardinierTest {
    void testBambou1Taille4(){
         p14.setBambou(new Bambou(4));
         parcelles.add(p14);
-        assertEquals(true,b14.estValide(parcelles));
+        assertTrue(b14.estValide(parcelles));
 
 
     }
@@ -36,7 +36,7 @@ public class ObjectifJardinierTest {
         parcelles.add(p32);
         parcelles.add(p33);
 
-        assertEquals(true,b43.estValide(parcelles));
+        assertTrue(b43.estValide(parcelles));
 
 
     }
@@ -97,7 +97,7 @@ public class ObjectifJardinierTest {
     void estValide() {
         p14.setBambou(new Bambou(4));
         parcelles.add(p14);
-        assertEquals(true,b14.estValide(parcelles));
+        assertTrue(b14.estValide(parcelles));
         p21.setBambou(new Bambou(3));
         p22.setBambou(new Bambou(3));
         p32.setBambou(new Bambou(3));
@@ -107,6 +107,86 @@ public class ObjectifJardinierTest {
         parcelles.add(p32);
         parcelles.add(p33);
 
-        assertEquals(true,b43.estValide(parcelles));
+        assertTrue(b43.estValide(parcelles));
     }
+
+
+    @Test
+    void getTypeTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"",4,1);
+        assertEquals("JARDINIER",b14bis.getType());
+
+        ObjectifJardinier b15bis= new ObjectifJardinier("B15",20,false,"",4,1);
+        assertEquals("JARDINIER",b14bis.getType());
+    }
+
+
+    @Test
+    void isStatutTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"",4,1);
+        assertFalse(b14bis.isStatut());
+
+
+        ObjectifJardinier b15= new ObjectifJardinier("B15",30,true,"",5,2);
+        assertTrue(b15.isStatut());
+
+    }
+
+
+    @Test
+    void getDecriptionTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"Objectif B14",4,1);
+        assertEquals("Objectif B14",b14bis.getDescription());
+
+
+        ObjectifJardinier b15= new ObjectifJardinier("B15",30,true,"Objectif B15",5,2);
+        assertEquals("Objectif B15",b15.getDescription());
+
+    }
+
+
+    @Test
+    void setNomTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"Objectif B14",4,1);
+        b14bis.setNom("B14Modif");
+        assertEquals("B14Modif",b14bis.getNom());
+
+        b14bis.setNom("");
+        assertEquals("B14Modif",b14bis.getNom());
+
+        b14bis.setNom(null);
+        assertEquals("B14Modif",b14bis.getNom());
+
+    }
+
+
+    @Test
+    void setPointTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"Objectif B14",4,1);
+        b14bis.setPoints(30);
+        assertEquals(30,b14bis.getPoints());
+
+        b14bis.setPoints(-20);
+        assertEquals(30,b14bis.getPoints());
+    }
+
+
+    @Test
+    void setStatutTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"Objectif B14",4,1);
+        b14bis.setStatut(true);
+        assertTrue(b14bis.isStatut());
+    }
+
+
+
+    @Test
+    void setDescriptionTest() {
+        ObjectifJardinier b14bis= new ObjectifJardinier("B14",20,false,"Objectif B14",4,1);
+        b14bis.setDescription("Objectif B14Modif");
+        assertEquals("Objectif B14Modif",b14bis.getDescription());
+
+    }
+
+
 }

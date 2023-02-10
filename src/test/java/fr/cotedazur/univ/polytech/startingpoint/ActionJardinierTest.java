@@ -1,13 +1,19 @@
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+import java.security.NoSuchAlgorithmException;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActionJardinierTest {
 
+
+
+
     @Test
-    void getDescription() {
+    void getDescription() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -15,7 +21,7 @@ class ActionJardinierTest {
 
         Position position = new Position(1, 1);
         ActionJardinier actionJardinier = new ActionJardinier(new Parcelle(position));
-        String comment = " a éffectué une action Jardinier en " + position.toString()+". Le bambou a une taille actuelle de 1";
+        String comment = " a effectue une action JARDINIER en " + position.toString()+". Le bambou a une taille actuelle de 1";
         assertEquals(comment , actionJardinier.getDescription());
     }
 
@@ -35,7 +41,7 @@ class ActionJardinierTest {
     }
 
     @Test
-    void testHashCode() {
+    void testHashCode() throws NoSuchAlgorithmException {
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         Joueur joueur2 = new Joueur(1.6, "Brahim");
         Jeu jeu = new Jeu(joueur1, joueur2);
@@ -70,5 +76,67 @@ class ActionJardinierTest {
     }
 
 
+    @Test
+    public void testGetParcelle() {
+        Parcelle parcelle = new Parcelle(new Position(0,0));
+        ActionJardinier actionJardinier = new ActionJardinier(parcelle);
+        assertEquals(parcelle, actionJardinier.getParcelle());
+    }
 
+
+
+    private ActionJardinier actionJardinier;
+    private Parcelle parcelle;
+
+
+    @BeforeEach
+    public void setUp() {
+        parcelle = new Parcelle(new Position(1, 2));
+        actionJardinier = new ActionJardinier(parcelle);
+    }
+
+    @Test
+    public void testEqualsWithSameObject() {
+        assertEquals(actionJardinier, actionJardinier);
+    }
+
+    @Test
+    public void testEqualsWithNullObject() {
+        assertNotEquals(actionJardinier, null);
+    }
+
+    @Test
+    public void testEqualsWithDifferentClass() {
+        assertNotEquals(actionJardinier, parcelle);
+    }
+
+    @Test
+    public void testEqualsWithDifferentParcelle() {
+        Parcelle parcelle2 = new Parcelle(new Position(2, 3));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertNotEquals(actionJardinier, actionJardinier2);
+    }
+
+    @Test
+    public void testEqualsWithEqualParcelle() {
+        Parcelle parcelle2 = new Parcelle(new Position(1, 2));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertEquals(actionJardinier, actionJardinier2);
+    }
+
+    @Test
+    public void testHashCodeWithEqualObjects() {
+        Parcelle parcelle2 = new Parcelle(new Position(1, 2));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertEquals(actionJardinier.hashCode(), actionJardinier2.hashCode());
+    }
+
+    @Test
+    public void testHashCodeWithDifferentObjects() {
+        Parcelle parcelle2 = new Parcelle(new Position(2, 3));
+        ActionJardinier actionJardinier2 = new ActionJardinier(parcelle2);
+        assertNotEquals(actionJardinier.hashCode(), actionJardinier2.hashCode());
+    }
 }
+
+

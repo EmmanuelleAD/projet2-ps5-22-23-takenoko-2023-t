@@ -9,12 +9,12 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 
 class JoueurTest {
-    private Joueur wassim=new Joueur(1.7,"Wassim");
-    private Joueur brahim=new Joueur(1.8,"Brahim");
+    private final Joueur wassim=new Joueur(1.7,"Wassim");
+    private final Joueur brahim=new Joueur(1.8,"Brahim");
 
-    private Joueur mohamed=new Joueur(1.78,"Mohamed");
+    private final Joueur mohamed=new Joueur(1.78,"Mohamed");
 
-    private Joueur emmanuelle=new Joueur(1.6,"Emmanuelle");
+    private final Joueur emmanuelle=new Joueur(1.6,"Emmanuelle");
 
 
     @Test
@@ -64,16 +64,6 @@ class JoueurTest {
     }
 
 
-    @Test
-    void getCerveau() {
-
-    }
-
-
-    @Test
-    void setCerveau() {
-
-    }
 
     @Test
     void addScore() {
@@ -122,18 +112,18 @@ class JoueurTest {
 
     @Test
     void getTaille() {
-        assertEquals(wassim.getTaille(),1.7);
-        assertEquals(brahim.getTaille(),1.8);
+        assertEquals(1.7,wassim.getTaille());
+        assertEquals(1.8,brahim.getTaille());
     }
 
     @Test
     void setTaille() {
 
         wassim.setTaille(1.8);
-        assertEquals(wassim.getTaille(),1.8);
+        assertEquals(1.8,wassim.getTaille());
 
         brahim.setTaille(1.7);
-        assertEquals(brahim.getTaille(),1.7);
+        assertEquals(1.7, brahim.getTaille());
 
     }
 
@@ -144,5 +134,167 @@ class JoueurTest {
 
     @Test
     void effectuerActionParcelle() {
+    }
+
+    @Test
+    void getPartieGagnees() {
+        brahim.setPartieGagnees(2);
+        assertEquals(2,brahim.getPartieGagnees());
+
+        wassim.setPartieGagnees(3);
+        assertEquals(3,wassim.getPartieGagnees());
+
+
+    }
+
+    @Test
+    void setPartieGagnees() {
+
+        brahim.setPartieGagnees(2);
+        assertEquals(2,brahim.getPartieGagnees());
+
+        wassim.setPartieGagnees(3);
+        assertEquals(3,wassim.getPartieGagnees());
+    }
+
+
+    @Test
+    void ajoutPartieGagnees() {
+        wassim.ajoutPartieGagnees(10);
+        assertEquals(10, wassim.getPartieGagnees());
+
+        brahim.ajoutPartieGagnees(5);
+        assertEquals(5, brahim.getPartieGagnees());
+    }
+
+    @Test
+    void getPlateau() {
+        Plateau plateau = new Plateau();
+        wassim.setPlateau(plateau);
+        assertEquals(plateau,wassim.getPlateau());
+    }
+
+    @Test
+    void getScoreMoyen() {
+        brahim.setScoreMoyen(2);
+        assertEquals(2,brahim.getScoreMoyen());
+
+        wassim.setScoreMoyen(3);
+        assertEquals(3,wassim.getScoreMoyen());
+    }
+
+    @Test
+    void setScoreMoyen() {
+        brahim.setScoreMoyen(10);
+        assertEquals(10,brahim.getScoreMoyen());
+
+        wassim.setScoreMoyen(15);
+        assertEquals(15, wassim.getScoreMoyen());
+    }
+
+    @Test
+    void ajoutScoreMoyen() {
+        brahim.setScoreMoyen(10);
+        brahim.ajoutScoreMoyen(10);
+        assertEquals(20,brahim.getScoreMoyen());
+
+        wassim.setScoreMoyen(15);
+        wassim.ajoutScoreMoyen(15);
+        assertEquals(30,wassim.getScoreMoyen());
+    }
+
+
+    @Test
+    void getPartieNulles() {
+        brahim.ajoutPartieNulles(10);
+        assertEquals(10,brahim.getPartieNulles());
+
+        wassim.ajoutPartieNulles(15);
+        assertEquals(15,wassim.getPartieNulles());
+    }
+
+    @Test
+    void setPartieNulles() {
+        brahim.setPartieNulles(20);
+        assertEquals(20,brahim.getPartieNulles());
+
+        wassim.setPartieNulles(5);
+        assertEquals(5,wassim.getPartieNulles());
+    }
+
+    @Test
+    void ajoutPartieNulles() {
+        brahim.setPartieNulles(20);
+        brahim.ajoutPartieNulles(20);
+        assertEquals(40,brahim.getPartieNulles());
+
+        wassim.setPartieNulles(5);
+        wassim.ajoutPartieNulles(5);
+        assertEquals(10,wassim.getPartieNulles());
+    }
+
+
+    @Test
+    void testAddScore() {
+        brahim.addScore(10);
+        assertEquals(10,brahim.getScore());
+
+        wassim.addScore(15);
+        assertEquals(15,wassim.getScore());
+    }
+
+    @Test
+    void setScore() {
+        brahim.setScore(15);
+        assertEquals(15,brahim.getScore());
+
+        wassim.setScore(50);
+        assertEquals(50,wassim.getScore());
+    }
+
+
+    @Test
+    void testGetScore() {
+        brahim.setScore(10);
+        assertEquals(10,brahim.getScore());
+
+        wassim.setScore(15);
+        assertEquals(15,wassim.getScore());
+    }
+
+
+    @Test
+    void testGetCerveau() {
+        CerveauJardinier cerveau =new CerveauJardinier(wassim);
+        wassim.setCerveau(cerveau);
+        assertEquals(cerveau,wassim.getCerveau());
+
+    }
+
+    @Test
+    void testSetCerveau() {
+    }
+
+
+
+
+
+
+    @Test
+    void testGetCartesObjectifs() {
+    }
+
+    @Test
+    void testSetCartesObjectifs() {
+    }
+
+
+
+    @Test
+    void testEffectuerActionParcelle() {
+    }
+
+    @Test
+    void setPlateau() {
     }
 }

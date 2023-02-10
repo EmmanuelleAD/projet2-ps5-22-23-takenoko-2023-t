@@ -1,20 +1,55 @@
 
 package fr.cotedazur.univ.polytech.startingpoint;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Joueur {
-    public static Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
-    public static Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
-    private double taille;
-    private List<Objectif>cartesObjectifs;
-    private String nom;
+    public static final Comparator<Joueur> tailleComparator=Comparator.comparing(Joueur::getTaille);
+    public static final Comparator<Joueur> scoreComparator=Comparator.comparing(Joueur::getScore);
+    private Plateau plateau;
+    private int partieGagnees=0;
 
 
+
+
+    private double scoreMoyen;
 
     private Cerveau cerveau;
 
+    private int partieNulles=0;
+
+    private double taille;
+    private List<Objectif>cartesObjectifs;
+    private String nom;
+    private int score=0;
+    public int getPartieGagnees(){return partieGagnees;}
+    public void setPartieGagnees(int partieGagnees){this.partieGagnees = partieGagnees;}
+    public void ajoutPartieGagnees(int partieGagnees){this.partieGagnees += partieGagnees;}
+    public Plateau getPlateau() {
+        return plateau;
+    }
+    public double getScoreMoyen() {
+        return scoreMoyen;
+    }
+
+    public void setScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen = scoreMoyen;
+    }
+    public void ajoutScoreMoyen(int scoreMoyen) {
+        this.scoreMoyen += scoreMoyen;
+    }
+    public int getPartieNulles() {
+        return partieNulles;
+    }
+
+    public void setPartieNulles(int partieNulles) {
+        this.partieNulles = partieNulles;
+    }
+    public void ajoutPartieNulles(int partieNulles) {
+        this.partieNulles += partieNulles;
+    }
     public Cerveau getCerveau() {
         return cerveau;
     }
@@ -23,11 +58,10 @@ public class Joueur {
         this.cerveau = cerveau;
     }
 
-    private int score=0;
-
     public void addScore(int score) {
         this.score+= score;
     }
+    public void setScore(int score){this.score=score;}
 
     public int getScore() {
         return score;
@@ -58,21 +92,50 @@ public class Joueur {
     }
 
 
-    public Joueur(double taille,String nom) {
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Joueur joueur = (Joueur) o;
+        return Double.compare(joueur.taille, taille) == 0 && Objects.equals(plateau, joueur.plateau) && Objects.equals(cerveau, joueur.cerveau) && Objects.equals(nom, joueur.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(plateau, cerveau, taille, nom);
+    }
+
+    public Joueur(double taille, String nom) {
         this.nom=nom;
         this.taille = taille;
+        this.plateau=new Plateau();
         this.cartesObjectifs=new ArrayList<>();
+        this.scoreMoyen=0;
     }
 
 
 
 
     public Action jouer(Jeu jeu) {
-        return cerveau.decider(jeu);
+        Action action1=cerveau.decider(jeu);
+        action1.traiter(this,jeu);
+        Action action2=cerveau.decider(jeu,action1);
+        action2.traiter(this,jeu);
+        return action2;
+    }
+
+   private Random rand;
+
+    {
+        try {
+            rand = SecureRandom.getInstanceStrong();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     private Action piocherCartesObjectifs(Jeu jeu) {
-        Random rand=new Random();
+
         int index=rand.nextInt(2);
         int size;
         Objectif o;
@@ -87,9 +150,10 @@ public class Joueur {
         return new ActionPiocher(o);
     }
 
+
     private Action effectuerActionJardinier(Jeu jeu) {
         List<Parcelle>parcelles=jeu.getParcellesPlacees();
-        Random rand=new Random();
+
         int index;
         do
          index=rand.nextInt(jeu.getParcellesPlacees().size());
@@ -100,13 +164,16 @@ public class Joueur {
     }
 
     public ActionParcelle effectuerActionParcelle(Jeu jeu){
-        Random rand = new Random();
+
         int index=rand.nextInt(jeu.getPlacementsPossibles().size());
         Parcelle parcelle1 = new Parcelle(jeu.getPlacementsPossibles().get(index));
         parcelle1.setBambou(new Bambou());
 
 
         return new ActionParcelle(parcelle1);
+    }
+    public void setPlateau(Plateau plateau){
+        this.plateau=plateau;
     }
 
 

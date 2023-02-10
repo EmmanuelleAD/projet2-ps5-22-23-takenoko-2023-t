@@ -3,23 +3,24 @@ package fr.cotedazur.univ.polytech.startingpoint;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ObjectifJardinier extends Objectif {
     static List<ObjectifJardinier> objectifsJardinier=new ArrayList<>(Arrays.asList(
-            new ObjectifJardinier("B14",20,false,"1 Bambou de Taille 4",4,1),
-            new ObjectifJardinier("B43",6,false,"4 Bambous de taille 3",3,4)));
+            new ObjectifJardinier("B14",6,false,"1 Bambou de Taille 4",4,1),
+            new ObjectifJardinier("B43",8,false,"4 Bambous de taille 3",3,4)));
 
     private int taille;
     private int nombre;
 
     @Override
     public String getType() {
-        return Type.TypeJardinier.getNomType();
+        return Type.TYPE_JARDINIER.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description) {
         super(nom, points, statut, description);
-        this.type=Type.TypeJardinier.getNomType();
+        this.type=Type.TYPE_JARDINIER.getNomType();
     }
 
     public ObjectifJardinier(String nom, int points, boolean statut, String description, int taille , int nombre) {
@@ -42,12 +43,26 @@ public class ObjectifJardinier extends Objectif {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof ObjectifJardinier)) return false;
-        ObjectifJardinier o = (ObjectifJardinier) obj;
+        if (!(obj instanceof ObjectifJardinier o)) return false;
         return super.equals(obj) && o.taille == this.taille && o.nombre == this.nombre;
     }
 
     @Override
+    public boolean estValide(List<Parcelle> parcelles, Joueur joueur) {
+        if(!joueur.getCartesObjectifs().contains(this)) return false;
+       return estValide(parcelles);
+    }
+
+    @Override
+    public ObjectifVerifier verifierValider(List<Parcelle> parcelles, Joueur joueur) {
+        return null;
+    }
+
+    @Override
+    public ObjectifVerifierParcelle verifierValider(List<Parcelle> parcelles) {
+        return null;
+    }
+
     public boolean estValide(List<Parcelle> parcelles) {
         int i=0;
         for (Parcelle p:parcelles
@@ -61,10 +76,9 @@ public class ObjectifJardinier extends Objectif {
      return false;
     }
 
+
     @Override
-    public ObjectifVerifier verifierValider(List<Parcelle> parcelles) {
-        return null;
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), taille, nombre);
     }
-
-
 }
