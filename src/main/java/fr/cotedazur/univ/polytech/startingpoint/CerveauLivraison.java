@@ -34,7 +34,10 @@ public class CerveauLivraison extends Cerveau {
 
         Action newAction = getMaxBambous(jeu, derniere);
         if (newAction != null) return newAction;
-        return placerUneParcelle(jeu, derniere);
+        newAction= placerUneParcelle(jeu, derniere);
+        if (newAction != null) return newAction;
+        return placerUneParcelle(jeu,null);
+
 
 
     }

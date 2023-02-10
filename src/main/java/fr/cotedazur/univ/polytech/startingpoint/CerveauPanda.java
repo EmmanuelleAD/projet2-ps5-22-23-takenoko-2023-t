@@ -19,7 +19,11 @@ public class CerveauPanda extends Cerveau{
         if (parcellesAvec != null) return parcellesAvec;
         Action action= placerUneParcelle(jeu,derniere);
         if(action!=null)return  action;
-        return super.mangerUnBambou(jeu,derniere);
+        action = super.mangerUnBambou(jeu,derniere);
+        if(action!=null){
+            return action;
+        }
+        return placerUneParcelle(jeu,null);
     }
     private Action pousserBambou(Jeu jeu ,Action derniere){
         List<Parcelle>parcelles=jeu.getJardinier().deplacementsPossibles(jeu.getParcellesPlacees());

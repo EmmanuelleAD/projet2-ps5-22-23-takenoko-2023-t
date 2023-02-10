@@ -20,7 +20,11 @@ public class CerveauJardinier extends Cerveau {
         if (newAction1 != null) return newAction1;
         newAction= placerUneParcelle(jeu,derniere);
         if(newAction!=null) return newAction;
-        return mangerUnBambou(jeu,derniere);
+        newAction=mangerUnBambou(jeu,derniere);
+        if(newAction!=null){
+            return newAction;
+        }
+        return placerUneParcelle(jeu,null);
     }
 
 

@@ -26,6 +26,7 @@ public class Main {
     }
 
     public  void main(boolean csv ) throws NoSuchAlgorithmException {
+<<<<<<< HEAD
         Joueur joueur1 = new Joueur(1.85, "Wassim");
         joueur1.setCerveau(new CerveauJardinier(joueur1));
         Joueur joueur2 = new Joueur(1.6, "Brahim");
@@ -49,6 +50,26 @@ public class Main {
                 message+="Le nombre de parties perdues par " + joueur.getNom()+" est "+(1-joueur.getPartieGagnees());
                 message+="Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles();
                 message+="Le score de " + joueur.getNom()+" est "+joueur.getScoreMoyen();
+=======
+        Joueur joueur1 = new Joueur(1.85, "JoueurPanda");
+        joueur1.setCerveau(new CerveauPanda(joueur1));
+        Joueur joueur2 = new Joueur(1.6, "JoueurSaboteur");
+        joueur2.setCerveau(new CerveauLivraison(joueur2));
+        Joueur joueur3=new Joueur(1.65,"JoueurParcelle");
+        joueur3.setCerveau(new CerveauJardinier(joueur3));
+
+        List<Joueur>joueurs=Arrays.asList(joueur1, joueur2,joueur3);
+        if(csv) {
+            List<String> listMsg=new ArrayList<>();
+            mainN(2000,joueur1,joueur2,joueur3);
+            listMsg.add("Player Wins Losses Draws Win(%) Loss(%) Draw(%)");
+            for (Joueur joueur : joueurs) {
+                listMsg.add( joueur.getNom() +' '+joueur.getPartieGagnees()+' '
+                        +(2000 - (joueur.getPartieGagnees()+joueur.getPartieNulles()))+' '+ joueur.getPartieNulles()+' '+
+                        +getPourcentage(2000,joueur.getPartieGagnees()) +' '
+                        +getPourcentage(2000,2000 - (joueur.getPartieGagnees()+joueur.getPartieNulles()))+' '
+                        +getPourcentage(2000,joueur.getPartieNulles()));
+>>>>>>> 6e8c2b0 (feat: modification fonctionnalitÃee csv #50)
 
             }
             try {

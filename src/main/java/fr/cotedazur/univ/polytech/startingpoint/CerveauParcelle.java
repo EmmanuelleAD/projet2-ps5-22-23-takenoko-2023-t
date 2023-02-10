@@ -23,8 +23,11 @@ public class CerveauParcelle extends Cerveau {
         if (newAction != null) return newAction;
         newAction = pousserBambou(jeu, derniere);
         if (newAction != null) return newAction;
-
-        return placerUneParcelleRandom(jeu,derniere);
+        newAction = placerUneParcelleRandom(jeu,derniere);
+        if(newAction!=null){
+            return newAction;
+        }
+        return placerUneParcelle(jeu,null);
     }
 
 
