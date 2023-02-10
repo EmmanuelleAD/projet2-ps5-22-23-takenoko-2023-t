@@ -3,6 +3,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.logging.Level;
@@ -11,12 +12,12 @@ public class Main {
     @Parameter(names={"--2thousands"})
     boolean est2000=false;
     @Parameter(names={"--demo"})
-    boolean estDemo=true;
+    boolean estDemo=false;
     @Parameter(names={"--csv"})
     boolean estCsv=false;
     private static int nbEgalite=0;
-    private static double getPourcentage(double nbre){
-        return nbre/10;
+    private static double getPourcentage(double total,double nombre){
+        return (nombre/total)*100;
     }
     public static void main(String ...args) throws NoSuchAlgorithmException {
 
@@ -26,31 +27,6 @@ public class Main {
     }
 
     public  void main(boolean csv ) throws NoSuchAlgorithmException {
-<<<<<<< HEAD
-        Joueur joueur1 = new Joueur(1.85, "Wassim");
-        joueur1.setCerveau(new CerveauJardinier(joueur1));
-        Joueur joueur2 = new Joueur(1.6, "Brahim");
-        joueur2.setCerveau(new CerveauParcelle(joueur2));
-        Joueur joueur3=new Joueur(1.65,"Emmanuelle");
-        joueur3.setCerveau(new CerveauPanda(joueur3));
-
-        Joueur joueur4=new Joueur(1.65,"Joueur Saboteur");
-        joueur4.setCerveau(new CerveauLivraison(joueur4));
-
-        List<Joueur>joueurs=Arrays.asList(joueur1, joueur2,joueur3,joueur4);
-        Jeu jeu = new Jeu(joueurs);
-
-        jeu.initialisation();
-        jeu.jouer();
-        if(csv){
-            String message="";
-            for (Joueur joueur:joueurs
-                 ) {
-               message+= "Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees();
-                message+="Le nombre de parties perdues par " + joueur.getNom()+" est "+(1-joueur.getPartieGagnees());
-                message+="Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles();
-                message+="Le score de " + joueur.getNom()+" est "+joueur.getScoreMoyen();
-=======
         Joueur joueur1 = new Joueur(1.85, "JoueurPanda");
         joueur1.setCerveau(new CerveauPanda(joueur1));
         Joueur joueur2 = new Joueur(1.6, "JoueurSaboteur");
@@ -69,16 +45,20 @@ public class Main {
                         +getPourcentage(2000,joueur.getPartieGagnees()) +' '
                         +getPourcentage(2000,2000 - (joueur.getPartieGagnees()+joueur.getPartieNulles()))+' '
                         +getPourcentage(2000,joueur.getPartieNulles()));
->>>>>>> 6e8c2b0 (feat: modification fonctionnalitÃee csv #50)
 
             }
             try {
-                Writing.appendCsv(message);
+                for (String message:listMsg
+                ) {
+                    Writing.appendCsv(message);
+
+                }
             } catch (Exception e) {
                 throw new RuntimeException(e);
             }
 
         }
+        else mainN(1, joueur1,joueur2,joueur3);
     }
 
 
@@ -98,10 +78,10 @@ public class Main {
             }
         }
         for (Joueur joueur:joueurs
-             ) {
-            System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees()+" soit "+getPourcentage(joueur.getPartieGagnees())+"% ");
-            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+" soit "+getPourcentage(1000- (double) joueur.getPartieGagnees()- (double) joueur.getPartieNulles())+"% ");
-            System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(joueur.getPartieNulles())+"% ");
+        ) {
+            System.out.println("Le nombre de parties gagnées par " + joueur.getNom()+" est "+joueur.getPartieGagnees()+" soit "+getPourcentage(1000,joueur.getPartieGagnees())+"% ");
+            System.out.println("Le nombre de parties perdues par " + joueur.getNom()+" est "+(1000-joueur.getPartieGagnees()- joueur.getPartieNulles())+" soit "+getPourcentage(1000,1000- (double) joueur.getPartieGagnees()- (double) joueur.getPartieNulles())+"% ");
+            System.out.println("Le nombre de parties nulles pour " + joueur.getNom()+" est "+ joueur.getPartieNulles()+" soit "+getPourcentage(1000,joueur.getPartieNulles())+"% ");
             System.out.println("Le score moyen  de " + joueur.getNom()+" est "+joueur.getScoreMoyen()/1000);
 
 
@@ -112,9 +92,39 @@ public class Main {
 
         }
 
-
-
     }
+    public static void mainN(int n, Joueur... joueurs){
+        for (int i = 0; i < n; i++) {
+
+            for (Joueur joueur : joueurs) {
+                joueur.setScore(0);
+                joueur.setPlateau(new Plateau());
+            }
+            Jeu jeu = new Jeu(Arrays.asList(joueurs));
+            if (n>1){
+                jeu.logger.setLevel(Level.OFF);
+            }
+            jeu.initialisation();
+            jeu.jouer();
+            if (jeu.getEgalite()) {
+                nbEgalite++;
+            }
+            if (n>1){
+                jeu.logger.setLevel(Level.OFF);
+            }
+        }
+        if(n>1){
+            for (Joueur joueur : joueurs) {
+                System.out.println("Le nombre de parties gagnées par " + joueur.getNom() + " est " + joueur.getPartieGagnees() + " soit " + getPourcentage(n, joueur.getPartieGagnees()) + "% ");
+                System.out.println("Le nombre de parties perdues par " + joueur.getNom() + " est " + (n - joueur.getPartieGagnees() - joueur.getPartieNulles()) + " soit " + getPourcentage(n, n - (double) joueur.getPartieGagnees() - (double) joueur.getPartieNulles()) + "% ");
+                System.out.println("Le nombre de parties nulles pour " + joueur.getNom() + " est " + joueur.getPartieNulles() + " soit " + getPourcentage(n, joueur.getPartieNulles()) + "% ");
+                System.out.println("Le score moyen  de " + joueur.getNom() + " est " + joueur.getScoreMoyen() / n);
+            }
+        }
+    }
+
+
+
     public  void run() throws NoSuchAlgorithmException {
         if(est2000)
         {
@@ -134,4 +144,3 @@ public class Main {
     }
 
 }
-
