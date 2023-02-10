@@ -39,9 +39,6 @@ public class ActionPanda extends Action{
 
     @Override
     public boolean traiter(Joueur j, Jeu jeu) {
-        if(!Position.isStraightMovement(jeu.getPanda().getPosition(), this.parcelle.getPosition())) {
-            throw new IllegalArgumentException("Le PANDA peut seulement se déplacer en ligne droite ! ");
-        }
        Optional<Bambou>bambouMange= jeu.getPanda().move(this.parcelle,jeu.getParcellesPlacees());
        if(bambouMange.isPresent()){
            j.getPlateau().ajouterBambou(bambouMange.get());
