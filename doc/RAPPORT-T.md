@@ -28,7 +28,7 @@ Ce rapport global porte sur les progrès réalisés par notre équipe dans le co
 ### 1. Comment est faite l'architecture du projet ? Et quels choix vous ont amené à la réaliser ainsi ?
 
 - Le projet est divisé en 2 parties : la partie base (Personnages + élement du jeu) et la partie intelligence (classes Cerveau) + la partie Jeu (class Jeu et main)
-- Tout d'abbord, nous avons commencé par créer un MVP du jeu composé seulement de bots random et de parcelles ayant des positions. Puis nous avons crées des objectifs et des actions, construits tout deux à partir d'une classe abstraite mère (Objectif et Action) dequelles découlent les objectifs et les actions particuliers. Nous avons fait ce choix car cela semblait plus cohérent et surtout pour que les objectifs et les actions aient la même structure. De plus, cela nous a permis de profiter des avantages du polymorphisme pour ne pas avoir à faire des casts multiples et réinstancier la même méthode à chaque fois.
+- Tout d'abbord, nous avons commencé par créer un MVP du jeu composé seulement de bots random et de parcelles ayant des positions. Puis nous avons crées des objectifs et des actions, construits tout deux à partir d'une classe abstraite mère (Objectif et Action) desquelles découlent les objectifs et les actions particuliers. Nous avons fait ce choix car cela semblait plus cohérent et surtout pour que les objectifs et les actions aient la même structure. De plus, cela nous a permis de profiter des avantages du polymorphisme pour ne pas avoir à faire des casts multiples et réinstancier la même méthode à chaque fois.
 - Ensuite, nous avons crée les personnages Panda et Jardinnier en utlisant là aussi une classe abstraite mère personnage afin de regrouper des caractéristiques communes comme le nom et le déplacement en ligne droite. Ainsi nous avons par la suite crée les objectifs et action Jardinnier et Panda en introduisant également les bambous comme un objet à part entière. De cette manière l'architecture de notre projet nous permettait de créer petit à petit des objectifs et des actions en fonction de nos besoins.
 - Or plus le nombre d'objectifs et d'actions augmentait, plus il était difficile de gérer les interactions entre les personnages et les objectifs puisqu'il fallait valider les objectifs des joueurs en leur accordant des points. Nous avons donc crée une classe ObjectifVerifier qui permet de stocker la verification d'un objectif et stoker les éléments manquants pour valider l'objectif. Nous avons là aussi utilisé le polymorphisme en créeant une classe mère ObjectifVerifier.
 - Pour ce qui est de l'intelligence, nous avions plusieurs possibilités pour l'introduire dans le jeu : soit d'introduire l'intelligence dans la classe joueur ou créer des cerveaux à part entière que pourraient avoir les joueurs. C'est finalement cette option que nous avons choisi. Pour cela nous avons de nouveau utilisé le polymorphisme en créant une classe mère Cerveau qui a les méthodes decider et verifierObjectif. Nous avons ensuite crée des classes filles CerveauRandom, CerveauLivraison et CerveauDemo qui héritent de Cerveau et qui implémentent les méthodes décider et verifierObjectif. Nous avons fait ce choix car cela nous permettait de créer des cerveaux différents et de les tester facilement.
@@ -40,18 +40,17 @@ Ce rapport global porte sur les progrès réalisés par notre équipe dans le co
 ### 2. Où trouver les infos (de la java doc, de la doc sur les points et les classes importants ?)
 - Le readme contient la description générale du Jeu, ainsi que les instructions pour lancer le jeu et les tests.
 - Le contributing contient les instructions pour contribuer au projet.
-- La javadoc est disponible dans le dossier doc.
 - Le code est plus ou moins commenté et nous avons essayé de nommer les variables et les méthodes de manière claire et explicite.
 - Les tests unitaires sont dans le dossier test.
 
 
 
 ### 3. Etat de la base de code : quelles parties sont bien faites ? Quelles parties sont à refactor et pourquoi ? Comment la sortie SONAR le montre-elle (ou pas) ?
-- La javadoc est disponible dans le dossier doc.
 - Le code est plus ou moins commenté et nous avons essayé de nommer les variables et les méthodes de manière claire et explicite.
-- Les tests unitaires sont dans le dossier test.
-- CE QUI EST BIEN : LES ACTIONS, LES OBJECTIFS, BONNES ABSTRACTIONS à développer ...
-- CE QUI EST A REFACTOR : LE MOTEUR DU JEU, LES CLASSES CERVEAU, LES CLASSES VERIFIER OBJECTIF, LES CLASSES READ CSV ET WRITING à développer ...
+- Les tests unitaires sont dans le dossier test. Chaque classe de tests avec ses tests ; des tests de cas généraux et particuliers .
+- CE QUI EST BIEN : LES ACTIONS, LES OBJECTIFS,LES CERVEAU .Dans les classes Actions et Objectifs nous avons réussi à réaliser de bonnes abstactions qui nous ont permis de profiter du polymorphisme et d'éviter des casts redondants.Nous avons par exemple une méthode traiter dans Action qui est redéfini par toutes les classes filles et qui s'adapte au comportement attendu.
+Les classes CERVEAU ont également une bonne implémentation avec l'encapsulation de méthodes générales dans la classe mère et leurs utilisations dans les classes filles.Nous avons également fait l'éffort d'orienter le plus possible nos classes Cerveau vers un comportement humain en créant des méthodes comme piocherUneCarte, placerUneParcelle .
+- CE QUI EST A REFACTOR :  La classe OBJECTIFPARCELLE .Dans la classe OBJECTIFPARCELLE, il faut refactor les méthodes de détection des motifs.Ces dernierères poourraient être moins nombreuses et optimisées en matière de performance.Il faudrait également déplacer les méthodes qui fournissent les parcelles manquantes dans une autre classe afin de respecter le prinicpe de responsabilité unique.
 - Nous avons utilisé Sonar pour analyser notre code. Nous avons obtenu un score de 0% de bugs, 0% de vulnérabilités, 0,8% de code dupliqué, 170 unit test et un coverage de 83%
 
 
@@ -69,7 +68,7 @@ Sur un plan global l'ensemble des fonctionnalités a été fait en commun. En te
 
 - Notre travail s'est fait avec la création de branches "feature/<nom>" à chaque fois que nous avions une nouvelle fonctionnalité à implémenter. A la fin de l'implémentation, la branche est merge avec master par un système de pull request.
 
-### 2. Rétrospécive
+### 2. Rétrospective
 
 - Le début du projet était un peu compliqué car nous n'avions pas encore bien compris comment bien créer les issues et les milestones. Nous avons eu quelques difficultés à nous organiser au début. Au fur et 
 - Nous avons eu des difficultés à gérer les conflits de merge entre les branches. Nous avons donc décidé de faire des pull request pour chaque fonctionnalité implémentée afin de pouvoir merger les branches plus facilement.
